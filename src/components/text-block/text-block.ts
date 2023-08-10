@@ -1,8 +1,8 @@
-import { LitElement, html, css,  } from 'lit';
-import {customElement} from 'lit/decorators.js';
-import {sharedStyles} from "../../shared/style";
+import { LitElement, html, css, TemplateResult } from 'lit'
+import { customElement } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 
-const componentStyle =  css`
+const componentStyle = css`
   p {
     text-align: center;
     font-size: 1rem;
@@ -13,14 +13,12 @@ const componentStyle =  css`
 
 @customElement('text-block')
 class TextBlock extends LitElement {
+  static styles = [sharedStyles, componentStyle]
 
-  static styles = [sharedStyles, componentStyle];
-
-
-  render() {
+  render (): TemplateResult {
     return html`
         <p><slot></slot></p>
-    `;
+    `
   }
 }
 

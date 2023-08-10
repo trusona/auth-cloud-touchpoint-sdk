@@ -1,7 +1,7 @@
-import { LitElement } from 'lit';
+import { LitElement, TemplateResult } from 'lit';
 declare class TextBlock extends LitElement {
     static styles: import("lit").CSSResult[];
-    render(): import("lit-html").TemplateResult<1>;
+    render(): TemplateResult;
 }
 declare global {
     interface HTMLElementTagNameMap {

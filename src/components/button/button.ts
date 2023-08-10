@@ -1,9 +1,9 @@
-import { LitElement, html, css,  } from 'lit';
-import {customElement, property} from 'lit/decorators.js';
-import {sharedStyles} from "../../shared/style";
+import { LitElement, html, css, TemplateResult } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 // import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 
-const componentStyle =  css`
+const componentStyle = css`
   .auth-button {
     margin-left: auto;
     margin-right: auto;
@@ -53,33 +53,32 @@ const componentStyle =  css`
 
 @customElement('auth-button')
 class AuthButton extends LitElement {
-  @property({ type: Function }) onClick? = () => {};
-  @property({type: Boolean}) isProcessing? = false;
-  @property({ type: String }) processingIcon?: string;
-  @property({ type: Boolean }) isWaitingForInput? = false;
+  @property({ type: Function }) onClick? = (): void => {}
+  @property({ type: Boolean }) isProcessing? = false
+  @property({ type: String }) processingIcon?: string
+  @property({ type: Boolean }) isWaitingForInput? = false
 
+  static styles = [sharedStyles, componentStyle]
 
-  static styles = [sharedStyles, componentStyle];
-
-  getContent = () => {
+  getContent = (): TemplateResult => {
     console.log('this.isProcessing', this.isProcessing)
-    if(this.isProcessing) {
-      return html`<span>${this.processingIcon ? this.processingIcon : 'Processing...'}</span>`
+    if (this.isProcessing ?? false) {
+      return html`<span>${this.processingIcon ?? 'Processing...'}</span>`
     } else {
       return html`<slot></slot>`
     }
   }
 
-  render() {
+  render (): TemplateResult {
     return html`
       <button part="button"
           @click=${this.onClick}
-          ?disabled=${this.isProcessing || this.isWaitingForInput}
+          ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)}
           class="auth-button"
       >
         ${this.getContent()}
       </button>
-    `;
+    `
   }
 }
 

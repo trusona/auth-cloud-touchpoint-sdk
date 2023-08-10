@@ -1,4 +1,4 @@
-import { css } from 'lit';
+import { css } from 'lit'
 
 export const sharedStyles = css`
   * {
@@ -8,4 +8,4 @@ export const sharedStyles = css`
     color: inherit;
     font-family: Arial, sans-serif;
   }
-`;
+`

@@ -657,13 +657,13 @@ const Dt = k`
 let m = class extends g {
   constructor() {
     super(...arguments), this.onClick = () => {
-    }, this.isProcessing = !1, this.isWaitingForInput = !1, this.getContent = () => (console.log("this.isProcessing", this.isProcessing), this.isProcessing ? x`<span>${this.processingIcon ? this.processingIcon : "Processing..."}</span>` : x`<slot></slot>`);
+    }, this.isProcessing = !1, this.isWaitingForInput = !1, this.getContent = () => (console.log("this.isProcessing", this.isProcessing), this.isProcessing ?? !1 ? x`<span>${this.processingIcon ?? "Processing..."}</span>` : x`<slot></slot>`);
   }
   render() {
     return x`
       <button part="button"
           @click=${this.onClick}
-          ?disabled=${this.isProcessing || this.isWaitingForInput}
+          ?disabled=${(this.isProcessing ?? !1) || (this.isWaitingForInput ?? !1)}
           class="auth-button"
       >
         ${this.getContent()}
