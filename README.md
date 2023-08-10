@@ -45,6 +45,11 @@ npm run storybook
 npm run build
 ```
 
+## Demo Page
+```bash
+npm run demo-page
+```
+
 
 ## Contact
 
