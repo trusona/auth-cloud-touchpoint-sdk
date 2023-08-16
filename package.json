@@ -14,6 +14,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build-watch": "tsc && vite build --watch",
     "storybook": "storybook dev",
     "build-storybook": "storybook build",
     "lint": "ts-standard src",
@@ -37,7 +38,8 @@
     "ts-standard": "^12.0.2",
     "typescript": "^5.1.6",
     "vite": "^4.4.9",
-    "web-types-lit": "^0.1.0"
+    "web-types-lit": "^0.1.0",
+    "@types/estree": "^1.0.1"
   },
   "dependencies": {
     "lit": "^2.8.0"
