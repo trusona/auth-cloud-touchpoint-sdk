@@ -13,9 +13,39 @@
             isProcessing = true
             alert('Button Clicked')
         }
+
+        document.addEventListener(
+            "code-changed",
+            (e) => {
+                console.log('Auth Code Changed...', e.detail)
+            },
+            false,
+        );
+
+        document.addEventListener(
+            "code-completed",
+            (e) => {
+                console.log('Auth Code Completed...', e.detail)
+            },
+            false,
+        );
+
+        /**
+         * This shows how to call a public function of a web component
+         */
+        const resetOTP = () => {
+            const otp = document.querySelector('code-input');
+            otp.reset();
+        }
     </script>
 
     <style>
+        h2 {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
         .demo-wrapper {
             display: flex;
             flex-direction: column;
@@ -25,7 +55,6 @@
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
-
         }
     </style>
 
@@ -38,11 +67,13 @@
         <img src="img/trusona.png" alt="Logo" width="300" height="110">
     </a>
 
-    <flex-container minWidth="300px">
+    <flex-container minWidth="500px">
+        <h2>Header component</h2>
         <header-1>
             Create or sign in to your account.
         </header-1>
 
+        <h2>Text Block component</h2>
         <text-block>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
             dolore magna aliqua.
@@ -52,6 +83,11 @@
             laborum.
         </text-block>
 
+        <h2>Code input component</h2>
+        <code-input codeLength="6"></code-input>
+        <button onclick="resetOTP()" type="button">Reset OTP</button>
+
+        <h2>Auth Button</h2>
         <auth-button ?isProcessing="${isProcessing}" onclick="authButtonClicked()">
             Create Account
         </auth-button>
