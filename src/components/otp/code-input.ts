@@ -338,10 +338,8 @@ class CodeInput extends LitElement {
       return
     }
 
-    // @ts-expect-error
     this.focusOnField(this.initialFocusField)
 
-    // @ts-expect-error
     this.state.isFocusingAfterAppearingCompleted = document.activeElement === this.inputs[this.initialFocusField]
   }
 
