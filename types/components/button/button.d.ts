@@ -4,7 +4,6 @@ declare class AuthButton extends LitElement {
     isProcessing?: boolean | undefined;
     processingIcon?: string;
     isWaitingForInput?: boolean | undefined;
-    static styles: import("lit").CSSResult[];
     getContent: () => TemplateResult;
     render(): TemplateResult;
 }

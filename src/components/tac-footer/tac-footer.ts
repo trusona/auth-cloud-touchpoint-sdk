@@ -1,26 +1,11 @@
-import {LitElement, html, css} from 'lit'
+import {LitElement, html} from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { sharedStyles } from '../../shared/style'
 import {TemplateResult} from "lit/development";
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
-
-const componentStyle = css`
-  .auth-footer{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 1.5rem;
-    background-color: #ffffff;
-  }
-`;
 
 @customElement('tac-footer')
 class TacFooter extends LitElement {
     @property({ type: Object }) globalStyles: any
-
-    static styles = [sharedStyles, componentStyle]
 
     isFooterVisible = (): boolean => {
         return this.globalStyles?.footerVisible !== undefined && this.globalStyles?.footerVisible

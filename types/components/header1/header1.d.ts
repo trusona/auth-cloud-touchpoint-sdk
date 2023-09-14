@@ -1,6 +1,5 @@
 import { LitElement, TemplateResult } from 'lit';
 declare class Header1 extends LitElement {
-    static styles: import("lit").CSSResult[];
     render(): TemplateResult;
 }
 declare global {

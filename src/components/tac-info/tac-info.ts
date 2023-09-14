@@ -1,78 +1,11 @@
-import {LitElement, html, css} from 'lit'
+import {LitElement, html} from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { sharedStyles } from '../../shared/style'
 import {PropertyValueMap, TemplateResult} from "lit/development";
 import {unsafeHTML} from 'lit/directives/unsafe-html.js';
-
-const componentStyle = css`
-  .auth-tac-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 2rem;
-    color: #19064E;
-    padding: 0 2rem;
-  }
-
-  .auth-tac-info.default-template h1 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 18px;
-  }
-
-  .auth-tac-info.default-template p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 14px;
-  }
-
-  .auth-tac-info ul {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .auth-tac-info li {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .auth-tac-info li h2 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 14px;
-    margin-bottom: .5rem;
-  }
-
-  .auth-tac-info li p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-  }
-
-  .auth-tac-info.default-template a {
-    display: block;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-    padding: 1rem;
-    border: 1px solid #EEEEEE;
-    border-radius: 4px;
-    width: fit-content;
-  }
-`;
 
 @customElement('tac-info')
 class TacInfo extends LitElement {
     @property({ type: Object }) globalStyles: any
-
-    static styles = [sharedStyles, componentStyle]
 
     connectedCallback() {
         super.connectedCallback();
