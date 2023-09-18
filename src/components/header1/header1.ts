@@ -1,5 +1,5 @@
 import { LitElement, html, css, TemplateResult } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
@@ -22,10 +22,11 @@ const componentStyle = css`
 @customElement('header-1')
 class Header1 extends LitElement {
   static styles = [sharedStyles, componentStyle]
+  @property({ type: String }) inlineStyle = '';
 
   render (): TemplateResult {
     return html`
-        <h1><slot></slot></h1>
+        <h1 style="${this.inlineStyle}"><slot></slot></h1>
     `
   }
 }

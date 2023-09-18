@@ -58,6 +58,7 @@ class AuthButton extends LitElement {
   @property({ type: Boolean }) isProcessing? = false
   @property({ type: String }) processingIcon?: string
   @property({ type: Boolean }) isWaitingForInput? = false
+  @property({ type: String }) inlineStyle = '';
 
   static styles = [sharedStyles, componentStyle]
 
@@ -74,7 +75,8 @@ class AuthButton extends LitElement {
     return html`
       <button part="button"
           @click=${this.onClick}
-          ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)}
+          ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)} 
+              style="${this.inlineStyle}"
           class="auth-button"
       >
         ${this.getContent()}

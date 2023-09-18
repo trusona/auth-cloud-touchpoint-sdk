@@ -4,87 +4,54 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Auth Cloud SDK Demo</title>
-    <style>
-        :root {
-            --trusona-button-bg-color: green;
-            --trusona-button-border-color: green;
-            --trusona-button-color: blue;
-            --trusona-button-disabled-bg-color: red;
-            --trusona-button-disabled-border-color: red;
-            --trusona-button-disabled-color: white;
-        }
-    </style>
+
     <script type="module" src="/dist/index.mjs"></script>
 
-    <script>
-
-        let isProcessing = false
-        const authButtonClicked = () => {
-            isProcessing = true
-            alert('Button Clicked')
-        }
-
-        document.addEventListener(
-            "code-changed",
-            (e) => {
-                console.log('Auth Code Changed...', e.detail)
-            },
-            false,
-        );
-
-        document.addEventListener(
-            "code-completed",
-            (e) => {
-                console.log('Auth Code Completed...', e.detail)
-            },
-            false,
-        );
-
-        /**
-         * This shows how to call a public function of a web component
-         */
-        const resetOTP = () => {
-            const otp = document.querySelector('code-input');
-            otp.reset();
-        }
-    </script>
-
-    <style>
-        h2 {
-            width: 100%;
-            text-align: center;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .demo-wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-content: center;
-            gap: 1.5rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
-
+    <link rel="stylesheet" href="/testpages/styles.css">
 
 </head>
 <body>
+
+
 
 <div class="demo-wrapper">
     <a href="https://www.trusona.com/" style="text-align: center">
         <img src="img/trusona.png" alt="Logo" width="300" height="110">
     </a>
 
-    <start-touchpoint inputId="start-component"
-                     inputName="start-component"
-                     inputType="email"
-                     isEmailInput="true"
-                     inputAutofocus="true"
-                     inputRequired="true"
-                     inputDisabled="false" />
+
+    <flex-container minWidth="500px">
+        <h2>Test Pages</h2>
+
+        <!-- Links to pages in the "components" directory -->
+        <ul>
+            <li><a href="testpages/components/button.html">Button</a></li>
+            <li><a href="testpages/components/flex.html">Flex</a></li>
+            <li><a href="testpages/components/header1.html">Header1</a></li>
+            <li><a href="testpages/components/otp.html">OTP</a></li>
+            <li><a href="testpages/components/reset.html">Reset</a></li>
+            <li><a href="testpages/components/skip.html">Skip</a></li>
+            <li><a href="testpages/components/tac-container.html">TAC Container</a></li>
+            <li><a href="testpages/components/tac-footer.html">TAC Footer</a></li>
+            <li><a href="testpages/components/tac-header-nav.html">TAC Header Nav</a></li>
+            <li><a href="testpages/components/tac-info.html">TAC Info</a></li>
+            <li><a href="testpages/components/text-block.html">Text Block</a></li>
+        </ul>
+
+        <!-- Links to pages in the "touchpoints" directory -->
+        <ul>
+            <li><a href="testpages/touchpoints/continue.html">Continue</a></li>
+            <li><a href="testpages/touchpoints/create-passkey.html">Create Passkey</a></li>
+            <li><a href="testpages/touchpoints/default.html">Default</a></li>
+            <li><a href="testpages/touchpoints/registration.html">Registration</a></li>
+            <li><a href="testpages/touchpoints/start.html">Start</a></li>
+            <li><a href="testpages/touchpoints/username-password.html">Username Password</a></li>
+            <li><a href="testpages/touchpoints/verifiable-email.html">Verifiable Email</a></li>
+            <li><a href="testpages/touchpoints/verifiable-phone-number.html">Verifiable Phone Number</a></li>
+        </ul>
+
+    </flex-container>
+
 </div>
 
 </body>
