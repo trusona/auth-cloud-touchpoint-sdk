@@ -73,14 +73,13 @@ class AuthButton extends LitElement {
 
   render (): TemplateResult {
     return html`
-      <button part="button"
-          @click=${this.onClick}
-          ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)} 
-              style="${this.inlineStyle}"
-          class="auth-button"
-      >
-        ${this.getContent()}
-      </button>
+        <button part="button"
+                @click=${this.onClick}
+                ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)}
+                style="${this.inlineStyle}"
+                class="auth-button">
+            ${this.getContent()}
+        </button>
     `
   }
 }

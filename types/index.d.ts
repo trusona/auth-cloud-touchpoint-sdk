@@ -10,6 +10,7 @@ export * from './components/tac-footer/tac-footer';
 export * from './components/tac-info/tac-info';
 export * from './components/tac-container/tac-container';
 export * from './touchpoints/start/start-touchpoint';
+export * from './touchpoints/fido-create-passkey/fido-create-passkey';
 export * from './touchpoints/default/default';
 export * from './touchpoints/username-password/username-password';
 export * from './touchpoints/continue/continue';
