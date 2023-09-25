@@ -15,7 +15,7 @@ const componentStyle = css`
     align-self: stretch;
     margin: auto;
   }
-  
+
   .auth-card {
     display: flex;
     padding: 20px;
@@ -25,12 +25,12 @@ const componentStyle = css`
     align-self: stretch;
     background: var(--Suave-500, #F5F9FC);
   }
-  
+
   .auth-img {
     width: 110px;
     height: 96px;
   }
-  
+
   .auth-paragraph {
     display: flex;
     flex-direction: column;
@@ -38,24 +38,30 @@ const componentStyle = css`
     flex-wrap: wrap;
     align-self: stretch;
   }
-  
+
   .auth-button {
     border-radius: 4px;
-    background: var(--secure, #19064E);
     display: flex;
     padding: 16px;
     justify-content: center;
     align-items: center;
     gap: 16px;
     align-self: stretch;
-    color: var(--white, #FFF);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 16px;
-    border: none;
+    background-color: var(--trusona-button-bg-color, #19064E);
+    border: 1px solid var(--trusona-button-border-color, #19064E);
+    color: var(--trusona-button-color, rgb(255, 255, 255));
   }
-  
+
+  .auth-button:disabled {
+    background-color: var(--trusona-button-disabled-bg-color, #cccccc) !important;
+    border: 1px solid var(--trusona-button-disabled-bg-color, #cccccc) !important;
+    color: var(--trusona-button-disabled-color, #444444) !important;
+  }
+
   .auth-h1 {
     color: #000;
     text-align: center;
@@ -64,7 +70,7 @@ const componentStyle = css`
     font-weight: 400;
     line-height: normal;
   }
-  
+
   .auth-h2 {
     align-self: stretch;
     color: var(--black, #000);
@@ -73,8 +79,8 @@ const componentStyle = css`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-  } 
-  
+  }
+
   .auth-h3 {
     align-self: stretch;
     color: var(--black, #000);
