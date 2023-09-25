@@ -5,7 +5,7 @@ import {sharedStyles} from "../../shared/style";
 
 const componentStyle = css``
 @customElement('default-touchpoint')
-class AuthLoginDefault extends LitElement {
+class DefaultTouchpoint extends LitElement {
     static styles = [sharedStyles, componentStyle]
 
     @property({type: Object}) globalStyles?: any;
@@ -117,6 +117,6 @@ class AuthLoginDefault extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        'default-touchpoint': AuthLoginDefault
+        'default-touchpoint': DefaultTouchpoint
     }
 }

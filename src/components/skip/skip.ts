@@ -18,6 +18,7 @@ const componentStyle = css`
     background: transparent;
     border: none;
     border-radius: 0;
+    cursor: pointer;
   }
 
   .skip-button:hover {

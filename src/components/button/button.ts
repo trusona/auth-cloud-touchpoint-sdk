@@ -1,6 +1,7 @@
-import { LitElement, html, css, TemplateResult } from 'lit'
+import {LitElement, html, css, TemplateResult, svg} from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
+import {unsafeHTML} from "lit/directives/unsafe-html.js";
 // import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 
 const componentStyle = css`
@@ -59,13 +60,15 @@ class AuthButton extends LitElement {
   @property({ type: String }) processingIcon?: string
   @property({ type: Boolean }) isWaitingForInput? = false
   @property({ type: String }) inlineStyle = '';
+  @property({ type: String }) btnId = '';
 
   static styles = [sharedStyles, componentStyle]
 
   getContent = (): TemplateResult => {
-    console.log('this.isProcessing', this.isProcessing)
+    // console.log('this.isProcessing', this.isProcessing)
     if (this.isProcessing ?? false) {
-      return html`<span>${this.processingIcon ?? 'Processing...'}</span>`
+      return this.processingIcon ? html`<span>${svg`${unsafeHTML(this.processingIcon)}`}</span>` :
+          html`<span>Processing...</span>`
     } else {
       return html`<slot></slot>`
     }
@@ -74,6 +77,7 @@ class AuthButton extends LitElement {
   render (): TemplateResult {
     return html`
         <button part="button"
+                id="${this.btnId}"
                 @click=${this.onClick}
                 ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)}
                 style="${this.inlineStyle}"

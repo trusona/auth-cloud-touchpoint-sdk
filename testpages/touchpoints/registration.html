@@ -4,69 +4,15 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Auth Cloud SDK Demo</title>
-    <style>
-        :root {
-            --trusona-button-bg-color: green;
-            --trusona-button-border-color: green;
-            --trusona-button-color: blue;
-            --trusona-button-disabled-bg-color: red;
-            --trusona-button-disabled-border-color: red;
-            --trusona-button-disabled-color: white;
-        }
-    </style>
     <script type="module" src="/dist/index.mjs"></script>
+    <script src="../sampleConfig.js"></script>
 
     <script>
 
-        let isProcessing = false
-        const authButtonClicked = () => {
-            isProcessing = true
-            alert('Button Clicked')
+        const config = window.sampleConfig;
+        const _enroll= () => {
+            console.log('_enroll called')
         }
-
-        document.addEventListener(
-            "code-changed",
-            (e) => {
-                console.log('Auth Code Changed...', e.detail)
-            },
-            false,
-        );
-
-        document.addEventListener(
-            "code-completed",
-            (e) => {
-                console.log('Auth Code Completed...', e.detail)
-            },
-            false,
-        );
-
-        /**
-         * This shows how to call a public function of a web component
-         */
-        const resetOTP = () => {
-            const otp = document.querySelector('code-input');
-            otp.reset();
-        }
-
-
-        /**
-         * Listen to events called from the default component
-         */
-        document.addEventListener(
-            "sign-in-another-way-event",
-            () => {
-                console.log('Sign in another way called...')
-            },
-            false,
-        );
-
-        document.addEventListener(
-            "perform-default-continue-event",
-            (e) => {
-                console.log('Default continue called...', e.detail)
-            },
-            false,
-        );
     </script>
 
     <link rel="stylesheet" href="../styles.css">
@@ -81,43 +27,19 @@
         <img src="../../img/trusona.png" alt="Logo" width="300" height="110">
     </a>
 
-    <!--
-    <flex-container minWidth="500px">
-        <h2>Header component</h2>
-        <header-1>
-            Create or sign in to your account.
-        </header-1>
+    <h2>Registration Touchpoint</h2>
 
-        <h2>Text Block component</h2>
-        <text-block>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.
-        </text-block>
+    <registration-touchpoint></registration-touchpoint>
 
-        <h2>Code input component</h2>
-        <code-input codeLength="6"></code-input>
-        <button onclick="resetOTP()" type="button">Reset OTP</button>
+    <script>
+        const elm = document.querySelector('registration-touchpoint')
+        elm.globalStyles = config.global
+        elm.upgradePrompt = config.upgradePrompt
+        elm.platformSpecificIcons = config.platformSpecificIcons
+        elm.learnMoreContentVisible = true
+        elm.enroll = _enroll
+    </script>
 
-        <h2>Auth Button</h2>
-        <auth-button ?isProcessing="${isProcessing}" onclick="authButtonClicked()">
-            Create Account
-        </auth-button>
-
-    </flex-container>
-
-    <start-touchpoint inputId="start-component"
-                     inputName="start-component"
-                     inputType="email"
-                     isEmailInput="true"
-                     inputAutofocus="true"
-                     inputRequired="true"
-                      inputDisabled="false" ></start-touchpoint>
-    -->
-    <default-touchpoint started="false"></default-touchpoint>
 </div>
 
 </body>

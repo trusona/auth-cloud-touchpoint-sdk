@@ -1,6 +1,8 @@
 import { LitElement, html, property, css } from 'lit-element';
 import {customElement, query} from 'lit/decorators.js'
+import {ref, createRef} from 'lit/directives/ref.js';
 import {sharedStyles} from "../../shared/style";
+
 
 const componentStyle = css`
   .hideLearnMore {
@@ -10,30 +12,38 @@ const componentStyle = css`
     list-style: disc;
   }
 `
-@customElement('auth-web-authn-registration')
-class AuthWebAuthnRegistration extends LitElement {
+@customElement('registration-touchpoint')
+class RegistrationTouchpoint extends LitElement {
   static styles = [sharedStyles, componentStyle]
 
   @property({ type: Object }) upgradePrompt?: any;
   @property({ type: Object }) globalStyles?: any;
   @property({ type: Object }) platformSpecificIcons?: any;
-  @property({ type: Boolean }) started?: boolean;
+  @property({ type: Boolean }) started? = false;
   @property({ type: Boolean }) learnMoreContentVisible?: boolean;
   @property({ type: Function }) enroll: Function = () => {}
   @query('#biometricIcon') biometricIconElement!: HTMLDivElement;
   @query('#rightArrowIcon') rightArrowIconElement!: HTMLSpanElement;
   @query('#downArrowIcon') downArrowIconElement!: HTMLSpanElement;
   @query('#learnMoreContent') learnMoreContentElement!: HTMLSpanElement;
-  @query('#auth-button') authBtn!: HTMLInputElement;
+
+  btnRef = createRef<HTMLInputElement>();
 
   updated() {
     this.setButtonFocus();
     this.updateIcons();
   }
 
+  connectedCallback() {
+    super.connectedCallback()
+    this.setButtonFocus();
+    this.updateIcons();
+  }
+
   setButtonFocus(): void {
     setTimeout(() => {
-      this.authBtn.focus();
+      const btnElm: any = this.btnRef.value?.shadowRoot?.querySelector('#authBtn')
+      btnElm?.focus()
     }, 1);
   }
 
@@ -52,6 +62,10 @@ class AuthWebAuthnRegistration extends LitElement {
     }
   }
 
+  toggleLearnMore (): void {
+    this.learnMoreContentVisible = !(this.learnMoreContentVisible ?? false)
+  }
+
   render() {
     return html`
       <flex-container .globalStyles="${this.globalStyles}">
@@ -61,20 +75,49 @@ class AuthWebAuthnRegistration extends LitElement {
         ${this.platformSpecificIcons?.biometricIcon !== 'none'
         ? html`<div id="biometricIcon" class="margin-left-right-auto"></div>`
         : ''}
-        <heading1 .inlineStyle="${this.globalStyles?.heading1Style}">
+        <header-1 .inlineStyle="${this.globalStyles?.heading1Style}">
           ${this.upgradePrompt?.headline}
-        </heading1>
+        </header-1>
         <text-block .style="${this.globalStyles?.paragraphStyle}">
           ${this.upgradePrompt?.bodyText}
         </text-block>
-        <auth-button
-          @click="${this.enroll}"
-          ?disabled="${this.started}"
-          .style="${this.globalStyles?.buttonStyle}"
-          .loadingIcon="${this.globalStyles?.spinnerIcon}"
+        <auth-button ${ref(this.btnRef)}
+            btnId="authBtn"
+          .onClick=${this.enroll}
+          ?isProcessing=${this.started}      
+          .inlineStyle="${this.globalStyles?.buttonStyle}"
+          .processingIcon=${this.globalStyles?.spinnerIcon}
         >
-          ${this.upgradePrompt?.buttonText}
+          ${this.upgradePrompt?.buttonText ?? 'Enable Simple Sign-In'}
         </auth-button>
+
+        ${!this.globalStyles?.hideLearnMore ? html`
+          <div class="mt-5 mb-2 flex justify-between underline decoration-1">
+            <div class="flex items-center">
+
+              ${this.learnMoreContentVisible === true ? html`
+                <span class="mr-2" id="rightArrowIcon"> </span>
+              ` : html`<span class="mr-2" id="downArrowIcon"> </span>`
+              }
+
+              <text-block class="cursor-pointer" 
+                          .inlineStyle=${this.globalStyles?.smallParagraphStyle}
+                           @click=${this.toggleLearnMore}>
+                ${this.upgradePrompt?.learnMoreText }
+              </text-block>
+            </div>
+          </div>
+
+
+          ${this.learnMoreContentVisible === false ? html`
+              <p class="small-paragraph" style="${this.globalStyles?.smallParagraphStyle}">
+                <span id="learnMoreContent"></span>
+              </p>
+              ` : html``
+          }
+
+        ` : ''}
+        
       </flex-container>
     `;
   }
@@ -83,6 +126,6 @@ class AuthWebAuthnRegistration extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'auth-web-authn-registration': AuthWebAuthnRegistration
+    'registration-touchpoint': RegistrationTouchpoint
   }
 }
