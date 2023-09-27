@@ -18,6 +18,7 @@ export * from './touchpoints/verifiable-phone-number/verifiable-phone-number';
 export * from './touchpoints/continue/continue';
 export * from './touchpoints/create-passkey/create-passkey';
 export * from './touchpoints/registration/registration';
+export * from './fido/fido-account-passkey-created/fido-account-passkey-created';
 export * from './fido/fido-passkey-created/fido-passkey-created';
 export * from './fido/fido-create-passkey/fido-create-passkey';
 export * from './fido/fido-passkey-details/fido-passkey-details';
