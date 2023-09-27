@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Auth Cloud SDK Demo</title>
+    <script type="module" src="/dist/index.mjs"></script>
+    <script src="../sampleConfig.js"></script>
+
+    <script>
+
+        const config = window.sampleConfig;
+        const _enroll= () => {
+            console.log('_enroll called')
+        }
+    </script>
+
+    <link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+
+
+
+<div class="demo-wrapper">
+    <a href="https://www.trusona.com/" style="text-align: center">
+        <img src="../../img/trusona.png" alt="Logo" width="300" height="110">
+    </a>
+
+    <h2>Registration Touchpoint</h2>
+
+    <registration-touchpoint></registration-touchpoint>
+
+    <script>
+        const elm = document.querySelector('registration-touchpoint')
+        elm.globalStyles = config.global
+        elm.upgradePrompt = config.upgradePrompt
+        elm.platformSpecificIcons = config.platformSpecificIcons
+        elm.learnMoreContentVisible = true
+        elm.enroll = _enroll
+    </script>
+
+</div>
+
+</body>
+</html>

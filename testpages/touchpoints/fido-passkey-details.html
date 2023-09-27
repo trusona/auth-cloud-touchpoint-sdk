@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Auth Cloud SDK Demo</title>
+    <script type="module" src="/dist/index.mjs"></script>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+
+<div class="demo-wrapper">
+    <a href="https://www.trusona.com/" style="text-align: center">
+        <img src="../../img/trusona.png" alt="Logo" width="300" height="110">
+    </a>
+    <fido-passkey-details
+            passkeydetails='[
+                {
+                    "savedText": "Saved with iOS 16.2 on April 11, 2023, 12:01am",
+                    "lastUsedText": "iOS 16.2, April 11, 2023, 3:42pm",
+                    "lastUsedIsMobile": true,
+                    "prevLastUsedText": "MacOS 13.0.1, April 23rd, 2023, 4:21pm",
+                    "prevLastUsedIsMobile": false
+                },
+                {
+                    "savedText": "Saved with Android 13 on April 11, 2023, 12:01am",
+                    "lastUsedText": "Android 13, April 11th, 2023, 3:42pm",
+                    "lastUsedIsMobile": true
+                }
+            ]'>
+    </fido-passkey-details>
+
+
+</div>
+
+</body>
+</html>

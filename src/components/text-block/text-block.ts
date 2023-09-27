@@ -1,5 +1,5 @@
 import { LitElement, html, css, TemplateResult } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
@@ -14,10 +14,11 @@ const componentStyle = css`
 @customElement('text-block')
 class TextBlock extends LitElement {
   static styles = [sharedStyles, componentStyle]
+  @property({ type: String }) inlineStyle = '';
 
   render (): TemplateResult {
     return html`
-        <p><slot></slot></p>
+        <p style="${this.inlineStyle}"><slot></slot></p>
     `
   }
 }

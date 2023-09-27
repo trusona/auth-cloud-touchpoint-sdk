@@ -1,9 +1,11 @@
-import { LitElement, html, css, TemplateResult } from 'lit'
+import {LitElement, html, css, TemplateResult, svg} from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
+import {unsafeHTML} from "lit/directives/unsafe-html.js";
 // import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
 
 const componentStyle = css`
+
   .auth-button {
     margin-left: auto;
     margin-right: auto;
@@ -26,16 +28,16 @@ const componentStyle = css`
     transition-timing-function: ease;
     width: 100%;
     cursor: pointer;
-    background-color: #7B46D1;
-    border: 1px solid #7B46D1;
-    color: rgb(255, 255, 255);
+    background-color: var(--trusona-button-bg-color, #7B46D1);
+    border: 1px solid var(--trusona-button-border-color, #7B46D1);
+    color: var(--trusona-button-color, rgb(255, 255, 255));
     border-radius: 5px;
   }
 
   .auth-button:disabled {
-    background-color: #cccccc !important;
-    border: 1px solid #cccccc !important;
-    color: #444444 !important;
+    background-color: var(--trusona-button-disabled-bg-color, #cccccc) !important;
+    border: 1px solid var(--trusona-button-disabled-bg-color, #cccccc) !important;
+    color: var(--trusona-button-disabled-color, #444444) !important;
   }
 
   .auth-btn-content-wrapper {
@@ -57,13 +59,16 @@ class AuthButton extends LitElement {
   @property({ type: Boolean }) isProcessing? = false
   @property({ type: String }) processingIcon?: string
   @property({ type: Boolean }) isWaitingForInput? = false
+  @property({ type: String }) inlineStyle = '';
+  @property({ type: String }) btnId = '';
 
   static styles = [sharedStyles, componentStyle]
 
   getContent = (): TemplateResult => {
-    console.log('this.isProcessing', this.isProcessing)
+    // console.log('this.isProcessing', this.isProcessing)
     if (this.isProcessing ?? false) {
-      return html`<span>${this.processingIcon ?? 'Processing...'}</span>`
+      return this.processingIcon ? html`<span>${svg`${unsafeHTML(this.processingIcon)}`}</span>` :
+          html`<span>Processing...</span>`
     } else {
       return html`<slot></slot>`
     }
@@ -71,13 +76,14 @@ class AuthButton extends LitElement {
 
   render (): TemplateResult {
     return html`
-      <button part="button"
-          @click=${this.onClick}
-          ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)}
-          class="auth-button"
-      >
-        ${this.getContent()}
-      </button>
+        <button part="button"
+                id="${this.btnId}"
+                @click=${this.onClick}
+                ?disabled=${(this.isProcessing ?? false) || (this.isWaitingForInput ?? false)}
+                style="${this.inlineStyle}"
+                class="auth-button">
+            ${this.getContent()}
+        </button>
     `
   }
 }

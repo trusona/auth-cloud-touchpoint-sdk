@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Auth Cloud SDK Demo</title>
+    <script type="module" src="/dist/index.mjs"></script>
+    <script src="../sampleConfig.js"></script>
+
+    <script>
+
+        const config = window.sampleConfig;
+        let login = {
+            response: ''
+        }
+
+        // const currentStep = "PROVIDE_PHONE_NUMBER"
+        const currentStep = "VERIFY_OTP"
+
+        const _signInWithBiometricPrompt = () => {
+            console.log('_signInWithBiometricPrompt called')
+        }
+        const _performLogin = (username) => {
+            console.log('_performLogin called with username: ', username)
+        }
+        const _signInAnotherWay = () => {
+            console.log('_signInAnotherWay called')
+        }
+        const _resendCode = () => {
+            console.log('_resendCode called')
+        }
+        const _startOver = () => {
+            console.log('_startOver called')
+        }
+        const _codeCompleted = () => {
+            console.log('_codeCompleted called')
+        }
+        const _currentStep = (step) => {
+            console.log('_currentStep called')
+            return step === currentStep
+        }
+        const _isError = () => {
+            console.log('_isError called')
+        }
+    </script>
+
+    <link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+
+
+
+<div class="demo-wrapper">
+    <a href="https://www.trusona.com/" style="text-align: center">
+        <img src="../../img/trusona.png" alt="Logo" width="300" height="110">
+    </a>
+
+    <h2>Verifiable Phone Number Touchpoint</h2>
+
+    <verifiable-phone-number-touchpoint></verifiable-phone-number-touchpoint>
+
+    <script>
+        const elm = document.querySelector('verifiable-phone-number-touchpoint')
+        elm.globalStyles = config.global
+        elm.otpSignIn = config.otpSignIn
+        elm.setFocus = true
+        elm.login = login
+        elm.signInWithBiometricPrompt = _signInWithBiometricPrompt
+        elm.performLogin = _performLogin
+        elm.signInAnotherWay = _signInAnotherWay
+        elm.resendCode = _resendCode
+        elm.startOver = _startOver
+        elm.codeCompleted = _codeCompleted
+        elm.currentStep = _currentStep
+        elm.isError = _isError
+    </script>
+
+</div>
+
+</body>
+</html>
