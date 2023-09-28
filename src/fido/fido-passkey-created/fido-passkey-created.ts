@@ -5,7 +5,7 @@ import {sharedStyles} from '../../shared/style'
 const componentStyle = css`
 
   .auth-container {
-    width: 260px;
+    width: 320px;
     min-height: 420px;
     margin: auto;
     /* TODO: Adding Border? */

@@ -5,7 +5,7 @@ import {sharedStyles} from '../../shared/style'
 const componentStyle = css`
 
   .auth-container {
-    width: 260px;
+    width: 320px;
     min-height: 420px;
     margin: auto;
     /* TODO: Adding Border? */
@@ -78,6 +78,16 @@ const componentStyle = css`
 
   .auth-email-card {
     display: flex;
+    width: 280px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid var(--pearl, #EEE);
+    background: var(--white, #FFF);
+  }
+
+  .auth-email-card div {
+    display: flex;
     padding: 10px 20px;
     justify-content: center;
     align-items: center;
@@ -87,6 +97,8 @@ const componentStyle = css`
     border: 2px solid var(--white, #FFF);
     background: var(--tilt, #FAFAFA);
   }
+  
+  
 
   .auth-email-card p {
     display: -webkit-box;
@@ -149,13 +161,16 @@ class FidoCheckEmail extends LitElement {
                     </svg>
                     <p class="auth-body">To confirm your new account, click the link we sent to:</p>
                     <div class="auth-email-card">
-                        <svg class="auth-img-email" viewBox="0 0 15 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.9806 2.5791H2.01908C1.38183 2.5791 0.865234 3.13875 0.865234 3.8291V11.3291C0.865234 12.0195 1.38183 12.5791 2.01908 12.5791H12.9806C13.6179 12.5791 14.1345 12.0195 14.1345 11.3291V3.8291C14.1345 3.13875 13.6179 2.5791 12.9806 2.5791Z"
-                                  stroke="#444444" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M13.7947 2.94287L7.49989 8.51662L1.20508 2.94287" stroke="#444444"
-                                  stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <p>${this.email}</p>
+                        <div>
+                            <svg class="auth-img-email" viewBox="0 0 15 16" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.9806 2.5791H2.01908C1.38183 2.5791 0.865234 3.13875 0.865234 3.8291V11.3291C0.865234 12.0195 1.38183 12.5791 2.01908 12.5791H12.9806C13.6179 12.5791 14.1345 12.0195 14.1345 11.3291V3.8291C14.1345 3.13875 13.6179 2.5791 12.9806 2.5791Z"
+                                      stroke="#444444" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M13.7947 2.94287L7.49989 8.51662L1.20508 2.94287" stroke="#444444"
+                                      stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <p>${this.email}</p>
+                        </div>
                     </div>
                 </div>
             </div>
