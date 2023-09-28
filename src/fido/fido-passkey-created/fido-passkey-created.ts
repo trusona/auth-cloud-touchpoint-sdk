@@ -93,10 +93,10 @@ const componentStyle = css`
 
 @customElement('fido-passkey-created')
 class FidoPasskeyCreated extends LitElement {
-    @property({type: Function}) onClick? = (): void => {
+    @property({type: Function}) onClick = (): void => {
     }
 
-    @property({type: Function}) onCancel? = (): void => {
+    @property({type: Function}) onCancel = (): void => {
     }
 
     static styles = [sharedStyles, componentStyle]
@@ -105,7 +105,7 @@ class FidoPasskeyCreated extends LitElement {
         return html`
             <div class="auth-container">
                 <div style="position: relative;">
-                    <svg class="auth-close-img" @click=${this.onCancel} viewBox="0 0 24 24" fill="none"
+                    <svg class="auth-close-img" @click=${() => { this.onCancel() }} viewBox="0 0 24 24" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M4.5 19.5L19.5 4.5" stroke="#444444" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round"/>
@@ -132,7 +132,7 @@ class FidoPasskeyCreated extends LitElement {
                     </svg>
                     <p class="auth-h2">Passkey created</p>
                     <p class="auth-body">To sign in use a passkey, password, or a code we send to your email.</p>
-                    <button class="auth-button" @click=${this.onClick}>View your account</button>
+                    <button class="auth-button" @click=${() => { this.onClick() }}>View your account</button>
                 </div>
             </div>
         `
