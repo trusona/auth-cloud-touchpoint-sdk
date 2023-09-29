@@ -1,5 +1,5 @@
-import { LitElement, html, property, css } from 'lit-element';
-import {customElement, query} from 'lit/decorators.js'
+import { LitElement, html, css } from 'lit';
+import {customElement, property, query} from 'lit/decorators.js'
 import {ref, createRef} from 'lit/directives/ref.js';
 import {sharedStyles} from "../../shared/style";
 
