@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Auth Cloud SDK Demo</title>
+    <script type="module" src="/dist/index.mjs"></script>
+    <link rel="stylesheet" href="../styles.css">
+
+</head>
+<body>
+
+
+<div class="demo-wrapper">
+    <a href="https://www.trusona.com/" style="text-align: center">
+        <img src="../../img/trusona.png" alt="Logo" width="300" height="110">
+    </a>
+    <fido-account-created></fido-account-created>
+</div>
+<script>
+    const elm = document.querySelector('fido-account-created')
+
+    elm.onClick = () => console.log('onClick for fido-account-created called.')
+    elm.onCancel = () => console.log('onCancel for fido-account-created called.')
+</script>
+</body>
+</html>

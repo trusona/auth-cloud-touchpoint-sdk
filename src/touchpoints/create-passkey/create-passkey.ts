@@ -1,5 +1,5 @@
-import {LitElement, html, property} from 'lit-element';
-import {customElement} from "lit/decorators.js";
+import {LitElement, html} from 'lit';
+import {customElement, property} from "lit/decorators.js";
 
 
 @customElement('create-passkey-touchpoint')

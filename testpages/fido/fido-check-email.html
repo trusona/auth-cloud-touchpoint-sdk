@@ -14,8 +14,12 @@
     <a href="https://www.trusona.com/" style="text-align: center">
         <img src="../../img/trusona.png" alt="Logo" width="300" height="110">
     </a>
-    <fido-create-passkey/>
+    <fido-check-email email="test@test.com"/>
 </div>
-
+<script>
+    const elm = document.querySelector('fido-check-email')
+    elm.onClick = () => console.log('onClick for fido-check-email called.')
+    elm.onCancel = () => console.log('onCancel for fido-check-email called.')
+</script>
 </body>
 </html>
