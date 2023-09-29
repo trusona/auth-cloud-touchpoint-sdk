@@ -54,6 +54,7 @@ const componentStyle = css`
     background-color: var(--trusona-button-bg-color, #19064E);
     border: 1px solid var(--trusona-button-border-color, #19064E);
     color: var(--trusona-button-color, rgb(255, 255, 255));
+    cursor: pointer;
   }
 
   .auth-button:disabled {

@@ -41,6 +41,7 @@ const componentStyle = css`
     padding: 0;
     border: none;
     background: none;
+    cursor: pointer;
   }
 
   .auth-h1 {

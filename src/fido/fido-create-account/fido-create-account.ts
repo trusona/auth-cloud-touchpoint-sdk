@@ -8,7 +8,6 @@ const componentStyle = css`
     width: 320px;
     min-height: 420px;
     margin: auto;
-    /* TODO: Adding Border? */
     border-radius: 6px;
     border: 1px solid #000;
     background: var(--white, #FFF);
@@ -26,22 +25,24 @@ const componentStyle = css`
     padding: 60px 30px;
   }
 
-  .auth-img {
-    width: 80px;
-    height: 80px;
-  }
-
   .auth-img-email {
     width: 15px;
     height: 15px;
   }
 
-  .auth-close-img {
-    width: 24px;
-    height: 24px;
+  .auth-back-btn {
     position: absolute;
-    right: 10px;
+    left: 10px;
     top: 10px;
+    border: none;
+    background-color: transparent;
+    color: #5390D4;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    text-align: left;
   }
 
   .auth-button {
@@ -77,6 +78,15 @@ const componentStyle = css`
     line-height: normal;
   }
 
+  .auth-h2 {
+    color: var(--ferrite, #444);
+    text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   .auth-email-card {
     display: flex;
     width: 280px;
@@ -99,8 +109,6 @@ const componentStyle = css`
     background: var(--tilt, #FAFAFA);
   }
   
-  
-
   .auth-email-card p {
     display: -webkit-box;
     transform: rotate(-0.324deg);
@@ -108,35 +116,64 @@ const componentStyle = css`
     -webkit-line-clamp: 1;
     flex: 1 0 0;
     overflow: hidden;
-    color: var(--ferrite, #444);
+    color: #444;
     text-align: center;
     text-overflow: ellipsis;
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
-    line-height: 14px; /* 127.273% */
+    line-height: 14px; 
   }
 
-  .auth-body {
-    color: #000;
-    text-align: center;
-    font-size: 14px;
+  .auth-button {
+    border-radius: 4px;
+    display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    line-height: 16px;
+    background-color: var(--trusona-button-bg-color, #19064E);
+    border: 1px solid var(--trusona-button-border-color, #19064E);
+    color: var(--trusona-button-color, rgb(255, 255, 255));
+    cursor: pointer;
+  }
+
+  .auth-button:disabled {
+    background-color: var(--trusona-button-disabled-bg-color, #cccccc) !important;
+    border: 1px solid var(--trusona-button-disabled-bg-color, #cccccc) !important;
+    color: var(--trusona-button-disabled-color, #444444) !important;
+  }
+  
+  .terms {
+    color: #888;
+    text-align: center;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+  }
+  
+  .terms a {
+    text-decoration: underline;
   }
 
 `
 
-@customElement('fido-check-email')
-class FidoCheckEmail extends LitElement {
+@customElement('fido-create-account')
+class FidoCreateAccount extends LitElement {
 
     @property({type: String}) email: string = ""
-    @property({type: Function}) onClick? = (): void => {
-    }
+    @property({type: String}) termsHref?: string
+    @property({type: String}) privacyHref?: string
+    @property({type: Function}) onClick = (): void => {}
 
-    @property({type: Function}) onCancel? = (): void => {
-    }
+    @property({type: Function}) onBack = (): void => {}
+
 
     static styles = [sharedStyles, componentStyle]
 
@@ -144,23 +181,11 @@ class FidoCheckEmail extends LitElement {
         return html`
             <div class="auth-container">
                 <div style="position: relative;">
-                    <svg class="auth-close-img" @click=${this.onCancel} viewBox="0 0 24 24" fill="none"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.5 19.5L19.5 4.5" stroke="#444444" stroke-width="1.5" stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                        <path d="M4.5 4.5L19.5 19.5" stroke="#444444" stroke-width="1.5" stroke-linecap="round"
-                              stroke-linejoin="round"/>
-                    </svg>
+                   <button class="auth-back-btn" @click=${() => { this.onBack() }}>&lt;&nbsp;Back</button>
                 </div>
                 <div class="auth-card">
-                    <p class="auth-h1">Welcome!</p>
-                    <svg class="auth-img" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M69.234 13.1799H10.7725C7.37382 13.1799 4.61865 16.1647 4.61865 19.8466V59.8466C4.61865 63.5285 7.37382 66.5133 10.7725 66.5133H69.234C72.6327 66.5133 75.3879 63.5285 75.3879 59.8466V19.8466C75.3879 16.1647 72.6327 13.1799 69.234 13.1799Z"
-                              stroke="#19064E" stroke-width="3.03151" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M73.5709 15.1201L39.9986 44.8468L6.42627 15.1201" stroke="#19064E"
-                              stroke-width="3.03151" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <p class="auth-body">To confirm your new account, click the link we sent to:</p>
+                    <p class="auth-h1">Create Account</p>
+                    <p class="auth-h2">Create your account using:</p>
                     <div class="auth-email-card">
                         <div>
                             <svg class="auth-img-email" viewBox="0 0 15 16" fill="none"
@@ -173,6 +198,8 @@ class FidoCheckEmail extends LitElement {
                             <p>${this.email}</p>
                         </div>
                     </div>
+                    <button class="auth-button" @click=${() => { this.onClick() }}>Create account</button>
+                    <p class="terms">By Creating an Account up you accept our <a href="${this.termsHref ?? '#'}">terms of use</a> and <a href="${this.privacyHref ?? '#'}">privacy policy.</a></p>
                 </div>
             </div>
         `
@@ -181,6 +208,6 @@ class FidoCheckEmail extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        'fido-check-email': FidoCheckEmail
+        'fido-create-account': FidoCreateAccount
     }
 }

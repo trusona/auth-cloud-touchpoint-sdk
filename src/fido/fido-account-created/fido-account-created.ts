@@ -93,8 +93,8 @@ const componentStyle = css`
 
 `
 
-@customElement('fido-passkey-created')
-class FidoPasskeyCreated extends LitElement {
+@customElement('fido-account-created')
+class FidoAccountCreated extends LitElement {
     @property({type: Function}) onClick = (): void => {
     }
 
@@ -116,7 +116,7 @@ class FidoPasskeyCreated extends LitElement {
                     </svg>
                 </div>
                 <div class="auth-card">
-                    <p class="auth-h1">Success</p>
+                    <p class="auth-h1">Welcome!</p>
                     <svg class="auth-img" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M48.7144 76.5564C45.6784 77.3313 42.4972 77.7432 39.2197 77.7432C18.0808 77.7432 0.944336 60.6067 0.944336 39.4678C0.944336 18.3289 18.0808 1.19238 39.2197 1.19238C60.3587 1.19238 77.4952 18.3289 77.4952 39.4678C77.4952 42.7452 77.0832 45.9264 76.3083 48.9625"
                               stroke="#19064E" stroke-width="1.78025" stroke-linecap="round"/>
@@ -132,7 +132,7 @@ class FidoPasskeyCreated extends LitElement {
                         <path d="M42.3554 42.4496C41.0955 41.9216 39.7181 41.6177 38.2566 41.6177H33.2171C27.6569 41.6177 23.1382 45.9212 23.1382 51.2167V54.4164H44.9759V45.6013C43.8337 44.7853 42.9433 43.6975 42.3554 42.4656V42.4496Z"
                               fill="#19064E"/>
                     </svg>
-                    <p class="auth-h2">Passkey created</p>
+                    <p class="auth-h2">Account created</p>
                     <p class="auth-body">To sign in use a passkey, password, or a code we send to your email.</p>
                     <button class="auth-button" @click=${() => { this.onClick() }}>View your account</button>
                 </div>
@@ -143,6 +143,6 @@ class FidoPasskeyCreated extends LitElement {
 
 declare global {
     interface HTMLElementTagNameMap {
-        'fido-passkey-created': FidoPasskeyCreated
+        'fido-account-created': FidoAccountCreated
     }
 }
