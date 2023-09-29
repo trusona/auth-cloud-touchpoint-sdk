@@ -1,6 +1,13 @@
-h2 {
+h1 {
     width: 100%;
     font-size: 2rem;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+h2 {
+    width: 100%;
+    font-size: 1.7rem;
     text-align: center;
     padding-bottom: 8px;
     border-bottom: 1px solid #eee;
@@ -11,8 +18,26 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    gap: 1.5rem;
+    gap: 1rem;
     max-width: 650px;
     margin-left: auto;
     margin-right: auto;
+}
+
+li {
+    margin: 0.5rem 0;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #7A46D1;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #17074B;
+    cursor: pointer;
 }
