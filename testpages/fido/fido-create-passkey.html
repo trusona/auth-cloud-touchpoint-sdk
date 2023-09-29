@@ -16,6 +16,9 @@
     </a>
     <fido-create-passkey/>
 </div>
-
+<script>
+    const elm = document.querySelector('fido-create-passkey')
+    elm.onClick = () => console.log('onClick for fido-create-passkey called.')
+</script>
 </body>
 </html>

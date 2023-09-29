@@ -16,6 +16,9 @@
     </a>
     <fido-account-passkey-created/>
 </div>
-
+<script>
+    const elm = document.querySelector('fido-account-passkey-created')
+    elm.onClick = () => console.log('onClick for fido-account-passkey-created called.')
+</script>
 </body>
 </html>

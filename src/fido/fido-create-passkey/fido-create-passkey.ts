@@ -105,7 +105,7 @@ const componentStyle = css`
 
 @customElement('fido-create-passkey')
 class FidoCreatePasskey extends LitElement {
-    @property({type: Function}) onClick? = (): void => {
+    @property({type: Function}) onClick = (): void => {
     }
 
     static styles = [sharedStyles, componentStyle]
@@ -192,7 +192,7 @@ class FidoCreatePasskey extends LitElement {
                             </li>
                         </ul>
                     </div>
-                    <button class="auth-button" @click=${this.onClick}>Create passkey</button>
+                    <button class="auth-button" @click=${() => {this.onClick()}}>Create passkey</button>
                 </div>
             </div>
         `

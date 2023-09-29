@@ -132,10 +132,10 @@ const componentStyle = css`
 class FidoCheckEmail extends LitElement {
 
     @property({type: String}) email: string = ""
-    @property({type: Function}) onClick? = (): void => {
+    @property({type: Function}) onClick = (): void => {
     }
 
-    @property({type: Function}) onCancel? = (): void => {
+    @property({type: Function}) onCancel = (): void => {
     }
 
     static styles = [sharedStyles, componentStyle]
@@ -144,7 +144,7 @@ class FidoCheckEmail extends LitElement {
         return html`
             <div class="auth-container">
                 <div style="position: relative;">
-                    <svg class="auth-close-img" @click=${this.onCancel} viewBox="0 0 24 24" fill="none"
+                    <svg class="auth-close-img" @click=${() => {this.onCancel()}} viewBox="0 0 24 24" fill="none"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M4.5 19.5L19.5 4.5" stroke="#444444" stroke-width="1.5" stroke-linecap="round"
                               stroke-linejoin="round"/>
@@ -161,7 +161,7 @@ class FidoCheckEmail extends LitElement {
                               stroke-width="3.03151" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <p class="auth-body">To confirm your new account, click the link we sent to:</p>
-                    <div class="auth-email-card">
+                    <button class="auth-email-card" @click=${() => {this.onClick()}} >
                         <div>
                             <svg class="auth-img-email" viewBox="0 0 15 16" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -172,7 +172,7 @@ class FidoCheckEmail extends LitElement {
                             </svg>
                             <p>${this.email}</p>
                         </div>
-                    </div>
+                    </button>
                 </div>
             </div>
         `

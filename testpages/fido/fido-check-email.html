@@ -16,6 +16,10 @@
     </a>
     <fido-check-email email="test@test.com"/>
 </div>
-
+<script>
+    const elm = document.querySelector('fido-check-email')
+    elm.onClick = () => console.log('onClick for fido-check-email called.')
+    elm.onCancel = () => console.log('onCancel for fido-check-email called.')
+</script>
 </body>
 </html>
