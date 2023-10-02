@@ -8,9 +8,6 @@
 
 This project provides a set of web components to provide a UX for the [Trusona WebAuthn SDK](https://github.com/trusona/auth-cloud-webauthn-sdk)
 
-
-<!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
 The Trusona Touchpoint SDK is a collection of web components that meant to be used 
@@ -47,23 +44,22 @@ npm run build
 ```
 
 ## Demo Pages
-Every component has a sample html page that shows each component. To view the demo page, first
-ensure you ran 
+Every component has a sample html page that shows each component. To view the demo page, run the following:
+ 
 ```bash
 npm run build
-```
-Then run:
-```bash
 npm run demo-page
 ```
 
 ## Project installation
 
-The Trusona Touchpoint SDK can be installed in your project by either including it in your Node.js 
-package.json file (`@trusona/touchpoint-sdk`)
-or by loading the sdk through https://unpkg.com/ in a script tag.  The SDK provides two different build types: 
-UMD (Universal Module Definition) as well a modern MJS (Modular JavaScript).  If you are unsure of what 
-build type, use the UMD version.
+The Trusona Touchpoint SDK can be installed in your project by either including it in your Node.js `package.json` with `@trusona/touchpoint-sdk`
+
+or by loading the sdk through https://unpkg.com/ in a script tag.
+
+The SDK provides two different build types: UMD (Universal Module Definition) as well a modern MJS (Modular JavaScript).
+
+If you are unsure of what build type, use the UMD version.
 
 
 ## Contact
