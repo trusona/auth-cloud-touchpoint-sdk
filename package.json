@@ -26,7 +26,7 @@
     "demo-page": "es-dev-server --app-index index.html --node-resolve --watch --open"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.10",
+    "@babel/core": "^7.23.0",
     "@storybook/addon-actions": "^7.2.1",
     "@storybook/addon-docs": "^7.2.2",
     "@storybook/addon-essentials": "^7.2.1",
