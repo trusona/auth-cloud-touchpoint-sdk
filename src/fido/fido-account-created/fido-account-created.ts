@@ -1,6 +1,6 @@
-import {LitElement, html, css, TemplateResult} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {sharedStyles} from '../../shared/style'
+import { LitElement, html, css, TemplateResult } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
 
@@ -95,16 +95,16 @@ const componentStyle = css`
 
 @customElement('fido-account-created')
 class FidoAccountCreated extends LitElement {
-    @property({type: Function}) onClick = (): void => {
-    }
+  @property({ type: Function }) onClick = (): void => {
+  }
 
-    @property({type: Function}) onCancel = (): void => {
-    }
+  @property({ type: Function }) onCancel = (): void => {
+  }
 
-    static styles = [sharedStyles, componentStyle]
+  static styles = [sharedStyles, componentStyle]
 
-    render(): TemplateResult {
-        return html`
+  render (): TemplateResult {
+    return html`
             <div class="auth-container">
                 <div style="position: relative;">
                     <svg class="auth-close-img" @click=${() => { this.onCancel() }} viewBox="0 0 24 24" fill="none"
@@ -138,11 +138,11 @@ class FidoAccountCreated extends LitElement {
                 </div>
             </div>
         `
-    }
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'fido-account-created': FidoAccountCreated
-    }
+  interface HTMLElementTagNameMap {
+    'fido-account-created': FidoAccountCreated
+  }
 }

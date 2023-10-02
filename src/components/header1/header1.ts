@@ -22,7 +22,7 @@ const componentStyle = css`
 @customElement('header-1')
 class Header1 extends LitElement {
   static styles = [sharedStyles, componentStyle]
-  @property({ type: String }) inlineStyle = '';
+  @property({ type: String }) inlineStyle = ''
 
   render (): TemplateResult {
     return html`

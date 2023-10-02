@@ -1,6 +1,6 @@
-import {html, css, LitElement} from 'lit';
-import {property, customElement, query} from 'lit/decorators.js';
-import {sharedStyles} from "../../shared/style";
+import { html, css, LitElement } from 'lit'
+import { property, customElement, query } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
   .reset-button {
@@ -44,13 +44,13 @@ const componentStyle = css`
 `
 @customElement('auth-reset')
 class Reset extends LitElement {
-    static styles = [sharedStyles, componentStyle]
-    @property({ type: String }) inlineStyle = '';
-    @property({ type: Function }) onClick?: Function = (): void => {}
-    @query('.reset-button') buttonElement!: HTMLInputElement;
+  static styles = [sharedStyles, componentStyle]
+  @property({ type: String }) inlineStyle = ''
+  @property({ type: Function }) onClick?: Function = (): void => {}
+  @query('.reset-button') buttonElement!: HTMLInputElement
 
-    render() {
-        return html`
+  render () {
+    return html`
       <button class="reset-button" style="${this.inlineStyle}" @click="${this.onClick}">
         <div class="reset-button__wrapper">
           <svg
@@ -76,12 +76,12 @@ class Reset extends LitElement {
           <span><slot></slot></span>
         </div>
       </button>
-    `;
-    }
+    `
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'auth-reset': Reset
-    }
+  interface HTMLElementTagNameMap {
+    'auth-reset': Reset
+  }
 }

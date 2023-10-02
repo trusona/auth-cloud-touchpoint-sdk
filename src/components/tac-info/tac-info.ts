@@ -1,8 +1,8 @@
-import {LitElement, html, css} from 'lit'
+import { LitElement, html, css } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
-import {PropertyValueMap, TemplateResult} from "lit/development";
-import {unsafeHTML} from 'lit/directives/unsafe-html.js';
+import { PropertyValueMap, TemplateResult } from 'lit/development'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 const componentStyle = css`
   .auth-tac-info {
@@ -66,29 +66,29 @@ const componentStyle = css`
     border-radius: 4px;
     width: fit-content;
   }
-`;
+`
 
 @customElement('tac-info')
 class TacInfo extends LitElement {
-    @property({ type: Object }) globalStyles: any
+  @property({ type: Object }) globalStyles: any
 
-    static styles = [sharedStyles, componentStyle]
+  static styles = [sharedStyles, componentStyle]
 
-    connectedCallback() {
-        super.connectedCallback();
-        this.updateStyles()
-    }
+  connectedCallback () {
+    super.connectedCallback()
+    this.updateStyles()
+  }
 
-    updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
-        super.updated(changedProperties);
-        this.updateStyles()
-    }
+  updated (changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
+    super.updated(changedProperties)
+    this.updateStyles()
+  }
 
-    getInfoContent = (): TemplateResult => {
-        if(this.globalStyles?.tacContainerMessagingContent && this.globalStyles?.tacContainerMessagingContent !== '') {
-            return html`<div class="auth-tac-info">${unsafeHTML(this.globalStyles?.tacContainerMessagingContent)}</div>`
-        } else {
-            return html`
+  getInfoContent = (): TemplateResult => {
+    if (this.globalStyles?.tacContainerMessagingContent && this.globalStyles?.tacContainerMessagingContent !== '') {
+      return html`<div class="auth-tac-info">${unsafeHTML(this.globalStyles?.tacContainerMessagingContent)}</div>`
+    } else {
+      return html`
                 <div class="auth-tac-info default-template">
                     <h1>
                         <div>Reduce sign-in friction.</div>
@@ -148,68 +148,67 @@ class TacInfo extends LitElement {
                     </a>
                 </div>
             `
-        }
     }
+  }
 
-    updateStyles = (): void => {
-        // First build out the basic global styles, then add the custom styles
-        if (this.globalStyles?.tacContainerMessagingContent) {
-            const header1 = this.globalStyles?.heading1Style
-                ? `.auth-tac-info h1 {${this.globalStyles?.heading1Style}}`
-                : ''
-            const header2 = this.globalStyles?.heading2Style
-                ? `.auth-tac-info h2 {${this.globalStyles?.heading2Style}}`
-                : ''
-            const paragraph = this.globalStyles?.paragraphStyle
-                ? `.auth-tac-info p {${this.globalStyles?.paragraphStyle}}`
-                : ''
-            const button = this.globalStyles?.buttonStyle
-                ? `.auth-tac-info button {${this.globalStyles?.buttonStyle}}`
-                : ''
-            const css = `
+  updateStyles = (): void => {
+    // First build out the basic global styles, then add the custom styles
+    if (this.globalStyles?.tacContainerMessagingContent) {
+      const header1 = this.globalStyles?.heading1Style
+        ? `.auth-tac-info h1 {${this.globalStyles?.heading1Style}}`
+        : ''
+      const header2 = this.globalStyles?.heading2Style
+        ? `.auth-tac-info h2 {${this.globalStyles?.heading2Style}}`
+        : ''
+      const paragraph = this.globalStyles?.paragraphStyle
+        ? `.auth-tac-info p {${this.globalStyles?.paragraphStyle}}`
+        : ''
+      const button = this.globalStyles?.buttonStyle
+        ? `.auth-tac-info button {${this.globalStyles?.buttonStyle}}`
+        : ''
+      const css = `
         ${header1}
         ${header2}
         ${paragraph}
         ${button}
       `
-            const styleElm = document.getElementById('tacInfoGlobalStyle')
-            if (styleElm === null) {
-                const styleElm = document.createElement('style')
-                styleElm.id = 'tacInfoGlobalStyle'
-                const head = document.getElementsByTagName('head')[0]
-                styleElm.appendChild(document.createTextNode(css))
-                head.appendChild(styleElm)
-            } else {
-                styleElm.innerHTML = css
-            }
-        }
-
-        if (this.globalStyles?.tacContainerMessagingContentStyle) {
-            const css = `${this.globalStyles.tacContainerMessagingContentStyle}`
-
-            const styleElm = document.getElementById('tacInfoStyle')
-            if (styleElm === null) {
-                const styleElm = document.createElement('style')
-                styleElm.id = 'tacInfoStyle'
-                const head = document.getElementsByTagName('head')[0]
-                styleElm.appendChild(document.createTextNode(css))
-                head.appendChild(styleElm)
-            } else {
-                styleElm.innerHTML = css
-            }
-        }
+      const styleElm = document.getElementById('tacInfoGlobalStyle')
+      if (styleElm === null) {
+        const styleElm = document.createElement('style')
+        styleElm.id = 'tacInfoGlobalStyle'
+        const head = document.getElementsByTagName('head')[0]
+        styleElm.appendChild(document.createTextNode(css))
+        head.appendChild(styleElm)
+      } else {
+        styleElm.innerHTML = css
+      }
     }
 
-    render() {
-        return html`
+    if (this.globalStyles?.tacContainerMessagingContentStyle) {
+      const css = `${this.globalStyles.tacContainerMessagingContentStyle}`
+
+      const styleElm = document.getElementById('tacInfoStyle')
+      if (styleElm === null) {
+        const styleElm = document.createElement('style')
+        styleElm.id = 'tacInfoStyle'
+        const head = document.getElementsByTagName('head')[0]
+        styleElm.appendChild(document.createTextNode(css))
+        head.appendChild(styleElm)
+      } else {
+        styleElm.innerHTML = css
+      }
+    }
+  }
+
+  render () {
+    return html`
             ${this.getInfoContent()}
-        `;
-    }
+        `
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'tac-info': TacInfo
-    }
+  interface HTMLElementTagNameMap {
+    'tac-info': TacInfo
+  }
 }
-

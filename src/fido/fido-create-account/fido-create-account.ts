@@ -1,6 +1,6 @@
-import {LitElement, html, css, TemplateResult} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {sharedStyles} from '../../shared/style'
+import { LitElement, html, css, TemplateResult } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
 
@@ -166,19 +166,17 @@ const componentStyle = css`
 
 @customElement('fido-create-account')
 class FidoCreateAccount extends LitElement {
+  @property({ type: String }) email: string = ''
+  @property({ type: String }) termsHref?: string
+  @property({ type: String }) privacyHref?: string
+  @property({ type: Function }) onClick = (): void => {}
 
-    @property({type: String}) email: string = ""
-    @property({type: String}) termsHref?: string
-    @property({type: String}) privacyHref?: string
-    @property({type: Function}) onClick = (): void => {}
+  @property({ type: Function }) onBack = (): void => {}
 
-    @property({type: Function}) onBack = (): void => {}
+  static styles = [sharedStyles, componentStyle]
 
-
-    static styles = [sharedStyles, componentStyle]
-
-    render(): TemplateResult {
-        return html`
+  render (): TemplateResult {
+    return html`
             <div class="auth-container">
                 <div style="position: relative;">
                    <button class="auth-back-btn" @click=${() => { this.onBack() }}>&lt;&nbsp;Back</button>
@@ -203,11 +201,11 @@ class FidoCreateAccount extends LitElement {
                 </div>
             </div>
         `
-    }
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'fido-create-account': FidoCreateAccount
-    }
+  interface HTMLElementTagNameMap {
+    'fido-create-account': FidoCreateAccount
+  }
 }

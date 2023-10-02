@@ -1,7 +1,7 @@
-import {html, css, LitElement} from 'lit';
-import {property, customElement, query} from 'lit/decorators.js';
-import {sharedStyles} from "../../shared/style";
-import {LoginStep} from "../../utils/login.model";
+import { html, css, LitElement } from 'lit'
+import { property, customElement, query } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
+import { LoginStep } from '../../utils/login.model'
 
 const componentStyle = css`
   .password-input-container {
@@ -25,71 +25,72 @@ const componentStyle = css`
 
 @customElement('username-password-touchpoint')
 class UsernamePasswordTouchpoint extends LitElement {
-    static styles = [sharedStyles, componentStyle]
+  static styles = [sharedStyles, componentStyle]
 
-    @property({type: Object}) globalStyles?: any;
-    @property({type: Object}) signInWithBiometricPrompt?: any;
-    @property({type: Object}) passwordSignIn?: any;
-    @property({type: Object}) platformSpecificIcons?: any;
-    @property({type: Function}) currentStep: Function = () => {};
-    @property({type: Function}) isError: Function = () => {};
-    @property({type: Boolean}) started?: boolean = false;
-    @property({type: Object}) login: any;
-    @property({type: Function}) performLogin: any;
-    @property({type: Boolean}) inputDisabled: boolean = true;
-    @property({type: Function}) signInAnotherWay: Function = () => {};
-    @property({type: Function}) startOver: Function = () => {};
+  @property({ type: Object }) globalStyles?: any
+  @property({ type: Object }) signInWithBiometricPrompt?: any
+  @property({ type: Object }) passwordSignIn?: any
+  @property({ type: Object }) platformSpecificIcons?: any
+  @property({ type: Function }) currentStep: Function = () => {}
+  @property({ type: Function }) isError: Function = () => {}
+  @property({ type: Boolean }) started?: boolean = false
+  @property({ type: Object }) login: any
+  @property({ type: Function }) performLogin: any
+  @property({ type: Boolean }) inputDisabled: boolean = true
+  @property({ type: Function }) signInAnotherWay: Function = () => {}
+  @property({ type: Function }) startOver: Function = () => {}
 
-    @query('#password') passwordInput!: HTMLInputElement;
+  @query('#password') passwordInput!: HTMLInputElement
 
-    waitingForInput: boolean = true;
-    showPassword: boolean = false;
+  waitingForInput: boolean = true
+  showPassword: boolean = false
 
-    getUserIdentifier (): string {
-        return this.login.userIdentifier ?? ''
+  getUserIdentifier (): string {
+    return this.login.userIdentifier ?? ''
+  }
+
+  onPasswordChange (event: Event) {
+    this.waitingForInput = (event.target as HTMLInputElement).value === ''
+    this.requestUpdate()
+  }
+
+  resetButtonClicked (event: Event) {
+    event.preventDefault()
+    if (this.startOver) {
+      this.startOver(event)
     }
+    return false
+  }
 
-    onPasswordChange(event: Event) {
-        this.waitingForInput = (event.target as HTMLInputElement).value === '';
-        this.requestUpdate()
+  togglePasswordVisibility (): void {
+    this.showPassword = !this.showPassword
+    if (this.passwordInput) {
+      this.passwordInput.type = this.showPassword ? 'text' : 'password'
     }
+  }
 
-    resetButtonClicked(event: Event) {
-        event.preventDefault();
-        if (this.startOver) {
-            this.startOver(event);
-        }
-        return false;
-    }
+  prePerformLogin (): any {
+    this.performLogin({
+      username: this.login.userIdentifier,
+      password: this.passwordInput.value
+    })
+  }
 
-    togglePasswordVisibility(): void {
-        this.showPassword = !this.showPassword;
-        if (this.passwordInput) {
-            this.passwordInput.type = this.showPassword ? 'text' : 'password';
-        }
-    }
+  preCheckSignInAnotherWay () {
+    this.signInAnotherWay()
+  }
 
-    prePerformLogin(): any {
-        this.performLogin({
-            username: this.login.userIdentifier,
-            password: this.passwordInput.value
-        })
+  inputPlaceholder () {
+    if (this.passwordSignIn?.hideInputHint) {
+      return ''
+    } else {
+      return this.passwordSignIn?.inputHint || 'Enter Password'
     }
-    preCheckSignInAnotherWay() {
-        this.signInAnotherWay();
-    }
+  }
 
-    inputPlaceholder() {
-        if (this.passwordSignIn?.hideInputHint) {
-            return '';
-        } else {
-            return this.passwordSignIn?.inputHint || 'Enter Password';
-        }
-    }
-
-    render() {
-        return html`
-            ${this.currentStep(LoginStep['ProvideUsername'])
+  render () {
+    return html`
+            ${this.currentStep(LoginStep.ProvideUsername)
                     ? html`
                     <start-touchpoint
                       ?started=${this.started}
@@ -108,13 +109,15 @@ class UsernamePasswordTouchpoint extends LitElement {
                       .signInAnotherWay=${this.preCheckSignInAnotherWay}
                       .performContinue=${this.performLogin}>
               </start-touchpoint>
-                    ` : html`
+                    `
+: html`
                         <flex-container .globalStyles=${this.globalStyles}>
                             <header-1 ?hidden=${this.passwordSignIn?.hideHeadline}
                                       style=${this.globalStyles?.heading1Style}>
                                 ${this.passwordSignIn?.headline || 'Sign in'}
                             </header-1>
-                            ${this.isError('response') ? html`
+                            ${this.isError('response')
+? html`
                                 <div class="error-msg">
                                     <div>
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
@@ -132,15 +135,18 @@ class UsernamePasswordTouchpoint extends LitElement {
                                     </div>
                                     <div>Incorrect username or password. Please try again.</div>
                                 </div>
-                            ` : ''}
+                            `
+: ''}
                             
                             <div style="position: relative;">
-                                ${!this.currentStep(LoginStep['ProvideUsername']) ? html`
+                                ${!this.currentStep(LoginStep.ProvideUsername)
+? html`
                                     <div class="auth-ui-input-wrapper">
-                                        <auth-reset .callback="${this.resetButtonClicked}">${ this.getUserIdentifier() }
+                                        <auth-reset .callback="${this.resetButtonClicked}">${this.getUserIdentifier()}
                                         </auth-reset>
                                     </div>
-                                ` : ''}
+                                `
+: ''}
                                 <p ?hidden=${!this.isError(this.getUserIdentifier())} class="mt-2 text-sm text-red-600">
                                     <span class="font-medium">Username or password</span> is required
                                 </p>
@@ -156,18 +162,19 @@ class UsernamePasswordTouchpoint extends LitElement {
                                     </label>
                                     <div class="password-input-container">
                                         <input class="auth-ui-input"
-                                               ?disabled=${!this.currentStep(LoginStep['ProvidePassword'])}
-                                               @input=${(ev: Event) => {this.onPasswordChange(ev)}}
+                                               ?disabled=${!this.currentStep(LoginStep.ProvidePassword)}
+                                               @input=${(ev: Event) => { this.onPasswordChange(ev) }}
                                                placeholder=${this.inputPlaceholder()}
                                                id="password"
                                                name="password"
                                                type="${this.showPassword ? 'text' : 'password'}"
                                                required>
 
-                                        ${!this.passwordSignIn?.hidePasswordToggle && !this.showPassword ? html`
+                                        ${!this.passwordSignIn?.hidePasswordToggle && !this.showPassword
+? html`
                                             <button title="Show password"
                                                     class="password-toggle-icon"
-                                                    @click=${() => {this.togglePasswordVisibility()}}>
+                                                    @click=${() => { this.togglePasswordVisibility() }}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                                      fill="currentColor" class="bi bi-eye"
                                                      viewBox="0 0 16 16">
@@ -175,12 +182,14 @@ class UsernamePasswordTouchpoint extends LitElement {
                                                     <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
                                                 </svg>
                                             </button>
-                                        ` : ''}
+                                        `
+: ''}
 
-                                        ${!this.passwordSignIn?.hidePasswordToggle && this.showPassword ? html`
+                                        ${!this.passwordSignIn?.hidePasswordToggle && this.showPassword
+? html`
                                             <button title="Hide password"
                                                     class="password-toggle-icon"
-                                                    @click=${() => {this.togglePasswordVisibility()}}>
+                                                    @click=${() => { this.togglePasswordVisibility() }}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
                                                      fill="currentColor"
                                                      class="bi bi-eye-slash"
@@ -190,13 +199,14 @@ class UsernamePasswordTouchpoint extends LitElement {
                                                     <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
                                                 </svg>
                                             </button>
-                                        ` : ''}
+                                        `
+: ''}
 
                                     </div>
                                 </div>
                             </div>
 
-                            <auth-button .onClick=${() => {this.prePerformLogin()}}
+                            <auth-button .onClick=${() => { this.prePerformLogin() }}
                                          processingIcon="${this.globalStyles?.spinnerIcon}"
                                          ?isProcessing=${this.started}
                                          ?isWaitingForInput=${this.waitingForInput}
@@ -204,11 +214,13 @@ class UsernamePasswordTouchpoint extends LitElement {
                                          btnId="loginSubmitBtn">${this.passwordSignIn?.buttonText || 'Continue'}
                             </auth-button>
                             
-                            ${!this.passwordSignIn?.hideMessage ? html`
+                            ${!this.passwordSignIn?.hideMessage
+? html`
                                 <text-block inlineStyle="${this.globalStyles?.paragraphStyle}">
                                     ${this.passwordSignIn?.message || 'By continuing, you agree to our privacy policy and terms of use.'}
                                 </text-block>
-                            ` : ''}
+                            `
+: ''}
 
 
                             <div class="text-center">
@@ -216,12 +228,12 @@ class UsernamePasswordTouchpoint extends LitElement {
                             </div>
                         </flex-container>
                     `}
-        `;
-    }
+        `
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'username-password-touchpoint': UsernamePasswordTouchpoint
-    }
+  interface HTMLElementTagNameMap {
+    'username-password-touchpoint': UsernamePasswordTouchpoint
+  }
 }

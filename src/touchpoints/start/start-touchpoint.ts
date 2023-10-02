@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit'
 import { property, customElement } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
-import {validateEmail, validatePhoneNumber} from '../../utils/validators'
+import { validateEmail, validatePhoneNumber } from '../../utils/validators'
 
 const componentStyle = css``
 
@@ -27,8 +27,8 @@ class StartTouchpoint extends LitElement {
   @property({ type: Object }) globalStyles?: any
   @property({ type: Object }) signInWithBiometricPrompt?: any
 
-  @property({ type: Function }) signInAnotherWay: Function = () => {};
-  @property({ type: Function }) performContinue: Function = () => {};
+  @property({ type: Function }) signInAnotherWay: Function = () => {}
+  @property({ type: Function }) performContinue: Function = () => {}
 
   username: string = ''
   isEmailError: boolean = false
@@ -155,14 +155,14 @@ class StartTouchpoint extends LitElement {
       if (this.isPhoneNumberInput || this.isEmailInput) {
         if (this.isPhoneNumberInput) {
           this.waitingForInput = !validatePhoneNumber(value)
-          if(this.isPhoneNumberError && !this.waitingForInput){
+          if (this.isPhoneNumberError && !this.waitingForInput) {
             this.isPhoneNumberError = false
             this.requestUpdate()
           }
         }
         if (this.isEmailInput) {
           this.waitingForInput = !validateEmail(value)
-          if(this.isEmailError && !this.waitingForInput){
+          if (this.isEmailError && !this.waitingForInput) {
             this.isEmailError = false
             this.requestUpdate()
           }

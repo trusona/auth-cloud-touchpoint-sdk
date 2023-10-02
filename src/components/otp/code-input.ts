@@ -23,8 +23,8 @@ class CodeInput extends LitElement {
   @property({ type: Boolean }) disabled = false
   @property({ type: String }) autocap = undefined
   @property({ type: Boolean }) isNonDigitsCode = false
-  @property({ type: Function }) codeChanged: Function = () => {};
-  @property({ type: Function }) codeCompleted: Function = () => {};
+  @property({ type: Function }) codeChanged: Function = () => {}
+  @property({ type: Function }) codeCompleted: Function = () => {}
 
   placeholders: number[] = []
   inputs: HTMLInputElement[] = []
@@ -353,13 +353,13 @@ class CodeInput extends LitElement {
     const code = this.getCurrentFilledCode()
 
     document.dispatchEvent(new CustomEvent('code-changed', { detail: code }))
-    if(this.codeChanged) {
-        this.codeChanged(code)
+    if (this.codeChanged) {
+      this.codeChanged(code)
     }
 
     if (code.length >= this.codeLength) {
-      if(this.codeCompleted) {
-          this.codeCompleted(code)
+      if (this.codeCompleted) {
+        this.codeCompleted(code)
       }
       document.dispatchEvent(new CustomEvent('code-completed', { detail: code }))
     }

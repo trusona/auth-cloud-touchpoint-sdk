@@ -1,6 +1,6 @@
-import { html, css, LitElement } from 'lit';
-import { property, customElement } from 'lit/decorators.js';
-import { sharedStyles } from "../../shared/style";
+import { html, css, LitElement } from 'lit'
+import { property, customElement } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
   .skip-button {
@@ -27,22 +27,21 @@ const componentStyle = css`
 `
 @customElement('auth-skip')
 class Skip extends LitElement {
-    static styles = [sharedStyles, componentStyle]
-    @property({ type: String }) inlineStyle = '';
-    @property({ type: Function }) onClick?: Function = (): void => {}
+  static styles = [sharedStyles, componentStyle]
+  @property({ type: String }) inlineStyle = ''
+  @property({ type: Function }) onClick?: Function = (): void => {}
 
-    render() {
-        return html`
+  render () {
+    return html`
             <button class="skip-button" style="${this.inlineStyle}" @click="${this.onClick}" type="button">
                 <slot></slot>
             </button>
-        `;
-    }
+        `
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'auth-skip': Skip
-    }
+  interface HTMLElementTagNameMap {
+    'auth-skip': Skip
+  }
 }
-

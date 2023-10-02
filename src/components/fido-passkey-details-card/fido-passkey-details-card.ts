@@ -1,6 +1,6 @@
-import {LitElement, html, css, TemplateResult} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {sharedStyles} from '../../shared/style'
+import { LitElement, html, css, TemplateResult } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
 
@@ -84,19 +84,18 @@ const componentStyle = css`
 
 @customElement('fido-passkey-details-card')
 class FidoPasskeyDetailsCard extends LitElement {
+  @property({ type: String }) savedText?: string
 
-    @property({type: String}) savedText?: string
+  @property({ type: String }) lastUsedText: string = ''
+  @property({ type: String }) lastUsedIsMobile: string = 'false'
 
-    @property({type: String}) lastUsedText: string = ""
-    @property({type: String}) lastUsedIsMobile: string = 'false'
+  @property({ type: String }) prevLastUsedText: string | null = null
+  @property({ type: String }) prevLastUsedIsMobile: string = 'false'
 
-    @property({type: String}) prevLastUsedText: string | null = null
-    @property({type: String}) prevLastUsedIsMobile: string = 'false'
+  static styles = [sharedStyles, componentStyle]
 
-    static styles = [sharedStyles, componentStyle]
-
-    render(): TemplateResult {
-        return html`
+  render (): TemplateResult {
+    return html`
             <div class="auth-card">
                 <div class="auth-card-header">
                     <svg class="auth-img" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -126,20 +125,20 @@ class FidoPasskeyDetailsCard extends LitElement {
                 </div>
             </div>
         `
-    }
+  }
 
-    private getRow(lastUsedText: string, lastUsedIsMobile: boolean): TemplateResult {
-        return html`
+  private getRow (lastUsedText: string, lastUsedIsMobile: boolean): TemplateResult {
+    return html`
             <div class="auth-card-row">
                 ${this.getIcon(lastUsedIsMobile)}
                 <p class="auth-card-h3">${lastUsedText}</p>
             </div>
         `
-    }
+  }
 
-    private getIcon(isMobile: boolean): TemplateResult {
-        if (isMobile) {
-            return html`
+  private getIcon (isMobile: boolean): TemplateResult {
+    if (isMobile) {
+      return html`
                 <svg class="passkey-type-img" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.6114 11.6851H4.38916" stroke="#444444" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M10.5003 1.7959H5.50027C4.88662 1.7959 4.38916 2.29336 4.38916 2.90701V13.4626C4.38916 14.0762 4.88662 14.5737 5.50027 14.5737H10.5003C11.1139 14.5737 11.6114 14.0762 11.6114 13.4626V2.90701C11.6114 2.29336 11.1139 1.7959 10.5003 1.7959Z"
@@ -148,8 +147,8 @@ class FidoPasskeyDetailsCard extends LitElement {
                           fill="#444444"/>
                 </svg>
             `
-        } else {
-            return html`
+    } else {
+      return html`
                 <svg class="passkey-type-img" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5534_164)">
                         <path d="M14.4995 9.68506V3.18506C14.4995 2.35173 13.8262 1.68506 12.9995 1.68506H2.99951C2.16618 1.68506 1.49951 2.35173 1.49951 3.18506V9.68506C1.49951 9.95839 1.71951 10.1851 1.99951 10.1851H13.9995C14.2728 10.1851 14.4995 9.95839 14.4995 9.68506ZM13.4995 9.68506L13.9995 9.18506H1.99951L2.49951 9.68506V3.18506C2.49951 2.90506 2.71951 2.68506 2.99951 2.68506H12.9995C13.2728 2.68506 13.4995 2.90506 13.4995 3.18506V9.68506Z"
@@ -166,20 +165,20 @@ class FidoPasskeyDetailsCard extends LitElement {
                     </defs>
                 </svg>
             `
-        }
     }
+  }
 
-    private getOptionalRow(): TemplateResult {
-        if (this.prevLastUsedText && this.prevLastUsedText !== "") {
-            return this.getRow(this.prevLastUsedText, this.prevLastUsedIsMobile === 'true')
-        } else {
-            return html``
-        }
+  private getOptionalRow (): TemplateResult {
+    if (this.prevLastUsedText && this.prevLastUsedText !== '') {
+      return this.getRow(this.prevLastUsedText, this.prevLastUsedIsMobile === 'true')
+    } else {
+      return html``
     }
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'fido-passkey-details-card': FidoPasskeyDetailsCard
-    }
+  interface HTMLElementTagNameMap {
+    'fido-passkey-details-card': FidoPasskeyDetailsCard
+  }
 }

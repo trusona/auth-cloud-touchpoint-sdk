@@ -22,11 +22,11 @@ const componentStyle = css`
 @customElement('flex-container')
 class FlexContainer extends LitElement {
   @property({ type: String }) minWidth?: string | null
-  @property({ type: Object }) globalStyles?: any;
+  @property({ type: Object }) globalStyles?: any
 
   static styles = [sharedStyles, componentStyle]
 
-  connectedCallback() {
+  connectedCallback () {
     super.connectedCallback()
     this.setFontFaceStyleDeclaration()
   }

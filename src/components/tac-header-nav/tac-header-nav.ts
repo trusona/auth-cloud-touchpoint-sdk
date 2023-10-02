@@ -1,8 +1,8 @@
-import {LitElement, html, css, PropertyValueMap} from 'lit'
+import { LitElement, html, css, PropertyValueMap } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
-import {TemplateResult} from "lit/development";
-import {unsafeSVG} from 'lit/directives/unsafe-svg.js';
+import { TemplateResult } from 'lit/development'
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 
 const componentStyle = css`
   .auth-header-nav {
@@ -34,37 +34,37 @@ const componentStyle = css`
     font-size: 18px;
     line-height: 21px;
   }
-`;
+`
 
 @customElement('tac-header-nav')
 class TacHeaderNav extends LitElement {
-    @property({ type: Object }) globalStyles: any
+  @property({ type: Object }) globalStyles: any
 
-    visible = false;
+  visible = false
 
-    static styles = [sharedStyles, componentStyle]
+  static styles = [sharedStyles, componentStyle]
 
-    connectedCallback() {
-        super.connectedCallback();
-        if (this.globalStyles?.headerNavVisible) this.visible = true;
+  connectedCallback () {
+    super.connectedCallback()
+    if (this.globalStyles?.headerNavVisible) this.visible = true
+  }
+
+  updated (changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
+    super.updated(changedProperties)
+    if (this.globalStyles?.headerNavVisible) this.visible = true
+  }
+
+  getSvgLogo = (): TemplateResult => {
+    if (this.globalStyles.headerNavLogo) {
+      return html`${unsafeSVG(this.globalStyles.headerNavLogo)}`
+    } else {
+      return html``
     }
+  }
 
-    updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
-        super.updated(changedProperties);
-        if (this.globalStyles?.headerNavVisible) this.visible = true;
-    }
-
-    getSvgLogo = (): TemplateResult => {
-        if (this.globalStyles.headerNavLogo) {
-            return html`${unsafeSVG(this.globalStyles.headerNavLogo)}`
-        } else {
-            return html``
-        }
-    }
-
-    render() {
-        if(this.visible) {
-            return html`
+  render () {
+    if (this.visible) {
+      return html`
               <div style="${this.globalStyles?.headerNavStyle}" class="auth-header-nav">
                 ${this.globalStyles?.headerNavLogo
                         ? html`
@@ -76,7 +76,8 @@ class TacHeaderNav extends LitElement {
                       </div>
                     `
                         : ''}
-                    ${this.globalStyles?.headerNavShowSecureMsg ? html`
+                    ${this.globalStyles?.headerNavShowSecureMsg
+? html`
                           <div class="auth-header-nav__lock">
                             <div>Secure sign-in</div>
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,19 +92,18 @@ class TacHeaderNav extends LitElement {
                                       </clipPath>
                                   </defs>
                               </svg>
-                          </div>` : 
-                    ''}
+                          </div>`
+                    : ''}
               </div>
-            `;
-        } else {
-            return html``
-        }
+            `
+    } else {
+      return html``
     }
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'tac-header-nav': TacHeaderNav
-    }
+  interface HTMLElementTagNameMap {
+    'tac-header-nav': TacHeaderNav
+  }
 }
-

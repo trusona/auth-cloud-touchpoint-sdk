@@ -14,7 +14,7 @@ const componentStyle = css`
 @customElement('text-block')
 class TextBlock extends LitElement {
   static styles = [sharedStyles, componentStyle]
-  @property({ type: String }) inlineStyle = '';
+  @property({ type: String }) inlineStyle = ''
 
   render (): TemplateResult {
     return html`

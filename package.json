@@ -1,7 +1,7 @@
 {
   "name": "@trusona/touchpoint-sdk",
   "version": "0.0.1",
-  "repository": "https://github.com/trusona/auth-cloud-webauthn-cx-sdk",
+  "repository": "https://github.com/trusona/auth-cloud-touchpoint-sdk",
   "description": "Trusona Touchpoint SDK",
   "main": "dist/index.es.js",
   "exports": {

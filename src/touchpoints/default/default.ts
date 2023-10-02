@@ -1,57 +1,59 @@
 import { html, css, LitElement } from 'lit'
 import { property, customElement } from 'lit/decorators.js'
-import {validateEmail} from '../../utils/validators'
-import {sharedStyles} from "../../shared/style";
+import { validateEmail } from '../../utils/validators'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css``
 @customElement('default-touchpoint')
 class DefaultTouchpoint extends LitElement {
-    static styles = [sharedStyles, componentStyle]
+  static styles = [sharedStyles, componentStyle]
 
-    @property({type: Object}) globalStyles?: any;
-    @property({type: Object}) signInWithBiometricPrompt?: any;
-    @property({type: String}) inputDisabled? = 'false';
-    @property({ type: String }) started?  = 'false'
-    @property({ type: String }) waitingForInput? = 'true'
+  @property({ type: Object }) globalStyles?: any
+  @property({ type: Object }) signInWithBiometricPrompt?: any
+  @property({ type: String }) inputDisabled? = 'false'
+  @property({ type: String }) started? = 'false'
+  @property({ type: String }) waitingForInput? = 'true'
 
-    @property({type: String}) performDefaultContinueEventName = 'perform-default-continue-event';
-    @property({type: String}) signInAnotherWayEventName = 'sign-in-another-way-event';
+  @property({ type: String }) performDefaultContinueEventName = 'perform-default-continue-event'
+  @property({ type: String }) signInAnotherWayEventName = 'sign-in-another-way-event'
 
-    username = '';
+  username = ''
 
-    inputUpdated(event: InputEvent) {
-        this.username = (event.target as HTMLInputElement).value
-        const booleanResult = !validateEmail(this.username);
-        this.waitingForInput = booleanResult.toString();
+  inputUpdated (event: InputEvent) {
+    this.username = (event.target as HTMLInputElement).value
+    const booleanResult = !validateEmail(this.username)
+    this.waitingForInput = booleanResult.toString()
+  }
+
+  inputPlaceholder (): string {
+    if (this.signInWithBiometricPrompt?.hideUsernameFieldHint) {
+      return ''
+    } else {
+      return (
+        this.signInWithBiometricPrompt?.usernameFieldHint || 'Enter email'
+      )
     }
+  }
 
-    inputPlaceholder(): string {
-        if (this.signInWithBiometricPrompt?.hideUsernameFieldHint) {
-            return '';
-        } else {
-            return (
-                this.signInWithBiometricPrompt?.usernameFieldHint || 'Enter email'
-            );
-        }
-    }
+  preparePerformLogin (): void {
+    this.dispatchEvent(new CustomEvent(this.performDefaultContinueEventName, {
+      detail: { value: this.username },
+      bubbles: true,
+      composed: true
+    })
+    )
+  }
 
-    preparePerformLogin(): void {
-        this.dispatchEvent(new CustomEvent(this.performDefaultContinueEventName, {
-            detail: { value: this.username},
-            bubbles: true,
-            composed: true })
-        );
-    }
+  preCheckSignInAnotherWay (): void {
+    this.dispatchEvent(new CustomEvent(this.signInAnotherWayEventName, {
+      bubbles: true,
+      composed: true
+    })
+    )
+  }
 
-    preCheckSignInAnotherWay(): void {
-        this.dispatchEvent(new CustomEvent(this.signInAnotherWayEventName, {
-            bubbles: true,
-            composed: true })
-        );
-    }
-
-    render() {
-        return html`
+  render () {
+    return html`
             <flex-container .globalStyles=${this.globalStyles || {}}>
                 <header-1
                         ?hidden=${this.signInWithBiometricPrompt?.hideHeadline}
@@ -111,12 +113,12 @@ class DefaultTouchpoint extends LitElement {
                     </button>
                 </div>
             </flex-container>
-        `;
-    }
+        `
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'default-touchpoint': DefaultTouchpoint
-    }
+  interface HTMLElementTagNameMap {
+    'default-touchpoint': DefaultTouchpoint
+  }
 }

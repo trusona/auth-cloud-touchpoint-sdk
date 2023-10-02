@@ -1,6 +1,6 @@
-import {LitElement, html, css, TemplateResult} from 'lit'
-import {customElement, property} from 'lit/decorators.js'
-import {sharedStyles} from '../../shared/style'
+import { LitElement, html, css, TemplateResult } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
 
@@ -105,13 +105,13 @@ const componentStyle = css`
 
 @customElement('fido-create-passkey')
 class FidoCreatePasskey extends LitElement {
-    @property({type: Function}) onClick = (): void => {
-    }
+  @property({ type: Function }) onClick = (): void => {
+  }
 
-    static styles = [sharedStyles, componentStyle]
+  static styles = [sharedStyles, componentStyle]
 
-    render(): TemplateResult {
-        return html`
+  render (): TemplateResult {
+    return html`
             <div class="auth-container">
                 <p class="auth-h1">Security Settings</p>
                 <div class="auth-card">
@@ -192,15 +192,15 @@ class FidoCreatePasskey extends LitElement {
                             </li>
                         </ul>
                     </div>
-                    <button class="auth-button" @click=${() => {this.onClick()}}>Create passkey</button>
+                    <button class="auth-button" @click=${() => { this.onClick() }}>Create passkey</button>
                 </div>
             </div>
         `
-    }
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'fido-create-passkey': FidoCreatePasskey
-    }
+  interface HTMLElementTagNameMap {
+    'fido-create-passkey': FidoCreatePasskey
+  }
 }

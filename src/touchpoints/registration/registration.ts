@@ -1,8 +1,7 @@
-import { LitElement, html, css } from 'lit';
-import {customElement, property, query} from 'lit/decorators.js'
-import {ref, createRef} from 'lit/directives/ref.js';
-import {sharedStyles} from "../../shared/style";
-
+import { LitElement, html, css } from 'lit'
+import { customElement, property, query } from 'lit/decorators.js'
+import { ref, createRef } from 'lit/directives/ref.js'
+import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
   .hideLearnMore {
@@ -16,49 +15,49 @@ const componentStyle = css`
 class RegistrationTouchpoint extends LitElement {
   static styles = [sharedStyles, componentStyle]
 
-  @property({ type: Object }) upgradePrompt?: any;
-  @property({ type: Object }) globalStyles?: any;
-  @property({ type: Object }) platformSpecificIcons?: any;
-  @property({ type: Boolean }) started? = false;
-  @property({ type: Boolean }) learnMoreContentVisible?: boolean;
+  @property({ type: Object }) upgradePrompt?: any
+  @property({ type: Object }) globalStyles?: any
+  @property({ type: Object }) platformSpecificIcons?: any
+  @property({ type: Boolean }) started? = false
+  @property({ type: Boolean }) learnMoreContentVisible?: boolean
   @property({ type: Function }) enroll: Function = () => {}
-  @query('#biometricIcon') biometricIconElement!: HTMLDivElement;
-  @query('#rightArrowIcon') rightArrowIconElement!: HTMLSpanElement;
-  @query('#downArrowIcon') downArrowIconElement!: HTMLSpanElement;
-  @query('#learnMoreContent') learnMoreContentElement!: HTMLSpanElement;
+  @query('#biometricIcon') biometricIconElement!: HTMLDivElement
+  @query('#rightArrowIcon') rightArrowIconElement!: HTMLSpanElement
+  @query('#downArrowIcon') downArrowIconElement!: HTMLSpanElement
+  @query('#learnMoreContent') learnMoreContentElement!: HTMLSpanElement
 
-  btnRef = createRef<HTMLInputElement>();
+  btnRef = createRef<HTMLInputElement>()
 
-  updated() {
-    this.setButtonFocus();
-    this.updateIcons();
+  updated () {
+    this.setButtonFocus()
+    this.updateIcons()
   }
 
-  connectedCallback() {
+  connectedCallback () {
     super.connectedCallback()
-    this.setButtonFocus();
-    this.updateIcons();
+    this.setButtonFocus()
+    this.updateIcons()
   }
 
-  setButtonFocus(): void {
+  setButtonFocus (): void {
     setTimeout(() => {
       const btnElm: any = this.btnRef.value?.shadowRoot?.querySelector('#authBtn')
       btnElm?.focus()
-    }, 1);
+    }, 1)
   }
 
-  updateIcons() {
+  updateIcons () {
     if (this.biometricIconElement) {
-      this.biometricIconElement.innerHTML = this.platformSpecificIcons?.biometricIcon ?? 'none';
+      this.biometricIconElement.innerHTML = this.platformSpecificIcons?.biometricIcon ?? 'none'
     }
     if (this.rightArrowIconElement) {
-      this.rightArrowIconElement.innerHTML = this.globalStyles?.rightArrowIcon ?? '';
+      this.rightArrowIconElement.innerHTML = this.globalStyles?.rightArrowIcon ?? ''
     }
     if (this.downArrowIconElement) {
-      this.downArrowIconElement.innerHTML = this.globalStyles?.downArrowIcon ?? '';
+      this.downArrowIconElement.innerHTML = this.globalStyles?.downArrowIcon ?? ''
     }
     if (this.learnMoreContentElement) {
-      this.learnMoreContentElement.innerHTML = this.upgradePrompt?.learnMoreContent ?? '';
+      this.learnMoreContentElement.innerHTML = this.upgradePrompt?.learnMoreContent ?? ''
     }
   }
 
@@ -66,7 +65,7 @@ class RegistrationTouchpoint extends LitElement {
     this.learnMoreContentVisible = !(this.learnMoreContentVisible ?? false)
   }
 
-  render() {
+  render () {
     return html`
       <flex-container .globalStyles="${this.globalStyles}">
         ${this.upgradePrompt?.hideIcon === false
@@ -91,37 +90,42 @@ class RegistrationTouchpoint extends LitElement {
           ${this.upgradePrompt?.buttonText ?? 'Enable Simple Sign-In'}
         </auth-button>
 
-        ${!this.globalStyles?.hideLearnMore ? html`
+        ${!this.globalStyles?.hideLearnMore
+? html`
           <div class="mt-5 mb-2 flex justify-between underline decoration-1">
             <div class="flex items-center">
 
-              ${this.learnMoreContentVisible === true ? html`
+              ${this.learnMoreContentVisible === true
+? html`
                 <span class="mr-2" id="rightArrowIcon"> </span>
-              ` : html`<span class="mr-2" id="downArrowIcon"> </span>`
+              `
+: html`<span class="mr-2" id="downArrowIcon"> </span>`
               }
 
               <text-block class="cursor-pointer" 
                           .inlineStyle=${this.globalStyles?.smallParagraphStyle}
                            @click=${this.toggleLearnMore}>
-                ${this.upgradePrompt?.learnMoreText }
+                ${this.upgradePrompt?.learnMoreText}
               </text-block>
             </div>
           </div>
 
 
-          ${this.learnMoreContentVisible === false ? html`
+          ${this.learnMoreContentVisible === false
+? html`
               <p class="small-paragraph" style="${this.globalStyles?.smallParagraphStyle}">
                 <span id="learnMoreContent"></span>
               </p>
-              ` : html``
+              `
+: html``
           }
 
-        ` : ''}
+        `
+: ''}
         
       </flex-container>
-    `;
+    `
   }
-
 }
 
 declare global {
