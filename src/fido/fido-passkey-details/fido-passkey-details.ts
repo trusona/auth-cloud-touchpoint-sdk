@@ -72,7 +72,7 @@ class FidoPasskeyDetails extends LitElement {
     render(): TemplateResult {
         return html`
             <div class="auth-container">
-                <p class="auth-h1">Passkey</p>
+                <p class="auth-h1">Passkeys</p>
                 ${this.getPasskeys()}
                 <div class="auth-h3">
                     <ul class="auth-paragraph">
