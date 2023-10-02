@@ -1,7 +1,10 @@
 {
   "name": "@trusona/touchpoint-sdk",
   "version": "0.0.1",
-  "repository": "https://github.com/trusona/auth-cloud-touchpoint-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trusona/auth-cloud-touchpoint-sdk.git"
+  },
   "description": "Trusona Touchpoint SDK",
   "main": "dist/index.es.js",
   "exports": {
@@ -49,5 +52,19 @@
     "ignore": [
       "src/vite-env.d.ts"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/trusona/auth-cloud-touchpoint-sdk/issues"
+  },
+  "homepage": "https://github.com/trusona/auth-cloud-touchpoint-sdk#readme",
+  "keywords": [
+    "web-component",
+    "lit",
+    "trusona",
+    "webauthn",
+    "fido",
+    "passkey"
+  ],
+  "author": "Trusona Engineering",
+  "license": "MIT"
 }
