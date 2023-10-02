@@ -1,0 +1,22 @@
+name: Typescript Build
+on: [ workflow_call ]
+permissions:
+  id-token: write
+  contents: read
+  packages: read
+jobs:
+  test:
+    name: Typescript
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3
+      with:
+        cache-dependency-path: package-lock.json
+        check-latest: true
+        node-version: 18
+        cache: 'npm'
+
+    - run: npm install
+    - run: npm run build
