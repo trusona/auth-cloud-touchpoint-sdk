@@ -4,9 +4,10 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   build: {
     lib: {
-      fileName: 'index',
+      name: 'touchpoint-sdk',
+      fileName: 'touchpoint-sdk',
       entry: 'src/index.ts',
-      formats: ['es'],
+      formats: ['es', 'umd'],
     },
     rollupOptions: {
       // external: /^lit/
