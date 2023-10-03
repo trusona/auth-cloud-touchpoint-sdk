@@ -1,16 +1,16 @@
 {
   "name": "@trusona/touchpoint-sdk",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/trusona/auth-cloud-touchpoint-sdk.git"
   },
   "description": "Trusona Touchpoint SDK",
   "type": "module",
-  "module": "dist/index.es.js",
-  "main": "dist/index.es.js",
+  "module": "dist/touchpoint-sdk.js",
+  "main": "dist/touchpoint-sdk.js",
   "exports": {
-    ".": "./dist/index.es.js"
+    ".": "./dist/touchpoint-sdk.js"
   },
   "types": "types/index.d.ts",
   "files": [
