@@ -154,7 +154,7 @@ class FidoPasskeyDetailsCard extends LitElement {
     private getFormattedDate(date: string) {
         const parsedDate = DateTime.fromISO(date);
         if (parsedDate.isValid) {
-            return parsedDate.toFormat("MMM d, yyyy, h:mma ZZZZ")
+            return parsedDate.toFormat("MMM d, yyyy, h:mm a ZZZZ")
         } else {
             return ""
         }
