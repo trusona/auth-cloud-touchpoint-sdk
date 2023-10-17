@@ -1,6 +1,6 @@
 {
   "name": "@trusona/touchpoint-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/trusona/auth-cloud-touchpoint-sdk.git"
