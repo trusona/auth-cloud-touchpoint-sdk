@@ -7,6 +7,23 @@
     <script type="module" src="/dist/touchpoint-sdk.umd.js"></script>
     <link rel="stylesheet" href="../styles.css">
 
+    <script>
+        const passkeyDetails = {
+            createdAt: '2023-10-12T17:12:13.183221Z',
+            createdOperatingSystem: 'Mac OS',
+            passkeyActivity: [
+                {
+                    lastUsedAt: '2023-10-13T17:12:13.183221Z',
+                    operatingSystem: 'Android 14'
+                },
+                {
+                    lastUsedAt: '2023-10-14T17:12:13.183221Z',
+                    operatingSystem: 'Android 14'
+                }
+            ]
+        }
+    </script>
+
 </head>
 <body>
 
@@ -17,14 +34,12 @@
     </a>
 
     <flex-container minWidth="500px">
-        <fido-passkey-details-card
-                savedText="Saved with iOS 16.2 on April 11, 2023, 12:01am"
-                lastUsedText="iOS 16.2, April 11, 2023, 3:42pm"
-                lastUsedIsMobile="true"
-                lastUsedTextOptional="MacOS 13.0.1, April 23rd, 2023, 4:21pm"
-                lastUsedOptionalIsMobile="false"
-        >
-        </fido-passkey-details-card>
+        <fido-passkey-details-card></fido-passkey-details-card>
+
+        <script>
+            const elm = document.querySelector('fido-passkey-details-card')
+            elm.passkeyDetails = passkeyDetails
+        </script>
     </flex-container>
 </div>
 

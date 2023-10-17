@@ -2,6 +2,7 @@ import {Meta, StoryObj} from '@storybook/web-components'
 import {html} from 'lit'
 
 import './fido-passkey-details-card'
+import {PasskeyDetails} from "./fido-passkey-details-card";
 
 export default {
     title: 'Fido Passkey Details Card',
@@ -29,24 +30,30 @@ export default {
     }
 } as Meta
 
+
+let passkeyDetails: PasskeyDetails = {
+    createdAt: '2023-10-12T17:12:13.183221Z',
+    createdOperatingSystem: 'Mac OS',
+    passkeyActivity: [
+        {
+            lastUsedAt: '2023-10-13T17:12:13.183221Z',
+            operatingSystem: 'Android 14'
+        },
+        {
+            lastUsedAt: '2023-10-14T17:12:13.183221Z',
+            operatingSystem: 'Android 14'
+        }
+    ]
+}
+
 export const Default: StoryObj = {
     name: 'Default',
-    args:{
-        savedText: "Saved with iOS 16.2 on April 11, 2023, 12:01am",
-        lastUsedText:"iOS 16.2, April 11, 2023, 3:42pm",
-        lastUsedIsMobile: true,
-        prevLastUsedText:"MacOS 13.0.1, April 23rd, 2023, 4:21pm",
-        prevLastUsedIsMobile:false
+    args: {
+        passkeyDetails: passkeyDetails
     },
     render: (args) => {
         return html`
-            <fido-passkey-details-card
-                    savedText="${args.savedText}"
-                    lastUsedText="${args.lastUsedText}"
-                    lastUsedIsMobile="${args.lastUsedIsMobile}"
-                    prevLastUsedText="${args.prevLastUsedText}"
-                    prevLastUsedIsMobile="${args.prevLastUsedIsMobile}"
-            >
+            <fido-passkey-details-card passkeyDetails="${JSON.stringify(args.passkeyDetails)}">
             </fido-passkey-details-card>
         `
     }

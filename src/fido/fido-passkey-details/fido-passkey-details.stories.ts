@@ -27,25 +27,42 @@ export default {
     }
 } as Meta
 
-let passkeyDetails : PasskeyDetails[] = [
+let passkeyDetails: PasskeyDetails[] = [
     {
-        savedText: "Saved with iOS 16.2 on April 11, 2023, 12:01am",
-        lastUsedText:"iOS 16.2, April 11, 2023, 3:42pm",
-        lastUsedIsMobile: true,
-        prevLastUsedText:"MacOS 13.0.1, April 23rd, 2023, 4:21pm",
-        prevLastUsedIsMobile:false
+        createdAt: '2023-10-12T17:12:13.183221Z',
+        createdOperatingSystem: 'Mac OS',
+        passkeyActivity: [
+            {
+                lastUsedAt: '2023-10-13T19:14:13.183221Z',
+                operatingSystem: 'Android 14'
+            },
+            {
+                lastUsedAt: '2023-10-14T18:16:13.183221Z',
+                operatingSystem: 'Mac OS X 10.15'
+            }
+        ]
+    }, {
+        createdAt: '2023-10-10T17:12:13.183221Z',
+        createdOperatingSystem: 'Android 13'
     },
     {
-        savedText: "Saved with Android 13 on April 11, 2023, 12:01am",
-        lastUsedText:"Android 13, April 11th, 2023, 3:42pm",
-        lastUsedIsMobile: true
-    },
+        passkeyActivity: [
+            {
+                lastUsedAt: '2023-10-03T17:10:13.183221Z',
+                operatingSystem: 'Android 10'
+            },
+            {
+                lastUsedAt: '2023-10-01T17:14:13.183221Z',
+                operatingSystem: 'Android 10'
+            }
+        ]
+    }
 ]
 
 export const Default: StoryObj = {
     name: 'Default',
-    args:{
-        passkeyDetails : passkeyDetails
+    args: {
+        passkeyDetails: passkeyDetails
     },
     render: (args) => {
         return html`
