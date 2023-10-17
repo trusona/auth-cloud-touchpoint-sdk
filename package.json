@@ -50,7 +50,8 @@
     "web-types-lit": "^0.1.0"
   },
   "dependencies": {
-    "lit": "^2.8.0"
+    "lit": "^2.8.0",
+    "moment": "^2.29.4"
   },
   "ts-standard": {
     "ignore": [
