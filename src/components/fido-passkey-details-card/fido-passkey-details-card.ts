@@ -2,7 +2,7 @@ import {LitElement, html, css, TemplateResult} from 'lit'
 import {customElement, property} from 'lit/decorators.js'
 import {repeat} from 'lit/directives/repeat.js'
 import {sharedStyles} from '../../shared/style'
-import moment from "moment";
+import {DateTime} from 'luxon';
 
 const componentStyle = css`
 
@@ -138,9 +138,8 @@ class FidoPasskeyDetailsCard extends LitElement {
     private getCreatedAtText(): string {
         const createdAt = this.passkeyDetails?.createdAt
         const os = this.passkeyDetails?.createdOperatingSystem
-        const parsedDate = moment(createdAt ?? "")
-        if (parsedDate.isValid()) {
-            const formattedDate = parsedDate.format("MMMM D, YYYY, h:mma")
+        const formattedDate = this.getFormattedDate(createdAt ?? "")
+        if (formattedDate) {
             return `Saved with ${os ?? "--"} on ${formattedDate}`
         } else {
             return ""
@@ -148,24 +147,33 @@ class FidoPasskeyDetailsCard extends LitElement {
     }
 
     private getLastUsedAtText(lastUsedAt?: string, lastUsedOs?: String): string {
-        const parsedDate = moment(lastUsedAt ?? "")
-        const formattedDate = parsedDate.format("MMMM D, YYYY, h:mma")
+        const formattedDate = this.getFormattedDate(lastUsedAt ?? "")
         return `${lastUsedOs ?? ""}, ${formattedDate}`
     }
 
+    private getFormattedDate(date: string) {
+        const parsedDate = DateTime.fromISO(date);
+        if (parsedDate.isValid) {
+            return parsedDate.toFormat("MMM d, yyyy, h:mma ZZZZ")
+        } else {
+            return ""
+        }
+    }
+
     private getLastUsedActivity(): TemplateResult {
-        if (this.passkeyDetails?.passkeyActivity === null || this.passkeyDetails?.passkeyActivity === undefined || this.passkeyDetails?.passkeyActivity.length == 0) {
+        const activityList = this.passkeyDetails?.passkeyActivity
+        if (Array.isArray(activityList) && activityList.length > 0) {
+            return html`
+                ${repeat(this.passkeyDetails?.passkeyActivity ?? [], (activity: PasskeyActivity) => html`
+                    ${this.getActivityRow(activity)}
+                `)}`
+        } else {
             return html`
                 ${this.getActivityRow({
                     lastUsedAt: this.passkeyDetails?.createdAt ?? "",
                     operatingSystem: this.passkeyDetails?.createdOperatingSystem ?? ""
                 })}
             `
-        } else {
-            return html`
-                ${repeat(this.passkeyDetails?.passkeyActivity ?? [], (activity: PasskeyActivity) => html`
-                    ${this.getActivityRow(activity)}
-                `)}`
         }
     }
 

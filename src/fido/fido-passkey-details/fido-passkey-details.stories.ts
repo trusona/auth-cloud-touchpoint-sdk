@@ -33,12 +33,12 @@ let passkeyDetails: PasskeyDetails[] = [
         createdOperatingSystem: 'Mac OS',
         passkeyActivity: [
             {
-                lastUsedAt: '2023-10-13T17:12:13.183221Z',
+                lastUsedAt: '2023-10-13T19:14:13.183221Z',
                 operatingSystem: 'Android 14'
             },
             {
-                lastUsedAt: '2023-10-14T17:12:13.183221Z',
-                operatingSystem: 'Android 14'
+                lastUsedAt: '2023-10-14T18:16:13.183221Z',
+                operatingSystem: 'Mac OS X 10.15'
             }
         ]
     }, {
