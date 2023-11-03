@@ -116,7 +116,7 @@ class UsernamePasswordTouchpoint extends LitElement {
                                       style=${this.globalStyles?.heading1Style}>
                                 ${this.passwordSignIn?.headline ?? 'Sign in'}
                             </header-1>
-                            ${this.isError('response') !== undefined
+                            ${this.isError('response') === true
 ? html`
                                 <div class="error-msg">
                                     <div>
@@ -170,7 +170,7 @@ class UsernamePasswordTouchpoint extends LitElement {
                                                type="${this.showPassword ? 'text' : 'password'}"
                                                required>
 
-                                        ${this.passwordSignIn?.hidePasswordToggle === false && !this.showPassword
+                                        ${this.passwordSignIn?.hidePasswordToggle === false && this.showPassword === false
 ? html`
                                             <button title="Show password"
                                                     class="password-toggle-icon"

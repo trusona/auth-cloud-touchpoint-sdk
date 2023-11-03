@@ -102,7 +102,6 @@ class FidoPasskeyDetailsCard extends LitElement {
   static styles = [sharedStyles, componentStyle]
 
   render (): TemplateResult {
-    // console.log(this.passkeyDetails)
     return html`
             <div class="auth-card">
                 <div class="auth-card-header">
