@@ -1,4 +1,4 @@
-import { html, css, LitElement } from 'lit'
+import { html, css, LitElement, TemplateResult } from 'lit'
 import { property, customElement, query } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
 import { LoginStep } from '../../utils/login.model'
@@ -49,14 +49,14 @@ class UsernamePasswordTouchpoint extends LitElement {
     return this.login.userIdentifier ?? ''
   }
 
-  onPasswordChange (event: Event) {
+  onPasswordChange (event: Event): void {
     this.waitingForInput = (event.target as HTMLInputElement).value === ''
     this.requestUpdate()
   }
 
-  resetButtonClicked (event: Event) {
+  resetButtonClicked (event: Event): boolean {
     event.preventDefault()
-    if (this.startOver) {
+    if (this.startOver !== undefined) {
       this.startOver(event)
     }
     return false
@@ -64,33 +64,33 @@ class UsernamePasswordTouchpoint extends LitElement {
 
   togglePasswordVisibility (): void {
     this.showPassword = !this.showPassword
-    if (this.passwordInput) {
+    if (this.passwordInput !== undefined) {
       this.passwordInput.type = this.showPassword ? 'text' : 'password'
     }
   }
 
-  prePerformLogin (): any {
+  prePerformLogin (): void {
     this.performLogin({
       username: this.login.userIdentifier,
       password: this.passwordInput.value
     })
   }
 
-  preCheckSignInAnotherWay () {
+  preCheckSignInAnotherWay (): void {
     this.signInAnotherWay()
   }
 
-  inputPlaceholder () {
-    if (this.passwordSignIn?.hideInputHint) {
+  inputPlaceholder (): string {
+    if (this.passwordSignIn?.hideInputHint !== undefined) {
       return ''
     } else {
-      return this.passwordSignIn?.inputHint || 'Enter Password'
+      return this.passwordSignIn?.inputHint ?? 'Enter Password'
     }
   }
 
-  render () {
+  render (): TemplateResult {
     return html`
-            ${this.currentStep(LoginStep.ProvideUsername)
+            ${this.currentStep(LoginStep.ProvideUsername) === true
                     ? html`
                     <start-touchpoint
                       ?started=${this.started}
@@ -114,9 +114,9 @@ class UsernamePasswordTouchpoint extends LitElement {
                         <flex-container .globalStyles=${this.globalStyles}>
                             <header-1 ?hidden=${this.passwordSignIn?.hideHeadline}
                                       style=${this.globalStyles?.heading1Style}>
-                                ${this.passwordSignIn?.headline || 'Sign in'}
+                                ${this.passwordSignIn?.headline ?? 'Sign in'}
                             </header-1>
-                            ${this.isError('response')
+                            ${this.isError('response') !== undefined
 ? html`
                                 <div class="error-msg">
                                     <div>
@@ -139,7 +139,7 @@ class UsernamePasswordTouchpoint extends LitElement {
 : ''}
                             
                             <div style="position: relative;">
-                                ${!this.currentStep(LoginStep.ProvideUsername)
+                                ${this.currentStep(LoginStep.ProvideUsername) === false
 ? html`
                                     <div class="auth-ui-input-wrapper">
                                         <auth-reset .callback="${this.resetButtonClicked}">${this.getUserIdentifier()}
@@ -147,22 +147,22 @@ class UsernamePasswordTouchpoint extends LitElement {
                                     </div>
                                 `
 : ''}
-                                <p ?hidden=${!this.isError(this.getUserIdentifier())} class="mt-2 text-sm text-red-600">
+                                <p ?hidden=${this.isError(this.getUserIdentifier()) === false} class="mt-2 text-sm text-red-600">
                                     <span class="font-medium">Username or password</span> is required
                                 </p>
                             </div>
 
-                            <div ?hidden="${!this.currentStep(LoginStep.ProvidePassword)}" style="position: relative;">
+                            <div ?hidden="${this.currentStep(LoginStep.ProvidePassword) === false}" style="position: relative;">
                                 <div class="auth-ui-input-wrapper">
-                                    <label ?hidden="${!this.passwordSignIn?.hideInputLabel ?? false}"
+                                    <label ?hidden="${this.passwordSignIn?.hideInputLabel === false ?? false}"
                                            class="auth-ui-label"
                                            style="${this.globalStyles?.paragraphStyle ?? ''}"
                                            for="password">
-                                        ${this.passwordSignIn?.inputLabel || 'Password'}
+                                        ${this.passwordSignIn?.inputLabel ?? 'Password'}
                                     </label>
                                     <div class="password-input-container">
                                         <input class="auth-ui-input"
-                                               ?disabled=${!this.currentStep(LoginStep.ProvidePassword)}
+                                               ?disabled=${this.currentStep(LoginStep.ProvidePassword) === false}
                                                @input=${(ev: Event) => { this.onPasswordChange(ev) }}
                                                placeholder=${this.inputPlaceholder()}
                                                id="password"
@@ -170,7 +170,7 @@ class UsernamePasswordTouchpoint extends LitElement {
                                                type="${this.showPassword ? 'text' : 'password'}"
                                                required>
 
-                                        ${!this.passwordSignIn?.hidePasswordToggle && !this.showPassword
+                                        ${this.passwordSignIn?.hidePasswordToggle === false && !this.showPassword
 ? html`
                                             <button title="Show password"
                                                     class="password-toggle-icon"
@@ -185,7 +185,7 @@ class UsernamePasswordTouchpoint extends LitElement {
                                         `
 : ''}
 
-                                        ${!this.passwordSignIn?.hidePasswordToggle && this.showPassword
+                                        ${this.passwordSignIn?.hidePasswordToggle === false && this.showPassword !== undefined
 ? html`
                                             <button title="Hide password"
                                                     class="password-toggle-icon"
@@ -211,13 +211,13 @@ class UsernamePasswordTouchpoint extends LitElement {
                                          ?isProcessing=${this.started}
                                          ?isWaitingForInput=${this.waitingForInput}
                                          inlineStyle="${this.globalStyles?.buttonStyle}"
-                                         btnId="loginSubmitBtn">${this.passwordSignIn?.buttonText || 'Continue'}
+                                         btnId="loginSubmitBtn">${this.passwordSignIn?.buttonText ?? 'Continue'}
                             </auth-button>
                             
-                            ${!this.passwordSignIn?.hideMessage
+                            ${this.passwordSignIn?.hideMessage === false
 ? html`
                                 <text-block inlineStyle="${this.globalStyles?.paragraphStyle}">
-                                    ${this.passwordSignIn?.message || 'By continuing, you agree to our privacy policy and terms of use.'}
+                                    ${this.passwordSignIn?.message ?? 'By continuing, you agree to our privacy policy and terms of use.'}
                                 </text-block>
                             `
 : ''}
