@@ -14,22 +14,27 @@ export default {
             description: `Array of PasskeyDetails Objects.
             
                 PasskeyDetails {
-                    savedText: string,
-                    lastUsedText: string
-                    lastUsedIsMobile: boolean
-                    prevLastUsedText?: string | null
-                    prevLastUsedIsMobile?: boolean | null
+                    createdAt: string,
+                    isSync: boolean,
+                    createdOperatingSystem: string,
+                    passkeyActivity: Array< PasskeyActivity >
+                }
+                
+                PasskeyActivity {
+                    lastUsedAt: string,
+                    operatingSystem: string
                 }`,
             control: {
                 type: 'object'
             }
-        },
+        }
     }
 } as Meta
 
 let passkeyDetails: PasskeyDetails[] = [
     {
         createdAt: '2023-10-12T17:12:13.183221Z',
+        isSync: true,
         createdOperatingSystem: 'Mac OS',
         passkeyActivity: [
             {
@@ -43,6 +48,7 @@ let passkeyDetails: PasskeyDetails[] = [
         ]
     }, {
         createdAt: '2023-10-10T17:12:13.183221Z',
+        isSync: false,
         createdOperatingSystem: 'Android 13'
     },
     {

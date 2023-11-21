@@ -10,22 +10,23 @@ export default {
         layout: 'centered',
     },
     argTypes: {
-        savedText: {
-            description: "Text to indicate the Created Date"
-        },
-        lastUsedText: {
-            description: "Text to indicate the Last Used Date"
-        },
-        lastUsedIsMobile: {
-            description: "Boolean to indicate if the Last Usage was on Mobile",
-            table: {defaultValue: {summary: 'false'}}
-        },
-        prevLastUsedText: {
-            description: "[Optional] Text to indicate the Previous Last Used Date"
-        },
-        prevLastUsedIsMobile: {
-            description: "[Optional] Boolean to indicate if the Previous Last Usage was on Mobile",
-            table: {defaultValue: {summary: 'false'}}
+        passkeyDetails: {
+            description: `PasskeyDetails Object:
+            
+                PasskeyDetails {
+                    createdAt: string,
+                    isSync: boolean,
+                    createdOperatingSystem: string,
+                    passkeyActivity: Array< PasskeyActivity >
+                }
+                
+                PasskeyActivity {
+                    lastUsedAt: string,
+                    operatingSystem: string
+                }`,
+            control: {
+                type: 'object'
+            }
         }
     }
 } as Meta
@@ -33,6 +34,7 @@ export default {
 
 let passkeyDetails: PasskeyDetails = {
     createdAt: '2023-10-12T17:12:13.183221Z',
+    isSync: true,
     createdOperatingSystem: 'Mac OS',
     passkeyActivity: [
         {

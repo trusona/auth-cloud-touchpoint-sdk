@@ -1,8 +1,8 @@
-import {LitElement, html, css, TemplateResult} from 'lit'
-import {repeat} from 'lit/directives/repeat.js'
-import {customElement, property} from 'lit/decorators.js'
-import {sharedStyles} from '../../shared/style'
-import {PasskeyDetails} from "../../components/fido-passkey-details-card/fido-passkey-details-card";
+import { LitElement, html, css, TemplateResult } from 'lit'
+import { repeat } from 'lit/directives/repeat.js'
+import { customElement, property } from 'lit/decorators.js'
+import { sharedStyles } from '../../shared/style'
+import { PasskeyDetails } from '../../components/fido-passkey-details-card/fido-passkey-details-card'
 
 const componentStyle = css`
 
@@ -57,12 +57,12 @@ const componentStyle = css`
 
 @customElement('fido-passkey-details')
 class FidoPasskeyDetails extends LitElement {
-    @property({type: Array}) passkeyDetails: PasskeyDetails[] = new Array<PasskeyDetails>()
+  @property({ type: Array }) passkeyDetails: PasskeyDetails[] = new Array<PasskeyDetails>()
 
-    static styles = [sharedStyles, componentStyle]
+  static styles = [sharedStyles, componentStyle]
 
-    render(): TemplateResult {
-        return html`
+  render (): TemplateResult {
+    return html`
             <div class="auth-container">
                 <p class="auth-h1">Passkeys</p>
                 ${this.getPasskeys()}
@@ -85,20 +85,20 @@ class FidoPasskeyDetails extends LitElement {
                 </div>
             </div>
         `
-    }
+  }
 
-    private getPasskeys(): TemplateResult {
-        return html`
+  private getPasskeys (): TemplateResult {
+    return html`
             ${repeat(this.passkeyDetails, (details: PasskeyDetails) => html`
                 <fido-passkey-details-card passkeyDetails="${JSON.stringify(details)}">
                 </fido-passkey-details-card>
             `)}
         `
-    }
+  }
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-        'fido-passkey-details': FidoPasskeyDetails
-    }
+  interface HTMLElementTagNameMap {
+    'fido-passkey-details': FidoPasskeyDetails
+  }
 }
