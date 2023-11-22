@@ -91,7 +91,7 @@ export interface PasskeyActivity {
 
 export interface PasskeyDetails {
   createdAt: string
-  isSync: boolean
+  synced: boolean
   createdOperatingSystem: string
   passkeyActivity: PasskeyActivity[]
 }
@@ -138,7 +138,7 @@ class FidoPasskeyDetailsCard extends LitElement {
     const createdAt = this.passkeyDetails?.createdAt
     const os = this.passkeyDetails?.createdOperatingSystem
     const formattedDate = this.getFormattedDate(createdAt ?? '')
-    const syncText = this.passkeyDetails?.isSync === true ? '.' : ''
+    const syncText = this.passkeyDetails?.synced === true ? '.' : ''
     if (formattedDate) {
       return `Saved with ${os ?? '--'} on ${formattedDate}${syncText}`
     } else {
