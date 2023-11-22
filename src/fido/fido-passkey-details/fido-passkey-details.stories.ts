@@ -15,7 +15,7 @@ export default {
             
                 PasskeyDetails {
                     createdAt: string,
-                    isSync: boolean,
+                    synced: boolean,
                     createdOperatingSystem: string,
                     passkeyActivity: Array< PasskeyActivity >
                 }
@@ -34,7 +34,7 @@ export default {
 let passkeyDetails: PasskeyDetails[] = [
     {
         createdAt: '2023-10-12T17:12:13.183221Z',
-        isSync: true,
+        synced: true,
         createdOperatingSystem: 'Mac OS',
         passkeyActivity: [
             {
@@ -48,7 +48,7 @@ let passkeyDetails: PasskeyDetails[] = [
         ]
     }, {
         createdAt: '2023-10-10T17:12:13.183221Z',
-        isSync: false,
+        synced: false,
         createdOperatingSystem: 'Android 13'
     },
     {
