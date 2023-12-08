@@ -1,8 +1,9 @@
-import { LitElement, html, css, TemplateResult } from 'lit'
-import { repeat } from 'lit/directives/repeat.js'
-import { customElement, property } from 'lit/decorators.js'
-import { sharedStyles } from '../../shared/style'
-import { PasskeyDetails } from '../../components/fido-passkey-details-card/fido-passkey-details-card'
+import {LitElement, html, css, TemplateResult} from 'lit'
+import {repeat} from 'lit/directives/repeat.js'
+import {customElement, property} from 'lit/decorators.js'
+import {sharedStyles} from '../../shared/style'
+import {PasskeyActivity} from "@trusona/webauthn";
+
 
 const componentStyle = css`
 
@@ -57,15 +58,15 @@ const componentStyle = css`
 
 @customElement('fido-passkey-details')
 class FidoPasskeyDetails extends LitElement {
-  @property({ type: Array }) passkeyDetails: PasskeyDetails[] = new Array<PasskeyDetails>()
+    @property({type: Object}) passkeyActivitiesMap: Map<string, Array<PasskeyActivity>> = new Map<string, Array<PasskeyActivity>>()
 
-  static styles = [sharedStyles, componentStyle]
+    static styles = [sharedStyles, componentStyle]
 
-  render (): TemplateResult {
-    return html`
+    render(): TemplateResult {
+        return html`
             <div class="auth-container">
                 <p class="auth-h1">Passkeys</p>
-                ${this.getPasskeys()}
+                ${this.getPasskeyActivities()}
                 <div class="auth-h3">
                     <ul class="auth-paragraph">
                         <li>
@@ -85,20 +86,21 @@ class FidoPasskeyDetails extends LitElement {
                 </div>
             </div>
         `
-  }
+    }
 
-  private getPasskeys (): TemplateResult {
-    return html`
-            ${repeat(this.passkeyDetails, (details: PasskeyDetails) => html`
-                <fido-passkey-details-card passkeyDetails="${JSON.stringify(details)}">
+    private getPasskeyActivities(): TemplateResult {
+        const entries: Array<PasskeyActivity> = Object.values(this.passkeyActivitiesMap)
+        return html`
+            ${repeat(entries, activities => html`
+                <fido-passkey-details-card passkeyActivities="${JSON.stringify(activities)}">
                 </fido-passkey-details-card>
             `)}
         `
-  }
+    }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'fido-passkey-details': FidoPasskeyDetails
-  }
+    interface HTMLElementTagNameMap {
+        'fido-passkey-details': FidoPasskeyDetails
+    }
 }
