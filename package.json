@@ -51,6 +51,7 @@
     "web-types-lit": "^0.1.0"
   },
   "dependencies": {
+    "@trusona/webauthn": "^1.6.3",
     "lit": "^2.8.0",
     "luxon": "^3.4.3"
   },

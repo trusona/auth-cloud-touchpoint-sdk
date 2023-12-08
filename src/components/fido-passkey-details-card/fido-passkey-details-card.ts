@@ -1,8 +1,9 @@
-import { LitElement, html, css, TemplateResult } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
-import { repeat } from 'lit/directives/repeat.js'
-import { sharedStyles } from '../../shared/style'
-import { DateTime } from 'luxon'
+import {LitElement, html, css, TemplateResult} from 'lit'
+import {customElement, property} from 'lit/decorators.js'
+import {repeat} from 'lit/directives/repeat.js'
+import {sharedStyles} from '../../shared/style'
+import {DateTime} from 'luxon'
+import {CredentialActivityType, CredentialFlag, PasskeyActivity} from "@trusona/webauthn";
 
 const componentStyle = css`
 
@@ -84,26 +85,15 @@ const componentStyle = css`
 
 `
 
-export interface PasskeyActivity {
-  lastUsedAt: string
-  operatingSystem: string
-}
-
-export interface PasskeyDetails {
-  createdAt: string
-  synced: boolean
-  createdOperatingSystem: string
-  passkeyActivity: PasskeyActivity[]
-}
-
 @customElement('fido-passkey-details-card')
 class FidoPasskeyDetailsCard extends LitElement {
-  @property({ type: Object }) passkeyDetails?: PasskeyDetails
+    @property({type: Array}) passkeyActivities?: PasskeyActivity[]
+    @property({type: Number}) maxActivityShown = 2
 
-  static styles = [sharedStyles, componentStyle]
+    static styles = [sharedStyles, componentStyle]
 
-  render (): TemplateResult {
-    return html`
+    render(): TemplateResult {
+        return html`
             <div class="auth-card">
                 <div class="auth-card-header">
                     <svg class="auth-img" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,67 +122,88 @@ class FidoPasskeyDetailsCard extends LitElement {
                 </div>
             </div>
         `
-  }
-
-  private getCreatedAtText (): string {
-    const createdAt = this.passkeyDetails?.createdAt
-    const os = this.passkeyDetails?.createdOperatingSystem
-    const formattedDate = this.getFormattedDate(createdAt ?? '')
-    const syncText = this.passkeyDetails?.synced === true ? '.' : ''
-    if (formattedDate) {
-      return `Saved with ${os ?? '--'} on ${formattedDate}${syncText}`
-    } else {
-      return ''
     }
-  }
 
-  private getLastUsedAtText (lastUsedAt?: string, lastUsedOs?: String): string {
-    const formattedDate = this.getFormattedDate(lastUsedAt ?? '')
-    return `${lastUsedOs ?? ''}, ${formattedDate}`
-  }
+    private getCreatedAtText(): string {
+        const registrationActivity = this.getRegistrationActivity()
+        const syncedState = this.getSyncedState(registrationActivity)
 
-  private getFormattedDate (date: string) {
-    const parsedDate = DateTime.fromISO(date)
-    if (parsedDate.isValid) {
-      return parsedDate.toFormat('MMM d, yyyy, h:mm a ZZZZ')
-    } else {
-      return ''
+        const createdAt = registrationActivity?.createdAt
+        const os = registrationActivity?.operatingSystem
+        const formattedDate = this.getFormattedDate(createdAt ?? '')
+        const syncText = syncedState ? '.' : ''
+        if (formattedDate) {
+            return `Saved with ${os ?? '--'} on ${formattedDate}${syncText}`
+        } else {
+            return ''
+        }
     }
-  }
 
-  private getLastUsedActivity (): TemplateResult {
-    const activityList = this.passkeyDetails?.passkeyActivity
-    if (Array.isArray(activityList) && activityList.length > 0) {
-      return html`
-                ${repeat(this.passkeyDetails?.passkeyActivity ?? [], (activity: PasskeyActivity) => html`
+    private getRegistrationActivity(): PasskeyActivity | undefined {
+        return this.passkeyActivities?.find(activity => activity.credentialActivityType === CredentialActivityType.REGISTRATION)
+    }
+
+    private getSyncedState(registrationActivity?: PasskeyActivity): boolean {
+        const registrationFlags = registrationActivity?.credentialFlags ?? new Map()
+        return Object.entries(registrationFlags).find((entry) =>
+            entry[0] === CredentialFlag.BACKUP_STATE
+        ) !== undefined
+    }
+
+    private getLastUsedAtText(lastUsedAt: Date | string, lastUsedOs?: String): string {
+        const formattedDate = this.getFormattedDate(lastUsedAt ?? '')
+        return `${lastUsedOs ?? ''}, ${formattedDate}`
+    }
+
+    private getFormattedDate(date: Date | string) {
+        let parsedDate: DateTime
+        if (typeof date === 'string') {
+            parsedDate = DateTime.fromISO(date)
+        } else {
+            parsedDate = DateTime.fromJSDate(date)
+        }
+
+        return parsedDate.isValid ? parsedDate.toFormat('MMM d, yyyy, h:mm a ZZZZ') : ''
+    }
+
+    private getLastUsedActivity(): TemplateResult {
+        let htmlResult
+        const assertionActivities = this.getAssertionActivities()
+        if (Array.isArray(assertionActivities) && assertionActivities.length > 0) {
+            htmlResult = html`
+                ${repeat(assertionActivities ?? [], (activity: PasskeyActivity) => html`
                     ${this.getActivityRow(activity)}
                 `)}`
-    } else {
-      return html`
-                ${this.getActivityRow({
-                    lastUsedAt: this.passkeyDetails?.createdAt ?? '',
-                    operatingSystem: this.passkeyDetails?.createdOperatingSystem ?? ''
-                })}
-            `
+        } else {
+            const registrationActivity = this.getRegistrationActivity()
+            htmlResult = registrationActivity ? html`${this.getActivityRow(registrationActivity)}` : html``
+        }
+        return htmlResult
     }
-  }
 
-  private isMobile (operatingSystem?: string) {
-    return operatingSystem?.toLowerCase().includes('android') || operatingSystem?.toLowerCase().includes('ios')
-  }
+    private getAssertionActivities(): PasskeyActivity[] | undefined {
+        return this.passkeyActivities?.filter(activity =>
+            activity.credentialActivityType === CredentialActivityType.ASSERTION
+        ).slice(0, this.maxActivityShown)
+    }
 
-  private getActivityRow (activity: PasskeyActivity): TemplateResult {
-    return html`
+    private isMobile(operatingSystem?: string) {
+        return operatingSystem?.toLowerCase().includes('android') || operatingSystem?.toLowerCase().includes('ios')
+    }
+
+    private getActivityRow(activity: PasskeyActivity): TemplateResult {
+        return html`
             <div class="auth-card-row">
                 ${this.getIcon(this.isMobile(activity.operatingSystem) ?? false)}
-                <p class="auth-card-h3">${this.getLastUsedAtText(activity.lastUsedAt, activity.operatingSystem)}</p>
+                <p class="auth-card-h3">
+                    ${this.getLastUsedAtText(activity.createdAt, activity.operatingSystem)}</p>
             </div>
         `
-  }
+    }
 
-  private getIcon (isMobile: boolean): TemplateResult {
-    if (isMobile) {
-      return html`
+    private getIcon(isMobile: boolean): TemplateResult {
+        if (isMobile) {
+            return html`
                 <svg class="passkey-type-img" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.6114 11.6851H4.38916" stroke="#444444" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M10.5003 1.7959H5.50027C4.88662 1.7959 4.38916 2.29336 4.38916 2.90701V13.4626C4.38916 14.0762 4.88662 14.5737 5.50027 14.5737H10.5003C11.1139 14.5737 11.6114 14.0762 11.6114 13.4626V2.90701C11.6114 2.29336 11.1139 1.7959 10.5003 1.7959Z"
@@ -201,8 +212,8 @@ class FidoPasskeyDetailsCard extends LitElement {
                           fill="#444444"/>
                 </svg>
             `
-    } else {
-      return html`
+        } else {
+            return html`
                 <svg class="passkey-type-img" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5534_164)">
                         <path d="M14.4995 9.68506V3.18506C14.4995 2.35173 13.8262 1.68506 12.9995 1.68506H2.99951C2.16618 1.68506 1.49951 2.35173 1.49951 3.18506V9.68506C1.49951 9.95839 1.71951 10.1851 1.99951 10.1851H13.9995C14.2728 10.1851 14.4995 9.95839 14.4995 9.68506ZM13.4995 9.68506L13.9995 9.18506H1.99951L2.49951 9.68506V3.18506C2.49951 2.90506 2.71951 2.68506 2.99951 2.68506H12.9995C13.2728 2.68506 13.4995 2.90506 13.4995 3.18506V9.68506Z"
@@ -219,12 +230,12 @@ class FidoPasskeyDetailsCard extends LitElement {
                     </defs>
                 </svg>
             `
+        }
     }
-  }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'fido-passkey-details-card': FidoPasskeyDetailsCard
-  }
+    interface HTMLElementTagNameMap {
+        'fido-passkey-details-card': FidoPasskeyDetailsCard
+    }
 }

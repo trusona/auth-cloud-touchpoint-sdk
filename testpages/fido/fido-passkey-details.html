@@ -7,40 +7,230 @@
     <script type="module" src="../../dist/touchpoint-sdk.umd.cjs"></script>
     <link rel="stylesheet" href="../styles.css">
     <script>
-        const passkeyDetails = [
-            {
-                createdAt: '2023-10-12T17:12:13.183221Z',
-                createdOperatingSystem: 'Mac OS',
-                synced: true,
-                passkeyActivity: [
+        const passkeyActivitiesMap = {
+            '4d2af8e5-6095-4dc5-ab37-a139e469deee':
+                [
                     {
-                        lastUsedAt: '2023-10-13T17:12:13.183221Z',
-                        operatingSystem: 'Android 14'
+                        'id': '7eb8dc64-14d8-4906-ae59-c44b8cdd7d0f',
+                        'credentialId': '4d2af8e5-6095-4dc5-ab37-a139e469deee',
+                        'userIdentifier': 'test_kev_124',
+                        'userAgent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Mobile Safari/537.36',
+                        'createdAt': '2023-10-12T16:47:47.116681Z',
+                        'ipAddress': '186.176.45.128',
+                        'operatingSystem': 'Android 10',
+                        'credentialActivityType': 'REGISTRATION',
+                        'credentialFlags': {
+                            'USER_PRESENT': true,
+                            'BACKUP_STATE': true,
+                            'EXTENSION_DATA': false,
+                            'BACKUP_ELIGIBILITY': true,
+                            'USER_VERIFIED': true
+                        }
                     },
                     {
-                        lastUsedAt: '2023-10-14T17:12:13.183221Z',
-                        operatingSystem: 'Android 14'
+                        'id': 'c7514fc4-fc1c-45eb-8a30-d2b62fa3a5aa',
+                        'credentialId': '4d2af8e5-6095-4dc5-ab37-a139e469deee',
+                        'userIdentifier': 'test_kev_124',
+                        'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+                        'createdAt': '2023-10-12T17:12:13.183221Z',
+                        'ipAddress': '186.176.45.128',
+                        'operatingSystem': 'Mac OS X 10.15',
+                        'credentialActivityType': 'ASSERTION',
+                        'credentialFlags': {
+                            'USER_PRESENT': true,
+                            'BACKUP_STATE': true,
+                            'EXTENSION_DATA': false,
+                            'BACKUP_ELIGIBILITY': true,
+                            'USER_VERIFIED': true
+                        }
                     }
-                ]
-            }, {
-                createdAt: '2023-10-10T17:12:13.183221Z',
-                synced: false,
-                createdOperatingSystem: 'Android 13'
-            },
-            {
-                passkeyActivity: [
+                ],
+            '2e6ce096-db5c-4aed-9ef6-6b32382c655c':
+                [
                     {
-                        lastUsedAt: '2023-10-03T17:10:13.183221Z',
-                        operatingSystem: 'Android 10'
+                        'id': '6e099673-8baf-4511-9401-731cef070bed',
+                        'credentialId': '2e6ce096-db5c-4aed-9ef6-6b32382c655c',
+                        'userIdentifier': 'test_kev_124',
+                        'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                        'createdAt': '2023-10-12T16:50:58.600527Z',
+                        'ipAddress': '186.176.45.128',
+                        'operatingSystem': 'Mac OS X 10.15',
+                        'credentialActivityType': 'ASSERTION',
+                        'credentialFlags': {
+                            'USER_PRESENT': true,
+                            'BACKUP_STATE': false,
+                            'EXTENSION_DATA': false,
+                            'BACKUP_ELIGIBILITY': true,
+                            'USER_VERIFIED': true
+                        }
                     },
                     {
-                        lastUsedAt: '2023-10-01T17:14:13.183221Z',
-                        operatingSystem: 'Android 10'
+                        'id': '6e099673-8baf-4511-9401-731cef070bed',
+                        'credentialId': '2e6ce096-db5c-4aed-9ef6-6b32382c655c',
+                        'userIdentifier': 'test_kev_124',
+                        'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                        'createdAt': '2023-10-01T16:50:58.600527Z',
+                        'ipAddress': '186.176.45.128',
+                        'operatingSystem': 'Mac OS X 10.15',
+                        'credentialActivityType': 'REGISTRATION',
+                        'credentialFlags': {
+                            'USER_PRESENT': true,
+                            'BACKUP_STATE': false,
+                            'EXTENSION_DATA': false,
+                            'BACKUP_ELIGIBILITY': true,
+                            'USER_VERIFIED': true
+                        }
+                    },
+                    {
+                        'id': '72481878-41c9-419b-931f-e4f377ef6f1e',
+                        'credentialId': '2e6ce096-db5c-4aed-9ef6-6b32382c655c',
+                        'userIdentifier': 'test_kev_124',
+                        'userAgent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Mobile Safari/537.36',
+                        'createdAt': '2023-10-11T16:50:49.634107Z',
+                        'ipAddress': '186.176.45.128',
+                        'operatingSystem': 'Android 10',
+                        'credentialActivityType': 'ASSERTION',
+                        'credentialFlags': {
+                            'USER_PRESENT': true,
+                            'BACKUP_STATE': false,
+                            'EXTENSION_DATA': false,
+                            'BACKUP_ELIGIBILITY': true,
+                            'USER_VERIFIED': true
+                        }
                     }
-                ]
-            }
-        ]
-
+                ],
+            '919c0e53-33b6-4fea-b95a-500c8a662d7a': [
+                {
+                    'id': '67636337-f2e0-4f4f-a3cc-d8d64b84e66a',
+                    'credentialId': '919c0e53-33b6-4fea-b95a-500c8a662d7a',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+                    'createdAt': '2023-10-03T22:39:24.389162Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'ASSERTION',
+                    'credentialFlags': {
+                        'USER_PRESENT': true,
+                        'BACKUP_STATE': false,
+                        'EXTENSION_DATA': false,
+                        'BACKUP_ELIGIBILITY': true,
+                        'USER_VERIFIED': true
+                    }
+                },
+                {
+                    'id': 'babfa463-e860-49b4-921b-8a1f26d920a9',
+                    'credentialId': '919c0e53-33b6-4fea-b95a-500c8a662d7a',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+                    'createdAt': '2023-10-03T21:37:28.920028Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'ASSERTION',
+                    'credentialFlags': {
+                        'USER_PRESENT': true,
+                        'BACKUP_STATE': true,
+                        'EXTENSION_DATA': false,
+                        'BACKUP_ELIGIBILITY': true,
+                        'USER_VERIFIED': true
+                    }
+                },
+                {
+                    'id': 'cc582984-9bea-4619-a471-a6bee4e3ec2a',
+                    'credentialId': '919c0e53-33b6-4fea-b95a-500c8a662d7a',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+                    'createdAt': '2023-10-03T21:35:28.976478Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'ASSERTION',
+                    'credentialFlags': {
+                        'USER_PRESENT': true,
+                        'BACKUP_STATE': true,
+                        'EXTENSION_DATA': false,
+                        'BACKUP_ELIGIBILITY': true,
+                        'USER_VERIFIED': true
+                    }
+                },
+                {
+                    'id': 'bbcbf52e-a2d8-442f-baad-33f54f1074bc',
+                    'credentialId': '919c0e53-33b6-4fea-b95a-500c8a662d7a',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36',
+                    'createdAt': '2023-09-29T17:27:56.978075Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'REGISTRATION',
+                    'credentialFlags': {
+                        'USER_PRESENT': true,
+                        'BACKUP_STATE': true,
+                        'EXTENSION_DATA': false,
+                        'BACKUP_ELIGIBILITY': true,
+                        'USER_VERIFIED': true
+                    }
+                }
+            ],
+            '678e4eb9-304c-4da7-8d01-cb6757ec77bd': [
+                {
+                    'id': '231349c1-271d-4fad-a23b-c531977b9d02',
+                    'credentialId': '678e4eb9-304c-4da7-8d01-cb6757ec77bd',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                    'createdAt': '2023-09-29T17:24:21.689443Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'ASSERTION',
+                    'credentialFlags': {
+                        'USER_PRESENT': true,
+                        'BACKUP_STATE': false,
+                        'EXTENSION_DATA': false,
+                        'BACKUP_ELIGIBILITY': true,
+                        'USER_VERIFIED': true
+                    }
+                },
+                {
+                    'id': 'ccdf6bd0-b053-4a0b-b527-75655f476c46',
+                    'credentialId': '678e4eb9-304c-4da7-8d01-cb6757ec77bd',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                    'createdAt': '2023-09-29T17:23:03.712419Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'ASSERTION',
+                    'credentialFlags': {
+                        'USER_PRESENT': true,
+                        'BACKUP_STATE': false,
+                        'EXTENSION_DATA': false,
+                        'BACKUP_ELIGIBILITY': true,
+                        'USER_VERIFIED': true
+                    }
+                }
+            ],
+            '678e4eb9-304c-4da7-8d01-cb6757ec77ef': [
+                {
+                    'id': '231349c1-271d-4fad-a23b-c531977b9d02',
+                    'credentialId': '678e4eb9-304c-4da7-8d01-cb6757ec77ef',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                    'createdAt': '2023-01-01T17:20:20.689443Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'REGISTRATION',
+                    'credentialFlags': {}
+                }
+            ],
+            '678e4eb9-304c-4da7-8d01-cb6757ec77ee': [
+                {
+                    'id': '231349c1-271d-4fad-a23b-c531977b9d02',
+                    'credentialId': '678e4eb9-304c-4da7-8d01-cb6757ec77ee',
+                    'userIdentifier': 'john@trusona.com',
+                    'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                    'createdAt': '2023-01-02T17:11:12.689443Z',
+                    'ipAddress': '98.165.184.110',
+                    'operatingSystem': 'Mac OS X 10.15',
+                    'credentialActivityType': 'REGISTRATION'
+                }
+            ]
+        }
     </script>
 
 </head>
@@ -56,7 +246,7 @@
 
     <script>
         const elm = document.querySelector('fido-passkey-details')
-        elm.passkeyDetails = passkeyDetails
+        elm.passkeyActivitiesMap = passkeyActivitiesMap
     </script>
 
 

@@ -226,7 +226,6 @@ class CodeInput extends LitElement {
   }
 
   onInput (e: InputEvent, i: number) {
-    // console.log("onInput: ", e, i)
     const target = e.target as HTMLInputElement
     const value = (e as any).data || target.value
 
@@ -302,7 +301,6 @@ class CodeInput extends LitElement {
   }
 
   async onKeydown (e: any, i: number): Promise<void> {
-    // console.log('Inside onKeydown...', e, i)
     const target = e.target
     const isTargetEmpty = this.isEmpty(target.value)
     const prev = i - 1
