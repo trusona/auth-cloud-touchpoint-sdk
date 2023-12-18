@@ -54,7 +54,8 @@
     "@babel/traverse": "^7.23.6",
     "@trusona/webauthn": "^1.6.3",
     "lit": "^3.1.0",
-    "luxon": "^3.4.4"
+    "luxon": "^3.4.4",
+    "postcss": "^8.4.32"
   },
   "ts-standard": {
     "ignore": [
