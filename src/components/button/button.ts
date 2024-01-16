@@ -65,7 +65,6 @@ class AuthButton extends LitElement {
   static styles = [sharedStyles, componentStyle]
 
   getContent = (): TemplateResult => {
-    // console.log('this.isProcessing', this.isProcessing)
     if (this.isProcessing ?? false) {
       return this.processingIcon
         ? html`<span>${svg`${unsafeHTML(this.processingIcon)}`}</span>`

@@ -4,8 +4,64 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Auth Cloud SDK Demo</title>
-    <script type="module" src="/dist/touchpoint-sdk.js"></script>
+    <script type="module" src="../../dist/touchpoint-sdk.umd.cjs"></script>
     <link rel="stylesheet" href="../styles.css">
+
+    <script>
+        const passkeyActivities = [
+            {
+                'id': '6e099673-8baf-4511-9401-731cef070bed',
+                'credentialId': '2e6ce096-db5c-4aed-9ef6-6b32382c655c',
+                'userIdentifier': 'test_kev_124',
+                'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                'createdAt': '2023-10-12T16:50:58.600527Z',
+                'ipAddress': '186.176.45.128',
+                'operatingSystem': 'Mac OS X 10.15',
+                'credentialActivityType': 'ASSERTION',
+                'credentialFlags': {
+                    'USER_PRESENT': true,
+                    'BACKUP_STATE': false,
+                    'EXTENSION_DATA': false,
+                    'BACKUP_ELIGIBILITY': true,
+                    'USER_VERIFIED': true
+                }
+            },
+            {
+                'id': '6e099673-8baf-4511-9401-731cef070bed',
+                'credentialId': '2e6ce096-db5c-4aed-9ef6-6b32382c655c',
+                'userIdentifier': 'test_kev_124',
+                'userAgent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Safari/605.1.15',
+                'createdAt': '2023-10-01T16:50:58.600527Z',
+                'ipAddress': '186.176.45.128',
+                'operatingSystem': 'Mac OS X 10.15',
+                'credentialActivityType': 'REGISTRATION',
+                'credentialFlags': {
+                    'USER_PRESENT': true,
+                    'BACKUP_STATE': false,
+                    'EXTENSION_DATA': false,
+                    'BACKUP_ELIGIBILITY': true,
+                    'USER_VERIFIED': true
+                }
+            },
+            {
+                'id': '72481878-41c9-419b-931f-e4f377ef6f1e',
+                'credentialId': '2e6ce096-db5c-4aed-9ef6-6b32382c655c',
+                'userIdentifier': 'test_kev_124',
+                'userAgent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Mobile Safari/537.36',
+                'createdAt': '2023-10-11T16:50:49.634107Z',
+                'ipAddress': '186.176.45.128',
+                'operatingSystem': 'Android 10',
+                'credentialActivityType': 'ASSERTION',
+                'credentialFlags': {
+                    'USER_PRESENT': true,
+                    'BACKUP_STATE': false,
+                    'EXTENSION_DATA': false,
+                    'BACKUP_ELIGIBILITY': true,
+                    'USER_VERIFIED': true
+                }
+            }
+        ]
+    </script>
 
 </head>
 <body>
@@ -17,14 +73,12 @@
     </a>
 
     <flex-container minWidth="500px">
-        <fido-passkey-details-card
-                savedText="Saved with iOS 16.2 on April 11, 2023, 12:01am"
-                lastUsedText="iOS 16.2, April 11, 2023, 3:42pm"
-                lastUsedIsMobile="true"
-                lastUsedTextOptional="MacOS 13.0.1, April 23rd, 2023, 4:21pm"
-                lastUsedOptionalIsMobile="false"
-        >
-        </fido-passkey-details-card>
+        <fido-passkey-details-card></fido-passkey-details-card>
+
+        <script>
+            const elm = document.querySelector('fido-passkey-details-card')
+            elm.passkeyActivities = passkeyActivities
+        </script>
     </flex-container>
 </div>
 

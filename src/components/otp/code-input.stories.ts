@@ -29,7 +29,7 @@ export const Enabled: StoryObj = {
                 document.addEventListener(
                         "code-changed",
                         (e) => {
-                            console.log('Auth Code Changed...', e.detail)
+                            // console.log('Auth Code Changed...', e.detail)
                         },
                         false,
                 );

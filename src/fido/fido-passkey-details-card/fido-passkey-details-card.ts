@@ -1,6 +1,9 @@
-import { LitElement, html, css, TemplateResult } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
-import { sharedStyles } from '../../shared/style'
+import {LitElement, html, css, TemplateResult} from 'lit'
+import {customElement, property} from 'lit/decorators.js'
+import {repeat} from 'lit/directives/repeat.js'
+import {sharedStyles} from '../../shared/style'
+import {DateTime} from 'luxon'
+import {CredentialActivityType, CredentialFlag, PasskeyActivity} from "@trusona/webauthn";
 
 const componentStyle = css`
 
@@ -84,18 +87,13 @@ const componentStyle = css`
 
 @customElement('fido-passkey-details-card')
 class FidoPasskeyDetailsCard extends LitElement {
-  @property({ type: String }) savedText?: string
+    @property({type: Array}) passkeyActivities?: PasskeyActivity[]
+    @property({type: Number}) maxActivityShown = 2
 
-  @property({ type: String }) lastUsedText: string = ''
-  @property({ type: String }) lastUsedIsMobile: string = 'false'
+    static styles = [sharedStyles, componentStyle]
 
-  @property({ type: String }) prevLastUsedText: string | null = null
-  @property({ type: String }) prevLastUsedIsMobile: string = 'false'
-
-  static styles = [sharedStyles, componentStyle]
-
-  render (): TemplateResult {
-    return html`
+    render(): TemplateResult {
+        return html`
             <div class="auth-card">
                 <div class="auth-card-header">
                     <svg class="auth-img" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +104,7 @@ class FidoPasskeyDetailsCard extends LitElement {
                         <path d="M12.8722 11.9558C12.0414 11.6077 11.1331 11.4072 10.1694 11.4072H6.84635C3.17989 11.4072 0.200195 14.245 0.200195 17.7369V19.8468H14.6002V14.034C13.847 13.496 13.2599 12.7787 12.8722 11.9663V11.9558Z"
                               fill="#19064E"/>
                     </svg>
-                    <p class="auth-card-h2">${this.savedText}</p>
+                    <p class="auth-card-h2">${this.getCreatedAtText()}</p>
                 </div>
                 <div class="auth-card-body">
                     <div class="auth-card-title">
@@ -120,25 +118,92 @@ class FidoPasskeyDetailsCard extends LitElement {
                                   stroke="#444444" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    ${this.getRow(this.lastUsedText, this.lastUsedIsMobile === 'true')}
-                    ${this.getOptionalRow()}
+                    ${this.getLastUsedActivity()}
                 </div>
             </div>
         `
-  }
+    }
 
-  private getRow (lastUsedText: string, lastUsedIsMobile: boolean): TemplateResult {
-    return html`
+    private getCreatedAtText(): string {
+        const registrationActivity = this.getRegistrationActivity()
+        const syncedState = this.getSyncedState(registrationActivity)
+
+        const createdAt = registrationActivity?.createdAt
+        const os = registrationActivity?.operatingSystem
+        const formattedDate = this.getFormattedDate(createdAt ?? '')
+        const syncText = syncedState ? '.' : ''
+        if (formattedDate) {
+            return `Saved with ${os ?? '--'} on ${formattedDate}${syncText}`
+        } else {
+            return ''
+        }
+    }
+
+    private getRegistrationActivity(): PasskeyActivity | undefined {
+        return this.passkeyActivities?.find(activity => activity.credentialActivityType === CredentialActivityType.REGISTRATION)
+    }
+
+    private getSyncedState(registrationActivity?: PasskeyActivity): boolean {
+        const registrationFlags = registrationActivity?.credentialFlags ?? new Map()
+        return Object.entries(registrationFlags).find((entry) =>
+            entry[0] === CredentialFlag.BACKUP_STATE
+        ) !== undefined
+    }
+
+    private getLastUsedAtText(lastUsedAt: Date | string, lastUsedOs?: String): string {
+        const formattedDate = this.getFormattedDate(lastUsedAt ?? '')
+        return `${lastUsedOs ?? ''}, ${formattedDate}`
+    }
+
+    private getFormattedDate(date: Date | string) {
+        let parsedDate: DateTime
+        if (typeof date === 'string') {
+            parsedDate = DateTime.fromISO(date)
+        } else {
+            parsedDate = DateTime.fromJSDate(date)
+        }
+
+        return parsedDate.isValid ? parsedDate.toFormat('MMM d, yyyy, h:mm a ZZZZ') : ''
+    }
+
+    private getLastUsedActivity(): TemplateResult {
+        let htmlResult
+        const assertionActivities = this.getAssertionActivities()
+        if (Array.isArray(assertionActivities) && assertionActivities.length > 0) {
+            htmlResult = html`
+                ${repeat(assertionActivities ?? [], (activity: PasskeyActivity) => html`
+                    ${this.getActivityRow(activity)}
+                `)}`
+        } else {
+            const registrationActivity = this.getRegistrationActivity()
+            htmlResult = registrationActivity ? html`${this.getActivityRow(registrationActivity)}` : html``
+        }
+        return htmlResult
+    }
+
+    private getAssertionActivities(): PasskeyActivity[] | undefined {
+        return this.passkeyActivities?.filter(activity =>
+            activity.credentialActivityType === CredentialActivityType.ASSERTION
+        ).slice(0, this.maxActivityShown)
+    }
+
+    private isMobile(operatingSystem?: string) {
+        return operatingSystem?.toLowerCase().includes('android') || operatingSystem?.toLowerCase().includes('ios')
+    }
+
+    private getActivityRow(activity: PasskeyActivity): TemplateResult {
+        return html`
             <div class="auth-card-row">
-                ${this.getIcon(lastUsedIsMobile)}
-                <p class="auth-card-h3">${lastUsedText}</p>
+                ${this.getIcon(this.isMobile(activity.operatingSystem) ?? false)}
+                <p class="auth-card-h3">
+                    ${this.getLastUsedAtText(activity.createdAt, activity.operatingSystem)}</p>
             </div>
         `
-  }
+    }
 
-  private getIcon (isMobile: boolean): TemplateResult {
-    if (isMobile) {
-      return html`
+    private getIcon(isMobile: boolean): TemplateResult {
+        if (isMobile) {
+            return html`
                 <svg class="passkey-type-img" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.6114 11.6851H4.38916" stroke="#444444" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M10.5003 1.7959H5.50027C4.88662 1.7959 4.38916 2.29336 4.38916 2.90701V13.4626C4.38916 14.0762 4.88662 14.5737 5.50027 14.5737H10.5003C11.1139 14.5737 11.6114 14.0762 11.6114 13.4626V2.90701C11.6114 2.29336 11.1139 1.7959 10.5003 1.7959Z"
@@ -147,8 +212,8 @@ class FidoPasskeyDetailsCard extends LitElement {
                           fill="#444444"/>
                 </svg>
             `
-    } else {
-      return html`
+        } else {
+            return html`
                 <svg class="passkey-type-img" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5534_164)">
                         <path d="M14.4995 9.68506V3.18506C14.4995 2.35173 13.8262 1.68506 12.9995 1.68506H2.99951C2.16618 1.68506 1.49951 2.35173 1.49951 3.18506V9.68506C1.49951 9.95839 1.71951 10.1851 1.99951 10.1851H13.9995C14.2728 10.1851 14.4995 9.95839 14.4995 9.68506ZM13.4995 9.68506L13.9995 9.18506H1.99951L2.49951 9.68506V3.18506C2.49951 2.90506 2.71951 2.68506 2.99951 2.68506H12.9995C13.2728 2.68506 13.4995 2.90506 13.4995 3.18506V9.68506Z"
@@ -165,20 +230,12 @@ class FidoPasskeyDetailsCard extends LitElement {
                     </defs>
                 </svg>
             `
+        }
     }
-  }
-
-  private getOptionalRow (): TemplateResult {
-    if (this.prevLastUsedText && this.prevLastUsedText !== '') {
-      return this.getRow(this.prevLastUsedText, this.prevLastUsedIsMobile === 'true')
-    } else {
-      return html``
-    }
-  }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'fido-passkey-details-card': FidoPasskeyDetailsCard
-  }
+    interface HTMLElementTagNameMap {
+        'fido-passkey-details-card': FidoPasskeyDetailsCard
+    }
 }
