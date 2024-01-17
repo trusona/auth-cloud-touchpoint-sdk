@@ -18,5 +18,6 @@ jobs:
         node-version: 18
         cache: 'npm'
 
+    - run: npm i @rollup/rollup-linux-x64-gnu
     - run: npm install
     - run: npm run build
