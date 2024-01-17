@@ -17,6 +17,11 @@
     "dist",
     "types"
   ],
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
