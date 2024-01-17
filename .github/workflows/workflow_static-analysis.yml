@@ -18,6 +18,7 @@ jobs:
         check-latest: true
         node-version: 18
         cache: 'npm'
+    - run: npm i @rollup/rollup-linux-x64-gnu
     - run: npm install
     - uses: dependency-check/Dependency-Check_Action@main
       with:

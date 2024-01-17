@@ -6,33 +6,33 @@ import { unsafeSVG } from 'lit/directives/unsafe-svg.js'
 
 const componentStyle = css`
   .auth-header-nav {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 1.375rem 1.875rem;
-    background-color: #ffffff;
-    margin-bottom: 1rem;
+    display: var(--tac-header-nav-display, flex);
+    justify-content: var(--tac-header-nav-justify-content, space-between);
+    align-content: var(--tac-header-nav-align-content, center);
+    align-items: var(--tac-header-nav-align-items, center);
+    width: var(--tac-header-nav-width, 100%);
+    padding: var(--tac-header-nav-padding, 1.375rem 1.875rem);
+    background-color: var(--tac-header-nav-background-color, #ffffff);
+    margin-bottom: var(--tac-header-nav-margin-bottom, 1rem);
   }
 
   .auth-header-nav img {
-    width: auto;
-    height: auto;
+    width: var(--tac-header-nav-img-width, auto);
+    height: var(--tac-header-nav-img-height, auto);
   }
 
   .auth-header-nav__lock {
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    align-items: flex-end;
+    display: var(--tac-header-nav-lock-display, flex);
+    justify-content: var(--tac-header-nav-lock-justify-content, space-between);
+    align-content: var(--tac-header-nav-lock-align-content, center);
+    align-items: var(--tac-header-nav-lock-align-items, flex-end);
   }
 
   .auth-header-nav__lock div {
-    margin-right: 1rem;
-    color: #444444;
-    font-size: 18px;
-    line-height: 21px;
+    margin-right: var(--tac-header-nav-lock-div-margin-right, 1rem);
+    color: var(--tac-header-nav-lock-div-color, #444444);
+    font-size: var(--tac-header-nav-lock-div-font-size, 18px);
+    line-height: var(--tac-header-nav-lock-div-line-height, 21px);
   }
 `
 

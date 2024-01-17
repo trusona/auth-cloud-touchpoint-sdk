@@ -3,56 +3,54 @@ import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
-
   .auth-container {
-    display: flex;
-    row-gap: 1.25rem;
-    width: 260px;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    flex-shrink: 0;
-    align-self: stretch;
-    margin: auto;
+    display: var(--fido-account-passkey-created-container-display, flex);
+    row-gap: var(--fido-account-passkey-created-container-row-gap, 1.25rem);
+    width: var(--fido-account-passkey-created-container-width, 260px);
+    flex-direction: var(--fido-account-passkey-created-container-flex-direction, column);
+    justify-content: var(--fido-account-passkey-created-container-justify-content, center);
+    align-content: var(--fido-account-passkey-created-container-align-content, center);
+    flex-shrink: var(--fido-account-passkey-created-container-flex-shrink, 0);
+    align-self: var(--fido-account-passkey-created-container-align-self, stretch);
+    margin: var(--fido-account-passkey-created-container-margin, auto);
   }
 
   .auth-card {
-    display: flex;
-    padding: 20px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    align-self: stretch;
-    background: var(--Suave-500, #F5F9FC);
+    display: var(--fido-account-passkey-created-card-display, flex);
+    padding: var(--fido-account-passkey-created-card-padding, 20px);
+    flex-direction: var(--fido-account-passkey-created-card-flex-direction, column);
+    align-items: var(--fido-account-passkey-created-card-align-items, center);
+    gap: var(--fido-account-passkey-created-card-gap, 20px);
+    align-self: var(--fido-account-passkey-created-card-align-self, stretch);
+    background: var(--fido-account-passkey-created-card-background, #F5F9FC);
   }
 
   .auth-img {
-    width: 82px;
-    height: 82px;
+    width: var(--fido-account-passkey-created-img-width, 82px);
+    height: var(--fido-account-passkey-created-img-height, 82px);
   }
 
   .auth-link {
-    color: var(--Suave, #5390D4);
-    text-align: center;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
+    color: var(--fido-account-passkey-created-link-color, #5390D4);
+    text-align: var(--fido-account-passkey-created-link-text-align, center);
+    font-size: var(--fido-account-passkey-created-link-font-size, 14px);
+    font-style: var(--fido-account-passkey-created-link-font-style, normal);
+    font-weight: var(--fido-account-passkey-created-link-font-weight, 400);
+    line-height: var(--fido-account-passkey-created-link-line-height, normal);
+    padding: var(--fido-account-passkey-created-link-padding, 0);
+    border: var(--fido-account-passkey-created-link-border, none);
+    background: var(--fido-account-passkey-created-link-background, none);
+    cursor: var(--fido-account-passkey-created-link-cursor, pointer);
   }
 
   .auth-h1 {
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    color: var(--fido-account-passkey-created-h1-color, #000);
+    text-align: var(--fido-account-passkey-created-h1-text-align, center);
+    font-size: var(--fido-account-passkey-created-h1-font-size, 24px);
+    font-style: var(--fido-account-passkey-created-h1-font-style, normal);
+    font-weight: var(--fido-account-passkey-created-h1-font-weight, 400);
+    line-height: var(--fido-account-passkey-created-h1-line-height, normal);
   }
-
 `
 
 @customElement('fido-account-passkey-created')

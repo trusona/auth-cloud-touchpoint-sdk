@@ -7,49 +7,48 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 const componentStyle = css`
 
   .auth-button {
-    margin-left: auto;
-    margin-right: auto;
-
-    align-items: center;
-    appearance: none;
-    display: flex;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    justify-content: space-around;
-    letter-spacing: 1px;
-    line-height: 17px;
-    min-height: 47px;
-    padding: 0 24px;
-    text-align: center;
-    transition-delay: 0s;
-    transition-duration: 0.1s;
-    transition-property: box-shadow;
-    transition-timing-function: ease;
-    width: 100%;
-    cursor: pointer;
-    background-color: var(--trusona-button-bg-color, #7B46D1);
-    border: 1px solid var(--trusona-button-border-color, #7B46D1);
-    color: var(--trusona-button-color, rgb(255, 255, 255));
-    border-radius: 5px;
+    margin-left: var(--auth-btn-margin, auto);
+    margin-right: var(--auth-btn-margin, auto);
+    align-items: var(--auth-btn-align, center);
+    appearance: var(--auth-btn-appearance, none);
+    display: var(--auth-btn-display, flex);
+    font-size: var(--auth-btn-font-size, 16px);
+    font-style: var(--auth-btn-font-style, normal);
+    font-weight: var(--auth-btn-font-weight, 400);
+    justify-content: var(--auth-btn-justify, space-around);
+    letter-spacing: var(--auth-btn-letter-spacing, 1px);
+    line-height: var(--auth-btn-line-height, 17px);
+    min-height: var(--auth-btn-min-height, 47px);
+    padding: var(--auth-btn-padding, 0 24px);
+    text-align: var(--auth-btn-text-align, center);
+    transition-delay: var(--auth-btn-transition-delay, 0s);
+    transition-duration: var(--auth-btn-transition-duration, 0.1s);
+    transition-property: var(--auth-btn-transition-property, all);
+    transition-timing-function: var(--auth-btn-transition-timing-function, ease);
+    width: var(--auth-btn-width, 100%);
+    cursor: var(--auth-btn-cursor, pointer);
+    background-color: var(--auth-btn-bg-color, #7B46D1);
+    border: var(--auth-btn-border-width, 1px) var(--auth-btn-border-style, solid) var(--auth-btn-border-color, #7B46D1);
+    color: var(--auth-btn-color, rgb(255, 255, 255));
+    border-radius: var(--auth-btn-border-radius, 5px);
   }
 
   .auth-button:disabled {
-    background-color: var(--trusona-button-disabled-bg-color, #cccccc) !important;
-    border: 1px solid var(--trusona-button-disabled-bg-color, #cccccc) !important;
-    color: var(--trusona-button-disabled-color, #444444) !important;
+    background-color: var(--auth-btn-disabled-bg-color, #cccccc) !important;
+    border: 1px solid var(--auth-btn-disabled-bg-color, #cccccc) !important;
+    color: var(--auth-btn-disabled-color, #444444) !important;
   }
 
   .auth-btn-content-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
+    display: var(--auth-btn-content-wrapper-display, flex);
+    justify-content: var(--auth-btn-content-wrapper-justify, flex-start);
+    align-items: var(--auth-btn-content-wrapper-align, center);
+    width: var(--auth-btn-content-wrapper-width, 100%);
   }
 
   .auth-btn-content-text {
-    flex: 1;
-    text-align: center;
+    flex: var(--auth-btn-content-text-flex, 1);
+    text-align: var(--auth-btn-content-text-text-align, center);
   }
   `
 

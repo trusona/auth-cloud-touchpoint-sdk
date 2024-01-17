@@ -6,65 +6,65 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 const componentStyle = css`
   .auth-tac-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 2rem;
-    color: #19064E;
-    padding: 0 2rem;
+    display: var(--tac-info-display, flex);
+    flex-direction: var(--tac-info-flex-direction, column);
+    justify-content: var(--tac-info-justify-content, flex-start);
+    gap: var(--tac-info-gap, 2rem);
+    color: var(--tac-info-color, #19064E);
+    padding: var(--tac-info-padding, 0 2rem);
   }
 
   .auth-tac-info.default-template h1 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 18px;
+    font-style: var(--tac-info-default-template-h1-font-style, normal);
+    font-weight: var(--tac-info-default-template-h1-font-weight, 400);
+    font-size: var(--tac-info-default-template-h1-font-size, 18px);
+    line-height: var(--tac-info-default-template-h1-line-height, 18px);
   }
 
   .auth-tac-info.default-template p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 14px;
+    font-style: var(--tac-info-default-template-p-font-style, normal);
+    font-weight: var(--tac-info-default-template-p-font-weight, 400);
+    font-size: var(--tac-info-default-template-p-font-size, 14px);
+    line-height: var(--tac-info-default-template-p-line-height, 14px);
   }
 
   .auth-tac-info ul {
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
+    list-style-type: var(--tac-info-ul-list-style-type, none);
+    display: var(--tac-info-ul-display, flex);
+    flex-direction: var(--tac-info-ul-flex-direction, column);
+    gap: var(--tac-info-ul-gap, 3rem);
   }
 
   .auth-tac-info li {
-    display: flex;
-    gap: 1rem;
+    display: var(--tac-info-li-display, flex);
+    gap: var(--tac-info-li-gap, 1rem);
   }
 
   .auth-tac-info li h2 {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 14px;
-    margin-bottom: .5rem;
+    font-style: var(--tac-info-li-h2-font-style, normal);
+    font-weight: var(--tac-info-li-h2-font-weight, 400);
+    font-size: var(--tac-info-li-h2-font-size, 14px);
+    line-height: var(--tac-info-li-h2-line-height, 14px);
+    margin-bottom: var(--tac-info-li-h2-margin-bottom, 0.5rem);
   }
 
   .auth-tac-info li p {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
+    font-style: var(--tac-info-li-p-font-style, normal);
+    font-weight: var(--tac-info-li-p-font-weight, 400);
+    font-size: var(--tac-info-li-p-font-size, 12px);
+    line-height: var(--tac-info-li-p-line-height, 16px);
   }
 
   .auth-tac-info.default-template a {
-    display: block;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 16px;
-    padding: 1rem;
-    border: 1px solid #EEEEEE;
-    border-radius: 4px;
-    width: fit-content;
+    display: var(--tac-info-default-template-a-display, block);
+    font-style: var(--tac-info-default-template-a-font-style, normal);
+    font-weight: var(--tac-info-default-template-a-font-weight, 400);
+    font-size: var(--tac-info-default-template-a-font-size, 16px);
+    line-height: var(--tac-info-default-template-a-line-height, 16px);
+    padding: var(--tac-info-default-template-a-padding, 1rem);
+    border: var(--tac-info-default-template-a-border, 1px solid #EEEEEE);
+    border-radius: var(--tac-info-default-template-a-border-radius, 4px);
+    width: var(--tac-info-default-template-a-width, fit-content);
   }
 `
 
