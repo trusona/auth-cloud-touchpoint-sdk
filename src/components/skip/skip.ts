@@ -4,25 +4,25 @@ import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
   .skip-button {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    width: auto;
-    max-width: 100%;
-    text-align: center;
-    color: #72a3db;
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
+    margin-left: var(--auth-skip-margin-left, auto);
+    margin-right: var(--auth-skip-margin-right, auto);
+    display: var(--auth-skip-display, flex);
+    flex-direction: var(--auth-skip-flex-direction, row);
+    justify-content: var(--auth-skip-justify-content, center);
+    align-items: var(--auth-skip-align-items, center);
+    padding: var(--auth-skip-padding, 0);
+    width: var(--auth-skip-width, auto);
+    max-width: var(--auth-skip-max-width, 100%);
+    text-align: var(--auth-skip-text-align, center);
+    color: var(--auth-skip-color, #72a3db);
+    background: var(--auth-skip-background, transparent);
+    border: var(--auth-skip-border, none);
+    border-radius: var(--auth-skip-border-radius, 0);
+    cursor: var(--auth-skip-cursor, pointer);
   }
 
   .skip-button:hover {
-    text-decoration: underline;
+    text-decoration: var(--auth-skip-hover-text-decoration, underline);
   }
 `
 @customElement('auth-skip')

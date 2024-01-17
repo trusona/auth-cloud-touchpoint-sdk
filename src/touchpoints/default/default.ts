@@ -67,8 +67,7 @@ class DefaultTouchpoint extends LitElement {
                             ?hidden=${this.signInWithBiometricPrompt?.hideUsernameControlText}
                             class="auth-ui-label"
                             style=${this.globalStyles?.paragraphStyle}
-                            for="email"
-                    >
+                            for="email">
                         ${this.signInWithBiometricPrompt?.usernameControlText || 'Email address'}
                     </label>
                     <input

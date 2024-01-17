@@ -6,83 +6,81 @@ import {DateTime} from 'luxon'
 import {CredentialActivityType, CredentialFlag, PasskeyActivity} from "@trusona/webauthn";
 
 const componentStyle = css`
-
   .auth-card {
-    display: flex;
-    width: 280px;
-    flex-direction: column;
-    align-items: flex-start;
-    border-radius: 10px;
-    padding: 3px;
-    border: 1px solid var(--pearl, #EEE);
-    background: var(--white, #FFF);
+    display: var(--fido-passkey-details-card-display, flex);
+    width: var(--fido-passkey-details-card-width, 280px);
+    flex-direction: var(--fido-passkey-details-card-flex-direction, column);
+    align-items: var(--fido-passkey-details-card-align-items, flex-start);
+    border-radius: var(--fido-passkey-details-card-border-radius, 10px);
+    padding: var(--fido-passkey-details-card-padding, 3px);
+    border: var(--fido-passkey-details-card-border, 1px solid #EEE);
+    background: var(--fido-passkey-details-card-background, #FFF);
   }
 
   .auth-card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 15px 30px;
-    align-self: stretch;
-    border-radius: 8px 8px;
-    background: var(--tilt, #FAFAFA);
+    display: var(--fido-passkey-details-card-header-display, flex);
+    flex-direction: var(--fido-passkey-details-card-header-flex-direction, column);
+    align-items: var(--fido-passkey-details-card-header-align-items, center);
+    justify-content: var(--fido-passkey-details-card-header-justify-content, center);
+    gap: var(--fido-passkey-details-card-header-gap, 10px);
+    padding: var(--fido-passkey-details-card-header-padding, 15px 30px);
+    align-self: var(--fido-passkey-details-card-header-align-self, stretch);
+    border-radius: var(--fido-passkey-details-card-header-border-radius, 8px 8px);
+    background: var(--fido-passkey-details-card-header-background, #FAFAFA);
   }
 
   .auth-card-body {
-    display: flex;
-    padding: 10px 20px;
-    flex-direction: column;
-    align-items: flex-start;
-    align-self: stretch;
+    display: var(--fido-passkey-details-card-body-display, flex);
+    padding: var(--fido-passkey-details-card-body-padding, 10px 20px);
+    flex-direction: var(--fido-passkey-details-card-body-flex-direction, column);
+    align-items: var(--fido-passkey-details-card-body-align-items, flex-start);
+    align-self: var(--fido-passkey-details-card-body-align-self, stretch);
   }
 
   .auth-card-title {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    align-self: stretch;
-    justify-content: space-between;
-    margin-bottom: 5px;
+    display: var(--fido-passkey-details-card-title-display, flex);
+    align-items: var(--fido-passkey-details-card-title-align-items, center);
+    gap: var(--fido-passkey-details-card-title-gap, 5px);
+    align-self: var(--fido-passkey-details-card-title-align-self, stretch);
+    justify-content: var(--fido-passkey-details-card-title-justify-content, space-between);
+    margin-bottom: var(--fido-passkey-details-card-title-margin-bottom, 5px);
   }
 
   .auth-card-row {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 5px;
-    align-self: stretch;
+    display: var(--fido-passkey-details-card-row-display, flex);
+    align-items: var(--fido-passkey-details-card-row-align-items, center);
+    flex-direction: var(--fido-passkey-details-card-row-flex-direction, row);
+    gap: var(--fido-passkey-details-card-row-gap, 5px);
+    align-self: var(--fido-passkey-details-card-row-align-self, stretch);
   }
 
   .auth-img {
-    width: 22px;
-    height: 22px;
+    width: var(--fido-passkey-details-img-width, 22px);
+    height: var(--fido-passkey-details-img-height, 22px);
   }
 
   .passkey-type-img {
-    width: 18px;
-    height: 18px;
-    margin-right: 10px;
+    width: var(--fido-passkey-details-type-img-width, 18px);
+    height: var(--fido-passkey-details-type-img-height, 18px);
+    margin-right: var(--fido-passkey-details-type-img-margin-right, 10px);
   }
 
   .auth-card-h2 {
-    color: var(--ferrite, #444);
-    text-align: center;
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
+    color: var(--fido-passkey-details-card-h2-color, #444);
+    text-align: var(--fido-passkey-details-card-h2-text-align, center);
+    font-size: var(--fido-passkey-details-card-h2-font-size, 11px);
+    font-style: var(--fido-passkey-details-card-h2-font-style, normal);
+    font-weight: var(--fido-passkey-details-card-h2-font-weight, 400);
+    line-height: var(--fido-passkey-details-card-h2-line-height, 14px);
   }
 
   .auth-card-h3 {
-    color: var(--ferrite, #444);
-    font-size: 11px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 14px;
+    color: var(--fido-passkey-details-card-h3-color, #444);
+    font-size: var(--fido-passkey-details-card-h3-font-size, 11px);
+    font-style: var(--fido-passkey-details-card-h3-font-style, normal);
+    font-weight: var(--fido-passkey-details-card-h3-font-weight, 400);
+    line-height: var(--fido-passkey-details-card-h3-line-height, 14px);
   }
-
 `
 
 @customElement('fido-passkey-details-card')

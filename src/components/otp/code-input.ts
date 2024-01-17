@@ -1,5 +1,6 @@
 import { html, css, LitElement, PropertyValues } from 'lit'
 import { property, queryAll, customElement } from 'lit/decorators.js'
+import {PropertyValueMap} from "lit/development";
 
 enum InputState {
   ready = 0,
@@ -45,8 +46,8 @@ class CodeInput extends LitElement {
     super.disconnectedCallback()
   }
 
-  // @ts-expect-error
-  updated (changedProperties) {
+
+  updated (changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>) {
     super.updated(changedProperties)
     if (changedProperties.has('code')) {
       this.onInputCodeChanges()
@@ -81,7 +82,7 @@ class CodeInput extends LitElement {
   firstUpdated (_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties)
     // @ts-expect-error
-    this.inputs = this.shadowRoot.querySelectorAll('input') || []
+    this.inputs = this.shadowRoot?.querySelectorAll('input') || []
     this.focusOnInputAfterAppearing()
   }
 

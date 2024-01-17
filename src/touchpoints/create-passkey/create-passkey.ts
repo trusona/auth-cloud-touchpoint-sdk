@@ -1,24 +1,24 @@
-import { LitElement, html } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import {LitElement, html} from 'lit'
+import {customElement, property} from 'lit/decorators.js'
 
 @customElement('create-passkey-touchpoint')
 class CreatePasskeyTouchpoint extends LitElement {
-  @property({ type: String }) userIdentifier?: string = ''
-  @property({ type: Object }) globalStyles?: any
-  @property({ type: Object }) createPasskey?: any
-  @property({ type: Object }) platformSpecificIcons?: any
-  @property({ type: Boolean }) started: Boolean = false
-  @property({ type: Boolean }) disableSkipForNow: Boolean = false
-  @property({ type: Function }) enroll: Function = () => {}
-  @property({ type: Function }) skipCreatePasskey: Function = () => {}
-  @property({ type: Function }) reset: Function = () => {}
+    @property({type: String}) userIdentifier?: string = ''
+    @property({type: Object}) globalStyles?: any
+    @property({type: Object}) createPasskey?: any
+    @property({type: Object}) platformSpecificIcons?: any
+    @property({type: Boolean}) started: Boolean = false
+    @property({type: Boolean}) disableSkipForNow: Boolean = false
+    @property({type: Function}) enroll: Function = () => {}
+    @property({type: Function}) skipCreatePasskey: Function = () => {}
+    @property({type: Function}) reset: Function = () => {}
 
-  render () {
-    return html`
+    render() {
+        return html`
             <flex-container .globalStyles=${this.globalStyles}>
 
                 ${!this.createPasskey?.hideHeadline
-? html`
+                        ? html`
                             <header-1 .inlineStyle=${this.globalStyles?.heading1Style}>
                                 ${this.createPasskey?.headline || 'Create passkey'}
                             </header-1>
@@ -26,10 +26,13 @@ class CreatePasskeyTouchpoint extends LitElement {
                         : ''}
 
                 <div class="auth-ui-input-wrapper">
-                    <auth-reset .onClick=${() => { this.reset() }}>${this.userIdentifier}</auth-reset>
+                    <auth-reset .onClick=${() => {
+                        this.reset()
+                    }}>${this.userIdentifier}
+                    </auth-reset>
                 </div>
 
-                <auth-button .onClick=${() => { this.enroll() }}
+                <auth-button .onClick=${() => {this.enroll()}}
                              btnId="authBtn"
                              ?isProcessing=${this.started}
                              .inlineStyle=${this.globalStyles?.buttonStyle}
@@ -44,19 +47,21 @@ class CreatePasskeyTouchpoint extends LitElement {
                 </div>
 
                 ${!this.createPasskey?.hideSkipForNow && !this.disableSkipForNow
-? html`
-                    <auth-skip .onclick=${() => { this.skipCreatePasskey() }}>
-                        ${this.createPasskey?.skipForNow || 'Skip for now'}
-                    </auth-skip>
-                `
-: ''}
+                        ? html`
+                            <auth-skip .onclick=${() => {
+                                this.skipCreatePasskey()
+                            }}>
+                                ${this.createPasskey?.skipForNow || 'Skip for now'}
+                            </auth-skip>
+                        `
+                        : ''}
             </flex-container>
         `
-  }
+    }
 }
 
 declare global {
-  interface HTMLElementTagNameMap {
-    'create-passkey-touchpoint': CreatePasskeyTouchpoint
-  }
+    interface HTMLElementTagNameMap {
+        'create-passkey-touchpoint': CreatePasskeyTouchpoint
+    }
 }

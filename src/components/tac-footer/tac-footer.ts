@@ -5,14 +5,14 @@ import { TemplateResult } from 'lit/development'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 const componentStyle = css`
-  .auth-footer{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 1.5rem;
-    background-color: #ffffff;
+  .auth-footer {
+    display: var(--tac-footer-display, flex);
+    justify-content: var(--tac-footer-justify-content, center);
+    align-content: var(--tac-footer-align-content, center);
+    align-items: var(--tac-footer-align-items, center);
+    width: var(--tac-footer-width, 100%);
+    padding: var(--tac-footer-padding, 1.5rem);
+    background-color: var(--tac-footer-background-color, #ffffff);
   }
 `
 

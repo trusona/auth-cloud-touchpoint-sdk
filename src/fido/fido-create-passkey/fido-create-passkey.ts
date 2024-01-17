@@ -3,102 +3,77 @@ import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
-
   .auth-container {
-    display: flex;
-    row-gap: 1.25rem;
-    width: 260px;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    flex-shrink: 0;
-    align-self: stretch;
-    margin: auto;
+    display: var(--fido-create-passkey-display, flex);
+    row-gap: var(--fido-create-passkey-row-gap, 1.25rem);
+    width: var(--fido-create-passkey-width, 260px);
+    flex-direction: var(--fido-create-passkey-flex-direction, column);
+    justify-content: var(--fido-create-passkey-justify-content, center);
+    align-content: var(--fido-create-passkey-align-content, center);
+    flex-shrink: var(--fido-create-passkey-flex-shrink, 0);
+    align-self: var(--fido-create-passkey-align-self, stretch);
+    margin: var(--fido-create-passkey-margin, auto);
   }
 
   .auth-card {
-    display: flex;
-    padding: 20px;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    align-self: stretch;
-    background: var(--Suave-500, #F5F9FC);
+    display: var(--fido-create-passkey-card-display, flex);
+    padding: var(--fido-create-passkey-card-padding, 20px);
+    flex-direction: var(--fido-create-passkey-card-flex-direction, column);
+    align-items: var(--fido-create-passkey-card-align-items, center);
+    gap: var(--fido-create-passkey-card-gap, 20px);
+    align-self: var(--fido-create-passkey-card-align-self, stretch);
+    background: var(--fido-create-passkey-card-background, #F5F9FC);
   }
 
   .auth-img {
-    width: 110px;
-    height: 96px;
+    width: var(--fido-create-passkey-img-width, 110px);
+    height: var(--fido-create-passkey-img-height, 96px);
   }
 
   .auth-paragraph {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-self: stretch;
-  }
-
-  .auth-button {
-    border-radius: 4px;
-    display: flex;
-    padding: 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    align-self: stretch;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 16px;
-    background-color: var(--trusona-button-bg-color, #19064E);
-    border: 1px solid var(--trusona-button-border-color, #19064E);
-    color: var(--trusona-button-color, rgb(255, 255, 255));
-    cursor: pointer;
-  }
-
-  .auth-button:disabled {
-    background-color: var(--trusona-button-disabled-bg-color, #cccccc) !important;
-    border: 1px solid var(--trusona-button-disabled-bg-color, #cccccc) !important;
-    color: var(--trusona-button-disabled-color, #444444) !important;
+    display: var(--fido-create-passkey-paragraph-display, flex);
+    flex-direction: var(--fido-create-passkey-paragraph-flex-direction, column);
+    gap: var(--fido-create-passkey-paragraph-gap, 8px);
+    flex-wrap: var(--fido-create-passkey-paragraph-flex-wrap, wrap);
+    align-self: var(--fido-create-passkey-paragraph-align-self, stretch);
   }
 
   .auth-h1 {
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    color: var(--fido-create-passkey-h1-color, #000);
+    text-align: var(--fido-create-passkey-h1-text-align, center);
+    font-size: var(--fido-create-passkey-h1-font-size, 24px);
+    font-style: var(--fido-create-passkey-h1-font-style, normal);
+    font-weight: var(--fido-create-passkey-h1-font-weight, 400);
+    line-height: var(--fido-create-passkey-h1-line-height, normal);
   }
 
   .auth-h2 {
-    align-self: stretch;
-    color: var(--black, #000);
-    text-align: center;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    align-self: var(--fido-create-passkey-h2-align-self, stretch);
+    color: var(--fido-create-passkey-h2-color, #000);
+    text-align: var(--fido-create-passkey-h2-text-align, center);
+    font-size: var(--fido-create-passkey-h2-font-size, 22px);
+    font-style: var(--fido-create-passkey-h2-font-style, normal);
+    font-weight: var(--fido-create-passkey-h2-font-weight, 400);
+    line-height: var(--fido-create-passkey-h2-line-height, normal);
   }
 
   .auth-h3 {
-    align-self: stretch;
-    color: var(--black, #000);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    align-self: var(--fido-create-passkey-h3-align-self, stretch);
+    color: var(--fido-create-passkey-h3-color, #000);
+    font-size: var(--fido-create-passkey-h3-font-size, 14px);
+    font-style: var(--fido-create-passkey-h3-font-style, normal);
+    font-weight: var(--fido-create-passkey-h3-font-weight, 400);
+    line-height: var(--fido-create-passkey-h3-line-height, normal);
   }
 
   ul {
-    display: block;
-    list-style-type: disc;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0;
-    -webkit-margin-end: 0;
-    -webkit-padding-start: 20px;
+    display: var(--fido-create-passkey-ul-display, block);
+    list-style-type: var(--fido-create-passkey-ul-list-style-type, disc);
+    -webkit-margin-before: var(--fido-create-passkey-ul-margin-before, 1em);
+    -webkit-margin-after: var(--fido-create-passkey-ul-margin-after, 1em);
+    -webkit-margin-start: var(--fido-create-passkey-ul-margin-start, 0);
+    -webkit-margin-end: var(--fido-create-passkey-ul-margin-end, 0);
+    -webkit-padding-start: var(--fido-create-passkey-ul-padding-start, 20px);
   }
 
 `
@@ -192,7 +167,7 @@ class FidoCreatePasskey extends LitElement {
                             </li>
                         </ul>
                     </div>
-                    <button class="auth-button" @click=${() => { this.onClick() }}>Create passkey</button>
+                    <auth-button .onClick=${() => { this.onClick() }}>Create passkey</auth-button>
                 </div>
             </div>
         `

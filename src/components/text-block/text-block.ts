@@ -4,10 +4,10 @@ import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
   p {
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    font-weight: 400;
+    text-align: var(--auth-text-block-p-text-align, center);
+    font-size: var(--auth-text-block-p-font-size, 1rem);
+    line-height: var(--auth-text-block-p-line-height, 1.75rem);
+    font-weight: var(--auth-text-block-p-font-weight, 400);
   }
   `
 

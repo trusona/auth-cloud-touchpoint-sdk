@@ -5,17 +5,17 @@ import { styleMap } from 'lit/directives/style-map.js'
 
 const componentStyle = css`
   .auth-flexdialog {
-    display: flex;
-    row-gap: 1.25rem;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    background-color: #ffffff;
-    width: 290px;
-    vertical-align: middle;
-    padding: 2rem;
-    border-radius: 0.5rem;
-    margin: auto;
+    display: var(--auth-flexdialog-display, flex);
+    row-gap: var(--auth-flexdialog-row-gap, 1.25rem);
+    flex-direction: var(--auth-flexdialog-flex-direction, column);
+    justify-content: var(--auth-flexdialog-justify-content, center);
+    align-content: var(--auth-flexdialog-align-content, center);
+    background-color: var(--auth-flexdialog-background-color, #ffffff);
+    width: var(--auth-flexdialog-width, 290px);
+    vertical-align: var(--auth-flexdialog-vertical-align, middle);
+    padding: var(--auth-flexdialog-padding, 2rem);
+    border-radius: var(--auth-flexdialog-border-radius, 0.5rem);
+    margin: var(--auth-flexdialog-margin, auto);
   }
 `
 

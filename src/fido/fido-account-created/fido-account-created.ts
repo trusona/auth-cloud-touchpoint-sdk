@@ -3,93 +3,68 @@ import { customElement, property } from 'lit/decorators.js'
 import { sharedStyles } from '../../shared/style'
 
 const componentStyle = css`
-
   .auth-container {
-    width: 320px;
-    min-height: 420px;
-    margin: auto;
-    /* TODO: Adding Border? */
-    border-radius: 6px;
-    border: 1px solid #000;
-    background: var(--white, #FFF);
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    width: var(--fido-account-created-container-width, 320px);
+    min-height: var(--fido-account-created-container-min-height, 420px);
+    margin: var(--fido-account-created-container-margin, auto);
+    border-radius: var(--fido-account-created-container-border-radius, 6px);
+    border: var(--fido-account-created-container-border, 1px solid #000);
+    background: var(--fido-account-created-container-background, #FFF);
+    box-shadow: var(--fido-account-created-container-box-shadow, 0 0 20px 0 rgba(0, 0, 0, 0.15));
   }
 
   .auth-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    align-self: stretch;
-    gap: 20px;
-    padding: 60px 30px;
+    display: var(--fido-account-created-card-display, flex);
+    flex-direction: var(--fido-account-created-card-flex-direction, column);
+    justify-content: var(--fido-account-created-card-justify-content, center);
+    align-items: var(--fido-account-created-card-align-items, center);
+    flex-shrink: var(--fido-account-created-card-flex-shrink, 0);
+    align-self: var(--fido-account-created-card-align-self, stretch);
+    gap: var(--fido-account-created-card-gap, 20px);
+    padding: var(--fido-account-created-card-padding, 60px 30px);
   }
 
   .auth-img {
-    width: 82px;
-    height: 82px;
+    width: var(--fido-account-created-img-width, 82px);
+    height: var(--fido-account-created-img-height, 82px);
   }
 
   .auth-close-img {
-    width: 24px;
-    height: 24px;
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    cursor: pointer;
+    width: var(--fido-account-created-close-img-width, 24px);
+    height: var(--fido-account-created-close-img-height, 24px);
+    position: var(--fido-account-created-close-img-position, absolute);
+    right: var(--fido-account-created-close-img-right, 10px);
+    top: var(--fido-account-created-close-img-top, 10px);
+    cursor: var(--fido-account-created-close-img-cursor, pointer);
   }
 
-  .auth-button {
-    border-radius: 4px;
-    display: flex;
-    padding: 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-    align-self: stretch;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 16px;
-    background-color: var(--trusona-button-bg-color, #19064E);
-    border: 1px solid var(--trusona-button-border-color, #19064E);
-    color: var(--trusona-button-color, rgb(255, 255, 255));
-    cursor: pointer;
+  h1 {
+    color: var(--fido-account-created-h1-color, #000);
+    text-align: var(--fido-account-created-h1-text-align, center);
+    font-size: var(--fido-account-created-h1-font-size, 24px);
+    font-style: var(--fido-account-created-h1-font-style, normal);
+    font-weight: var(--fido-account-created-h1-font-weight, 400);
+    line-height: var(--fido-account-created-h1-line-height, normal);
   }
 
-  .auth-button:disabled {
-    background-color: var(--trusona-button-disabled-bg-color, #cccccc) !important;
-    border: 1px solid var(--trusona-button-disabled-bg-color, #cccccc) !important;
-    color: var(--trusona-button-disabled-color, #444444) !important;
-  }
-
-  .auth-h1 {
-    color: #000;
-    text-align: center;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-
-  .auth-h2 {
-    color: #000;
-    text-align: center;
-    font-size: 22px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  h2 {
+    color: var(--fido-account-created-h2-color, #000);
+    text-align: var(--fido-account-created-h2-text-align, center);
+    font-size: var(--fido-account-created-h2-font-size, 22px);
+    font-style: var(--fido-account-created-h2-font-style, normal);
+    font-weight: var(--fido-account-created-h2-font-weight, 400);
+    line-height: var(--fido-account-created-h2-line-height, normal);
   }
 
   .auth-body {
-    color: #000;
-    text-align: center;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+    color: var(--fido-account-created-body-color, #000);
+    text-align: var(--fido-account-created-body-text-align, center);
+    font-size: var(--fido-account-created-body-font-size, 14px);
+    font-style: var(--fido-account-created-body-font-style, normal);
+    font-weight: var(--fido-account-created-body-font-weight, 400);
+    line-height: var(--fido-account-created-body-line-height, normal);
   }
+
 
 `
 
@@ -116,7 +91,7 @@ class FidoAccountCreated extends LitElement {
                     </svg>
                 </div>
                 <div class="auth-card">
-                    <p class="auth-h1">Welcome!</p>
+                    <h1>Welcome!</h1>
                     <svg class="auth-img" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M48.7144 76.5564C45.6784 77.3313 42.4972 77.7432 39.2197 77.7432C18.0808 77.7432 0.944336 60.6067 0.944336 39.4678C0.944336 18.3289 18.0808 1.19238 39.2197 1.19238C60.3587 1.19238 77.4952 18.3289 77.4952 39.4678C77.4952 42.7452 77.0832 45.9264 76.3083 48.9625"
                               stroke="#19064E" stroke-width="1.78025" stroke-linecap="round"/>
@@ -134,7 +109,7 @@ class FidoAccountCreated extends LitElement {
                     </svg>
                     <p class="auth-h2">Account created</p>
                     <p class="auth-body">To sign in use a passkey, password, or a code we send to your email.</p>
-                    <button class="auth-button" @click=${() => { this.onClick() }}>View your account</button>
+                    <auth-button .onClick=${() => { this.onClick() }}>View your account</auth-button>
                 </div>
             </div>
         `
