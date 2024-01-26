@@ -42,24 +42,21 @@ class StartTouchpoint extends LitElement {
                 ${this.renderHeader()}
 
                 ${this.renderError()}
-
-                <div class="auth-ui-input-wrapper">
-
-                    ${this.renderLabel()}
-
-                    <input class="auth-ui-input"
-                           value="${this.login?.userIdentifier ?? ''}"
-                           @input=${(e: any) => this.onInputChange(e.target.value)}
-                           placeholder="${this.inputPlaceholder()}"
-                           id="${this.inputId}"
-                           name="${this.inputName}"
-                           type="${this.inputType}"
-                           autocomplete="${this.inputAutocomplete}"
-                           ?autofocus=${this.inputAutofocus}
-                           ?required=${this.inputRequired}
-                           data-input-marker="userIdentifierInput"
-                    >
-                </div>
+                
+                <auth-user-input
+                        userIdentifier="${this.login?.userIdentifier ?? ''}"
+                        inputId="${this.inputId}"
+                        inputName="${this.inputName}"
+                        inputType="${this.inputType}"
+                        inputAutocomplete="${this.inputAutocomplete}"
+                        .onInput=${(e: any) => this.onInputChange(e.target.value)}
+                        ?isEmailInput="${this.isEmailInput}"
+                        ?isPhoneNumberInput="${this.isPhoneNumberInput}"
+                        ?inputAutofocus="${this.inputAutofocus}"
+                        ?inputRequired="${this.inputRequired}"
+                        ?inputDisabled="${this.inputDisabled}"
+                        .signInWithBiometricPrompt="${this.signInWithBiometricPrompt}"
+                ></auth-user-input>
 
                 <auth-button .onClick="${() => this.preparePerformLogin()}"
                              ?isProcessing=${this.started}
@@ -116,34 +113,6 @@ class StartTouchpoint extends LitElement {
             : html``
     }
 
-    private renderLabel() {
-        if (this.signInWithBiometricPrompt?.hideUsernameControlText) {
-            return html``
-        }
-        if (this.isPhoneNumberInput) {
-            return html`
-                <label class="auth-ui-label" style="${this.globalStyles?.paragraphStyle}"
-                       for="${this.inputId}">
-                    Phone number
-                </label>
-            `
-        } else if (this.inputName === 'username') {
-            return html`
-                <label class="auth-ui-label" style="${this.globalStyles?.paragraphStyle}"
-                       for="${this.inputId}">
-                    ${this.signInWithBiometricPrompt?.usernameControlText || 'Username'}
-                </label>
-            `
-        } else {
-            return html`
-                <label class="auth-ui-label" style="${this.globalStyles?.paragraphStyle}"
-                       for="${this.inputId}">
-                    ${this.signInWithBiometricPrompt?.usernameControlText || 'Email address'}
-                </label>
-            `
-        }
-    }
-
     private renderMessage() {
         return (!this.signInWithBiometricPrompt?.hideMessage)
             ? html`
@@ -178,19 +147,6 @@ class StartTouchpoint extends LitElement {
             this.waitingForInput = true
         }
         this.username = value
-    }
-
-    private inputPlaceholder() {
-        if (this.signInWithBiometricPrompt?.hideUsernameFieldHint) {
-            return ''
-        }
-        if (this.isPhoneNumberInput) {
-            return this.signInWithBiometricPrompt?.usernameFieldHint || 'Enter 10 digit phone number'
-        } else if (this.inputName === 'username') {
-            return this.signInWithBiometricPrompt?.usernameFieldHint || 'Enter username'
-        } else {
-            return this.signInWithBiometricPrompt?.usernameFieldHint || 'Enter email'
-        }
     }
 
     private preparePerformLogin() {

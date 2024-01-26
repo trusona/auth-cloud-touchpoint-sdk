@@ -29,6 +29,7 @@ export const sharedStyles = css`
     border-radius: var(--auth-input-ui-input-border-radius, 6px);
     position: var(--auth-input-ui-input-position, relative);
     width: var(--auth-input-ui-input-width, 100%);
+    min-width: var(--auth-input-ui-input-min-width, 300px);;
     margin-top: var(--auth-input-ui-input-margin-top, 10px);
     font-style: var(--auth-input-ui-input-font-style, normal);
     font-weight: var(--auth-input-ui-input-font-weight, 400);

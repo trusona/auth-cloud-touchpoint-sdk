@@ -26,7 +26,7 @@
     --auth-btn-display: flex;
     --auth-btn-font-size: 16px;
     --auth-btn-font-style: normal;
-    --auth-btn-font-weight: 400;
+    --auth-btn-font-weight: bold;
     --auth-btn-justify: space-around;
     --auth-btn-letter-spacing: 1px;
     --auth-btn-line-height: 17px;
@@ -38,6 +38,7 @@
     --auth-btn-transition-property: all;
     --auth-btn-transition-timing-function: ease;
     --auth-btn-width: 100%;
+    --auth-btn-min-width: 300px;
     --auth-btn-cursor: pointer;
     --auth-btn-bg-color: #7B46D1;
     --auth-btn-border-color: #7B46D1;
@@ -71,6 +72,20 @@
     --auth-header-1-padding-top: 0;
     --auth-header-1-padding-bottom: 0;
 
+    /* header-2 (H2 Header) */
+    --auth-header-2-font-style: normal;
+    --auth-header-2-font-weight: 400;
+    --auth-header-2-font-size: 16px;
+    --auth-header-2-line-height: 18px;
+    --auth-header-2-display: flex;
+    --auth-header-2-align-items: center;
+    --auth-header-2-text-align: center;
+    --auth-header-2-color: rgb(23, 47, 48);
+    --auth-header-2-margin-bottom: 0;
+    --auth-header-2-margin-top: 0;
+    --auth-header-2-padding-top: 0;
+    --auth-header-2-padding-bottom: 0;
+
     /* text-block (Paragraph) */
     --auth-text-block-p-text-align: center;
     --auth-text-block-p-font-size: 1rem;
@@ -83,6 +98,7 @@
     --auth-input-ui-input-border-radius: 6px;
     --auth-input-ui-input-position: relative;
     --auth-input-ui-input-width: 100%;
+    --auth-input-ui-input-min-width: 300px;
     --auth-input-ui-input-margin-top: 10px;
     --auth-input-ui-input-font-style: normal;
     --auth-input-ui-input-font-weight: 400;
@@ -102,6 +118,66 @@
     --auth-input-ui-label-font-size: 12px;
     --auth-input-ui-label-line-height: 12px;
     --auth-input-ui-label-color: #444444;
+
+    /* code-input */
+    --auth-code-input-host-display: flex;
+    --auth-code-input-host-transform: translate3d(0, 0, 0);
+    --auth-code-input-host-font-size: inherit;
+    --auth-code-input-host-margin-left: auto;
+    --auth-code-input-host-margin-right: auto;
+
+    --auth-code-input-code-input-display: flex;
+    --auth-code-input-code-input-color: #171516;
+    --auth-code-input-code-input-flex-direction: row;
+    --auth-code-input-code-input-gap: 1rem;
+    --auth-code-input-code-input-max-width: 300px;
+
+    --auth-code-input-span-display: block;
+    --auth-code-input-span-flex: 1;
+
+    --auth-code-input-span-code-hidden-input-text-security: disc;
+    --auth-code-input-span-code-hidden-input-webkit-text-security: disc;
+    --auth-code-input-span-code-hidden-input-moz-text-security: disc;
+
+    --auth-code-input-input-width: 100%;
+    --auth-code-input-input-height: 4.375em;
+    --auth-code-input-input-color: inherit;
+    --auth-code-input-input-background: transparent;
+    --auth-code-input-input-text-align: center;
+    --auth-code-input-input-font-size: inherit;
+    --auth-code-input-input-border-top-width: 1px;
+    --auth-code-input-input-border-top-style: solid;
+    --auth-code-input-input-border-top-color: #ddd;
+    --auth-code-input-input-border-right-width: 1px;
+    --auth-code-input-input-border-right-style: solid;
+    --auth-code-input-input-border-right-color: #ddd;
+    --auth-code-input-input-border-left-width: 1px;
+    --auth-code-input-input-border-left-style: solid;
+    --auth-code-input-input-border-left-color: #ddd;
+    --auth-code-input-input-border-bottom-width: 1px;
+    --auth-code-input-input-border-bottom-style: solid;
+    --auth-code-input-input-border-bottom-color: #ddd;
+    --auth-code-input-input-border-radius: 5px;
+    --auth-code-input-input-appearance: none;
+    --auth-code-input-input-transform: translateZ(0);
+    --auth-code-input-input-outline: none;
+
+    --auth-code-input-input-has-value-border: 1px solid #ddd;
+    --auth-code-input-input-has-value-border-bottom: 1px solid #ddd;
+
+    --auth-code-input-input-focus-border-top-width: 1px;
+    --auth-code-input-input-focus-border-top-style: solid;
+    --auth-code-input-input-focus-border-top-color: #ddd;
+    --auth-code-input-input-focus-border-right-width: 1px;
+    --auth-code-input-input-focus-border-right-style: solid;
+    --auth-code-input-input-focus-border-right-color: #ddd;
+    --auth-code-input-input-focus-border-left-width: 1px;
+    --auth-code-input-input-focus-border-left-style: solid;
+    --auth-code-input-input-focus-border-left-color: #ddd;
+    --auth-code-input-input-focus-border-bottom-width: 1px;
+    --auth-code-input-input-focus-border-bottom-style: solid;
+    --auth-code-input-input-focus-border-bottom-color: #ddd;
+    --auth-code-input-input-focus-box-shadow: 0 1px 5px #ddd;
 
     /* auth-error-msg */
     --auth-error-msg-display: flex;
@@ -129,7 +205,7 @@
     --auth-reset-padding: 12px 20px;
     --auth-reset-width: auto;
     --auth-reset-max-width: 100%;
-    --auth-reset-min-width: 90%;
+    --auth-reset-min-width: 300px;
     --auth-reset-font-style: normal;
     --auth-reset-font-weight: 400;
     --auth-reset-font-size: 11px;
@@ -710,4 +786,10 @@
     --fido-passkey-details-card-h3-font-weight: 400;
     --fido-passkey-details-card-h3-line-height: 14px;
 
+}
+
+@media only screen and (max-width: 767px) {
+    :root {
+        --auth-code-input-code-input-max-width: 250px;
+    }
 }

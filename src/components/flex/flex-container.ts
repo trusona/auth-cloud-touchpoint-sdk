@@ -10,6 +10,7 @@ const componentStyle = css`
     flex-direction: var(--auth-flexdialog-flex-direction, column);
     justify-content: var(--auth-flexdialog-justify-content, center);
     align-content: var(--auth-flexdialog-align-content, center);
+    align-items: var(--auth-flexdialog-align-content, center);
     background-color: var(--auth-flexdialog-background-color, #ffffff);
     width: var(--auth-flexdialog-width, 290px);
     vertical-align: var(--auth-flexdialog-vertical-align, middle);

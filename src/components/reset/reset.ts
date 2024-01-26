@@ -13,7 +13,7 @@ const componentStyle = css`
     padding: var(--auth-reset-padding, 12px 20px);
     width: var(--auth-reset-width, auto);
     max-width: var(--auth-reset-max-width, 100%);
-    min-width: var(--auth-reset-min-width, 90%);
+    min-width: var(--auth-reset-min-width, 300px);
     font-style: var(--auth-reset-font-style, normal);
     font-weight: var(--auth-reset-font-weight, 400);
     font-size: var(--auth-reset-font-size, 11px);
