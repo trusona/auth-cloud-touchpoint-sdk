@@ -14,11 +14,12 @@ const componentStyle = css`
     display: var(--auth-btn-display, flex);
     font-size: var(--auth-btn-font-size, 16px);
     font-style: var(--auth-btn-font-style, normal);
-    font-weight: var(--auth-btn-font-weight, 400);
+    font-weight: var(--auth-btn-font-weight, bold);
     justify-content: var(--auth-btn-justify, space-around);
     letter-spacing: var(--auth-btn-letter-spacing, 1px);
     line-height: var(--auth-btn-line-height, 17px);
     min-height: var(--auth-btn-min-height, 47px);
+    min-width: var(--auth-btn-min-width, 300px);
     padding: var(--auth-btn-padding, 0 24px);
     text-align: var(--auth-btn-text-align, center);
     transition-delay: var(--auth-btn-transition-delay, 0s);

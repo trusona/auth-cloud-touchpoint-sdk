@@ -87,70 +87,78 @@ class CodeInput extends LitElement {
   }
 
   static styles = css`
-    :host {
-        --text-security-type: disc;
-        --item-background: transparent;
-        --item-font-weight: 300;
-        --color: #171516;
-        --item-spacing: .5rem;
-        --item-height: 4.375em;
-        --item-border: 1px solid #ddd;
-        --item-border-bottom: 1px solid #ddd;
-        --item-border-has-value: 1px solid #ddd;
-        --item-border-bottom-has-value: 1px solid #ddd;
-        --item-border-focused: 1px solid #ddd;
-        --item-border-bottom-focused: 1px solid #ddd;
-        --item-shadow-focused: 0px 1px 5px #ddd;
-        --item-border-radius: 5px;
 
-        display: flex;
-        transform: translate3d(0, 0, 0);
-        font-size: inherit;
-        color: var(--color);
-    } 
-      
+    :host {
+      display: var(--auth-code-input-host-display, flex);
+      transform: var(--auth-code-input-host-transform, translate3d(0, 0, 0));
+      font-size: var(--auth-code-input-host-font-size, inherit);
+      margin-left: var(--auth-code-input-host-margin-left, auto);
+      margin-right: var(--auth-code-input-host-margin-right, auto);
+    }
+
     .code-input {
-      display: flex;
-      flex-direction: row;
-      gap: 1rem;
+      display: var(--auth-code-input-code-input-display, flex);
+      color: var(--auth-code-input-code-input-color, #171516);
+      flex-direction: var(--auth-code-input-code-input-flex-direction, row);
+      gap: var(--auth-code-input-code-input-gap, 1rem);
+      max-width: var(--auth-code-input-code-input-max-width, 300px);
     }
 
     span {
-      display: block;
-      flex: 1;
+      display: var(--auth-code-input-span-display, block);
+      flex: var(--auth-code-input-span-flex, 1);
     }
 
     span.code-hidden input {
-      text-security: var(--text-security-type);
-      -webkit-text-security: var(--text-security-type);
-      -moz-text-security: var(--text-security-type);
+      text-security: var(--auth-code-input-span-code-hidden-input-text-security, disc);
+      -webkit-text-security: var(--auth-code-input-span-code-hidden-input-webkit-text-security, disc);
+      -moz-text-security: var(--auth-code-input-span-code-hidden-input-moz-text-security, disc);
     }
 
     input {
-      width: 100%;
-      height: var(--item-height);
-      color: inherit;
-      background: var(--item-background);
-      text-align: center;
-      font-size: inherit;
-      border: var(--item-border);
-      border-bottom: var(--item-border-bottom);
-      border-radius: var(--item-border-radius);
-      -webkit-appearance: none;
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      outline: none;
+      width: var(--auth-code-input-input-width, 100%);
+      height: var(--auth-code-input-input-height, 4.375em);
+      color: var(--auth-code-input-input-color, inherit);
+      background: var(--auth-code-input-input-background, transparent);
+      text-align: var(--auth-code-input-input-text-align, center);
+      font-size: var(--auth-code-input-input-font-size, inherit);
+      border-top-width: var(--auth-code-input-input-border-top-width, 1px);
+      border-top-style: var(--auth-code-input-input-border-top-style, solid);
+      border-top-color: var(--auth-code-input-input-border-top-color, #ddd);
+      border-right-width: var(--auth-code-input-input-border-right-width, 1px);
+      border-right-style: var(--auth-code-input-input-border-right-style, solid);
+      border-right-color: var(--auth-code-input-input-border-right-color, #ddd);
+      border-left-width: var(--auth-code-input-input-border-left-width, 1px);
+      border-left-style: var(--auth-code-input-input-border-left-style, solid);
+      border-left-color: var(--auth-code-input-input-border-left-color, #ddd);
+      border-bottom-width: var(--auth-code-input-input-border-bottom-width, 1px);
+      border-bottom-style: var(--auth-code-input-input-border-bottom-style, solid);
+      border-bottom-color: var(--auth-code-input-input-border-bottom-color, #ddd);
+      border-radius: var(--auth-code-input-input-border-radius, 5px);
+      -webkit-appearance: var(--auth-code-input-input-appearance, none);
+      transform: var(--auth-code-input-input-transform, translateZ(0));
+      outline: var(--auth-code-input-input-outline, none);
     }
 
     input.has-value {
-      border: var(--item-border-has-value);
-      border-bottom: var(--item-border-bottom-has-value);
+      border: var(--auth-code-input-input-has-value-border, 1px solid #ddd);
+      border-bottom: var(--auth-code-input-input-has-value-border-bottom, 1px solid #ddd);
     }
 
     input:focus {
-      border: var(--item-border-focused);
-      border-bottom: var(--item-border-bottom-focused);
-      box-shadow: var(--item-shadow-focused);
+      border-top-width: var(--auth-code-input-input-focus-border-top-width, 1px);
+      border-top-style: var(--auth-code-input-input-focus-border-top-style, solid);
+      border-top-color: var(--auth-code-input-input-focus-border-top-color, #ddd);
+      border-right-width: var(--auth-code-input-input-focus-border-right-width, 1px);
+      border-right-style: var(--auth-code-input-input-focus-border-right-style, solid);
+      border-right-color: var(--auth-code-input-input-focus-border-right-color, #ddd);
+      border-left-width: var(--auth-code-input-input-focus-border-left-width, 1px);
+      border-left-style: var(--auth-code-input-input-focus-border-left-style, solid);
+      border-left-color: var(--auth-code-input-input-focus-border-left-color, #ddd);
+      border-bottom-width: var(--auth-code-input-input-focus-border-bottom-width, 1px);
+      border-bottom-style: var(--auth-code-input-input-focus-border-bottom-style, solid);
+      border-bottom-color: var(--auth-code-input-input-focus-border-bottom-color, #ddd);
+      box-shadow: var(--auth-code-input-input-focus-box-shadow, 0 1px 5px #ddd);
     }
   `
 
