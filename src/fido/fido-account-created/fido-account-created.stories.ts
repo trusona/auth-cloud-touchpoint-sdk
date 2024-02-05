@@ -4,7 +4,7 @@ import {html} from 'lit'
 import './fido-account-created'
 
 export default {
-    title: 'Fido Account Created',
+    title: 'Fido/Fido Account Created',
     parameters: {
         layout: 'centered',
     },
@@ -18,7 +18,7 @@ export const Default: StoryObj = {
     args:{
 
     },
-    render: (args) => {
+    render: () => {
         return html`
             <fido-account-created>
             </fido-account-created>

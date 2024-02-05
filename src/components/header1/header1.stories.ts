@@ -4,7 +4,7 @@ import { html } from 'lit'
 import './header1'
 
 export default {
-  title: 'Header 1',
+  title: 'Components/Header 1',
   parameters: {
     layout: 'centered',
   }

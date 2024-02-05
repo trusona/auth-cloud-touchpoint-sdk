@@ -4,7 +4,7 @@ import {html} from 'lit'
 import './start-touchpoint'
 
 export default {
-    title: 'Start Touchpoint',
+    title: 'Touchpoints/Start Touchpoint',
     parameters: {
         layout: 'centered',
     },

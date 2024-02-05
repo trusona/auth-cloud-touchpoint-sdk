@@ -5,7 +5,7 @@ import './fido-passkey-details-card'
 import {PasskeyActivity} from "@trusona/webauthn";
 
 export default {
-    title: 'Fido Passkey Details Card',
+    title: 'Fido/Fido Passkey Details Card',
     parameters: {
         layout: 'centered',
     },

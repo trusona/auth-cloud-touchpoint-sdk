@@ -4,7 +4,7 @@ import {html} from 'lit'
 import './fido-account-passkey-created'
 
 export default {
-    title: 'Fido Account Passkey Created',
+    title: 'Fido/Fido Account Passkey Created',
     parameters: {
         layout: 'centered',
     },
@@ -18,7 +18,7 @@ export const Default: StoryObj = {
     args:{
 
     },
-    render: (args) => {
+    render: () => {
         return html`
             <fido-account-passkey-created>
             </fido-account-passkey-created>

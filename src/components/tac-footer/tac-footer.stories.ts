@@ -5,7 +5,7 @@ import { getConfigs } from '../../../storybook-mock-content/utils'
 import './tac-footer'
 
 export default {
-  title: 'TAC Footer',
+  title: 'Components/TAC Footer',
   parameters: {
     layout: 'centered',
   },

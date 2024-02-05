@@ -4,7 +4,7 @@ import {html} from 'lit'
 import './flex-container'
 
 export default {
-    title: 'Flex Container',
+    title: 'Components/FlexContainer',
     parameters: {
         layout: 'centered',
     },

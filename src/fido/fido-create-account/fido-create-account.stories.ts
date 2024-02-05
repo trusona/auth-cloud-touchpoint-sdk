@@ -4,7 +4,7 @@ import {html} from 'lit'
 import './fido-create-account'
 
 export default {
-    title: 'Fido Create Account',
+    title: 'Fido/Fido Create Account',
     parameters: {
         layout: 'centered',
     },
