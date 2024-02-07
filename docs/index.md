@@ -45,23 +45,8 @@ Here are some key features that `auth-cloud-touchpoint-sdk` offers:
 - [password-input.md](components/password-input.md)
 - [reset.md](components/reset.md)
 - [skip.md](components/skip.md)
-- [tac-container.md](components/tac-container.md)
-- [tac-footer.md](components/tac-footer.md)
-- [tac-header-nav.md](components/tac-header-nav.md)
-- [tac-info.md](components/tac-info.md)
 - [text-block.md](components/text-block.md)
 - [user-input.md](components/user-input.md)
-
-## Fido
-
-- [fido-account-created.md](fido/fido-account-created.md)
-- [fido-account-passkey-created.md](fido/fido-account-passkey-created.md)
-- [fido-check-email.md](fido/fido-check-email.md)
-- [fido-create-account.md](fido/fido-create-account.md)
-- [fido-create-passkey.md](fido/fido-create-passkey.md)
-- [fido-passkey-created.md](fido/fido-passkey-created.md)
-- [fido-passkey-details-card.md](fido/fido-passkey-details-card.md)
-- [fido-passkey-details.md](fido/fido-passkey-details.md)
 
 ## Touchpoints
 
