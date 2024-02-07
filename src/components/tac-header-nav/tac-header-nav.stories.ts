@@ -5,7 +5,7 @@ import { getConfigs } from '../../../storybook-mock-content/utils'
 import './tac-header-nav'
 
 export default {
-  title: 'TAC Header Nav',
+  title: 'Components/TAC Header Nav',
   parameters: {
     layout: 'centered',
   },

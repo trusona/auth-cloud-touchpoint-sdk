@@ -4,7 +4,7 @@ import { html } from 'lit'
 import './text-block'
 
 export default {
-  title: 'TextBlock',
+  title: 'Components/TextBlock',
   parameters: {
     layout: 'centered',
   }

@@ -4,7 +4,7 @@ import {html} from 'lit'
 import './code-input'
 
 export default {
-    title: 'Code Input',
+    title: 'Components/Code Input',
     parameters: {
         layout: 'centered',
     },

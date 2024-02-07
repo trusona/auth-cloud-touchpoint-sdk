@@ -5,7 +5,7 @@ import { getConfigs } from '../../../storybook-mock-content/utils'
 import './tac-info'
 
 export default {
-  title: 'TAC Info',
+  title: 'Components/TAC Info',
   parameters: {
     layout: 'centered',
   },

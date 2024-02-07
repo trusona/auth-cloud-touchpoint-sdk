@@ -5,7 +5,7 @@ import './fido-passkey-details'
 import {PasskeyActivity} from "@trusona/webauthn";
 
 export default {
-    title: 'Fido Passkey Details',
+    title: 'Fido/Fido Passkey Details',
     parameters: {
         layout: 'centered',
     },
@@ -30,6 +30,7 @@ export default {
         }
     }
 } as Meta
+
 
 let passkeyActivitiesMap: Map<string, Array<PasskeyActivity>> = {
     '4d2af8e5-6095-4dc5-ab37-a139e469deee': [

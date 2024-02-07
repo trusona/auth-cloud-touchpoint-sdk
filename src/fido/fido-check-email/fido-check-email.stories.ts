@@ -4,7 +4,7 @@ import {html} from 'lit'
 import './fido-check-email'
 
 export default {
-    title: 'Fido Check Email',
+    title: 'Fido/Fido Check Email',
     parameters: {
         layout: 'centered',
     },

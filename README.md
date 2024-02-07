@@ -13,6 +13,10 @@ This project provides a set of web components to provide a UX for the [Trusona W
 The Trusona Touchpoint SDK is a collection of web components that meant to be used 
 in tandem with the Trusona WebAuthn SDK to provide a user experience.
 
+## Documentation
+Please see the main [documentation](docs/index.md) page for a deeper understanding of the framework and the individual 
+components that comprise this library.
+
 
 ### Built With
 
