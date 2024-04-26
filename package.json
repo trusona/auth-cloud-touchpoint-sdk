@@ -37,7 +37,7 @@
     "@storybook/addon-essentials": "^8.0.9",
     "@storybook/addon-links": "^8.0.9",
     "@storybook/builder-vite": "^8.0.8",
-    "@storybook/cli": "^7.6.5",
+    "@storybook/cli": "^8.0.9",
     "@storybook/web-components-vite": "^8.0.9",
     "@types/estree": "^1.0.2",
     "@types/luxon": "^3.3.2",
